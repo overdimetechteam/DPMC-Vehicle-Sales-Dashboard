@@ -1,0 +1,53 @@
+table AsOfDateSelector
+	lineageTag: f15f37b5-6470-47b5-a75b-819c9aa09832
+
+	measure 'Selected As Of Date' =
+			
+			SELECTEDVALUE ( AsOfDateSelector[SelectedDate], TODAY () - 1 )
+		formatString: General Date
+		lineageTag: a54d855a-1e89-4107-9062-157ed5ebffb6
+
+	column SelectedDate
+		formatString: yyyy-mm-dd
+		lineageTag: 3a1e9679-8db5-4a1b-b973-22d339fbbfac
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [SelectedDate]
+
+		variation Variation
+			isDefault
+			relationship: bba42c09-50c0-49ab-9e09-d2b993e06000
+			defaultHierarchy: LocalDateTable_00b49d70-07ac-4fed-a74b-6400707bb5a9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'SelectedDate Display' =
+			
+			IF (
+			    AsOfDateSelector[SelectedDate] = TODAY() - 1,
+			    "Yesterday",
+			    FORMAT ( AsOfDateSelector[SelectedDate], "YYYY-MM-DD" )
+			)
+		lineageTag: bc0d0be1-dbd0-48ef-b3b5-6032d446b325
+		summarizeBy: none
+		sortByColumn: SelectedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AsOfDateSelector = calculated
+		mode: import
+		source =
+				
+				VAR Today = TODAY ()
+				RETURN
+				    FILTER(
+				        DISTINCT ( SELECTCOLUMNS ( Vw_dpmc_vs_DimDate, "SelectedDate", Vw_dpmc_vs_DimDate[TheDate] ) ),
+				        [SelectedDate] <= Today - 1
+				    )
+
+	annotation PBI_Id = 76939b37495745718af9bc49fca6c43c
+

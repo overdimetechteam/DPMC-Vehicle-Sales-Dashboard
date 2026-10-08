@@ -1,0 +1,112 @@
+table gold_dpmc_vs_2w3w_target
+	lineageTag: b751a629-2f0c-4319-815b-709c80bdedc0
+
+	column DATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: ecce2f26-4427-4436-b42e-3f802e7e30b0
+		summarizeBy: none
+		sourceColumn: DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SRM
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4778653f-55f9-4190-8fc8-10e7d871fe10
+		summarizeBy: none
+		sourceColumn: SRM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_Owner
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bb727520-ad20-48e2-a37a-b28d07dfde8d
+		summarizeBy: none
+		sourceColumn: Product_Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column RO
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cf2eb6c2-d22e-4e79-9a23-2be0e421750e
+		summarizeBy: none
+		sourceColumn: RO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_BRANCH
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0e9c2a63-0889-4061-832d-1507453fa83f
+		summarizeBy: none
+		sourceColumn: STR_BRANCH
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2WTarget
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 8d250a7d-99e9-48d3-b263-f21c30dc5f4a
+		summarizeBy: sum
+		sourceColumn: 2WTarget
+
+		annotation SummarizationSetBy = Automatic
+
+	column 3WTarget
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f18771e7-af4f-449a-96db-3168c4715794
+		summarizeBy: sum
+		sourceColumn: 3WTarget
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: e62c48be-0e64-4ddf-a2e1-3bc5d615f281
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		variation Variation
+			isDefault
+			relationship: 0ad35fdc-955e-45cd-819f-3e0d06bfa512
+			defaultHierarchy: LocalDateTable_b1ff85d0-f904-4de6-ba71-69ef15711402.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9fadc99f-b349-486b-8c55-b90fa278ac5f
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w_target = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External", [HierarchicalNavigation=true, MultiSubnetFailover=true]),
+				    dbo = Source{[Schema="dbo"]}[Data],
+				    gold_dpmc_vs_2w3w_target1 = dbo{[Name="gold_dpmc_vs_2w3w_target"]}[Data]
+				in
+				    gold_dpmc_vs_2w3w_target1
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

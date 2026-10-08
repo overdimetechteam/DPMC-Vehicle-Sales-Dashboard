@@ -1,0 +1,240 @@
+table FactGRNDetails_Dedup
+	lineageTag: 476bb6b3-44bd-4ed0-8e07-f112ef58ad71
+
+	measure 'GRN Count' =
+			
+			DISTINCTCOUNT ( FactGRNDetails_Dedup[ChassisNo] )
+		formatString: 0
+		lineageTag: 91968149-3e90-408d-8d95-227fb06845a0
+
+	column CompanySK
+		formatString: 0
+		lineageTag: e622c6de-92d2-4c85-b4e1-2b3474341f9e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[CompanySK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		formatString: 0
+		lineageTag: f0da5d41-967c-4fcd-9ab3-2397314cf601
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[DivisionSK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromPremiseSK
+		formatString: 0
+		lineageTag: 8cb7e1b8-a9f5-4242-99e7-f6e39fb7dc53
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[FromPremiseSK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToPremiseSK
+		formatString: 0
+		lineageTag: f4552863-9deb-407b-8dd4-69f47461f340
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[ToPremiseSK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		formatString: 0
+		lineageTag: 02c6396d-bd9b-4c15-8742-8568c6f7523c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[ProductSK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChassisNo
+		lineageTag: 2e84ce6c-1c09-4a6f-810e-c60faa9cfeb2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[ChassisNo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GatePassNo
+		lineageTag: 0f403725-9b4e-424a-af59-747424338d10
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[GatePassNo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GatePassDate
+		formatString: General Date
+		lineageTag: 07bf0e80-3246-40f9-a1c5-e40233bc8b2a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[GatePassDate]
+
+		variation Variation
+			isDefault
+			relationship: e56e69ae-8cf2-4b78-ab6d-fa15987f15b5
+			defaultHierarchy: LocalDateTable_4c2c0d3c-8f49-47cd-90e5-5fd1dc7715d6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column GatePassApprovedDate
+		formatString: Short Date
+		lineageTag: 16bca2d9-9c65-4270-96b0-fb0c37c155f6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[GatePassApprovedDate]
+
+		variation Variation
+			isDefault
+			relationship: 4e45c657-fe47-4798-8deb-9e9ab5efc332
+			defaultHierarchy: LocalDateTable_195cf829-2185-4b05-a5b5-371797f09edb.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column GRNDate
+		formatString: General Date
+		lineageTag: 1a773a2b-b6d7-4916-b139-0ccf9b54eee9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[GRNDate]
+
+		variation Variation
+			isDefault
+			relationship: 3027f9c0-a23f-45da-8301-efbac6f699d8
+			defaultHierarchy: LocalDateTable_8cb1b4ba-025c-4197-b3a7-88c5c694a686.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromDealerCode
+		lineageTag: 162e2848-31fe-4efe-8676-cba6fac51c4d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[FromDealerCode]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DealerName
+		lineageTag: c5981b2c-f565-4402-946e-fde240a39daf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[DealerName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssemblyCategory
+		lineageTag: 5f84d71d-d750-4d08-acdb-6a43d8fb34ea
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[AssemblyCategory]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		lineageTag: 43057a17-9429-418a-bcc8-a56279c74ba1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[DMT_LOADED_DATE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column INT_LOADED_DATE
+		formatString: 0
+		lineageTag: 6abf4a76-142d-4292-b4eb-271b6132de49
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[INT_LOADED_DATE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		lineageTag: 214b679b-cb74-49fd-bb2e-9f91b738cfdc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[DMT_MONTH_END]
+
+		annotation SummarizationSetBy = Automatic
+
+	column INT_MONTH_END
+		formatString: 0
+		lineageTag: 55cce90a-254c-4c7c-9e12-ac5542545273
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[INT_MONTH_END]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pending Days'
+		formatString: 0
+		lineageTag: d79504ac-1ec9-4640-b5d4-197bb5d808e1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w4w_factgrndetails[Pending Days]
+
+		annotation SummarizationSetBy = Automatic
+
+	column RN
+		formatString: 0
+		lineageTag: db84275e-8d07-4af5-8163-819244cce742
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [RN]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'To Location' =
+			
+			LOOKUPVALUE(
+			    gold_dpmc_vs_2w3w4w_dimpremises[PremisesDesc],
+			    gold_dpmc_vs_2w3w4w_dimpremises[PremiseSK],
+			    FactGRNDetails_Dedup[ToPremiseSK]
+			)
+		lineageTag: c58ee959-1f5c-4322-a519-c8285536c97a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'From Location' =
+			
+			LOOKUPVALUE(
+			    gold_dpmc_vs_2w3w4w_dimpremises[PremisesDesc],
+			    gold_dpmc_vs_2w3w4w_dimpremises[PremiseSK],
+			    FactGRNDetails_Dedup[FromPremiseSK]
+			)
+		lineageTag: 78afe1c1-4bfb-4ead-a675-5756dea16c82
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactGRNDetails_Dedup = calculated
+		mode: import
+		source = ```
+				
+				VAR RankedTable = 
+				    ADDCOLUMNS(
+				        gold_dpmc_vs_2w3w4w_factgrndetails,
+				        "RN",
+				        VAR CurChassis = gold_dpmc_vs_2w3w4w_factgrndetails[ChassisNo]
+				        VAR CurGatePass = gold_dpmc_vs_2w3w4w_factgrndetails[GatePassNo]
+				        VAR CurLoadDate = gold_dpmc_vs_2w3w4w_factgrndetails[DMT_LOADED_DATE]
+				        RETURN
+				            COUNTROWS(
+				                FILTER(
+				                    gold_dpmc_vs_2w3w4w_factgrndetails,
+				                    gold_dpmc_vs_2w3w4w_factgrndetails[ChassisNo] = CurChassis &&
+				                    gold_dpmc_vs_2w3w4w_factgrndetails[GatePassNo] = CurGatePass &&
+				                    gold_dpmc_vs_2w3w4w_factgrndetails[DMT_LOADED_DATE] >= CurLoadDate
+				                )
+				            )
+				    )
+				RETURN FILTER ( RankedTable, [RN] = 1 )
+				```
+
+	annotation PBI_Id = 9ca08d6bdfb14ca2bc021de8811edecf
+

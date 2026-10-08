@@ -1,0 +1,199 @@
+table gold_dpmc_vs_2w3w4w_factinquiry
+	lineageTag: cd69dfca-1b6b-4c9f-a4c0-b195c2f61be9
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3d36b0ba-2708-400e-8fb2-02e609c542d3
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0886ccfa-5d66-4ced-923b-21cc33701ea4
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DealerPremiseDesc
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4fe2bf67-1735-4884-aaad-6aba45f41304
+		summarizeBy: none
+		sourceColumn: DealerPremiseDesc
+
+		annotation SummarizationSetBy = Automatic
+
+	column AttachedPremiseSK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c41db3a9-c5be-4b87-b5e0-059c39872422
+		summarizeBy: none
+		sourceColumn: AttachedPremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 1eb8843b-9cf9-414b-a63c-96ecd5321cae
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryNo
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 37a636e1-4b84-470e-947f-0f448d07a8b0
+		summarizeBy: count
+		sourceColumn: InquiryNo
+
+		annotation SummarizationSetBy = User
+
+	column InquiryFrom
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fb75c369-ec3c-464f-bb5c-6ce2176ae82d
+		summarizeBy: none
+		sourceColumn: InquiryFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryType
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5a8d07c9-01f0-45f6-9787-b697904fb534
+		summarizeBy: none
+		sourceColumn: InquiryType
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssembleCategory
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 1b75d85a-d73b-49f0-bbc3-eb62143714a3
+		summarizeBy: none
+		sourceColumn: AssembleCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		sourceProviderType: datetime2
+		lineageTag: cd907bc6-09c5-4bfa-ac19-7f7a2f9814c3
+		summarizeBy: none
+		sourceColumn: InquiryDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DMT_LOADED_DATE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 844a546f-8725-4578-b668-d69fc4aa87bf
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: c3628fe2-8054-4189-afff-24602ab9f45e
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 22aba2c3-c9c3-4bea-86db-fa049f0eae0d
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2ca23c4b-feec-4889-87e5-ca093cb48ad2
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e4a2486f-f0d9-41dc-b102-20b8a9d61a3b
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Pending Bucket' =
+			
+			VAR d = DATEDIFF(gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate], TODAY(), DAY)
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        NOT gold_dpmc_vs_2w3w4w_factinquiry[Type] IN {"INQ", "CONFIRM", "ALLOCATE"}, BLANK(),
+			        d <= 30, "0-30 days",
+			        d <= 60, "31-60 days",
+			        d <= 80, "61-80 days",
+			        "81 days above"
+			    )
+		lineageTag: 1ac6a1bc-ccb6-4b3b-a73e-2ae091adf02e
+		summarizeBy: none
+		sortByColumn: 'Days Pending Bucket Sort'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Pending Bucket Sort' =
+			
+			VAR d = DATEDIFF(gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate], TODAY(), DAY)
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        NOT gold_dpmc_vs_2w3w4w_factinquiry[Type] IN {"INQ", "CONFIRM", "ALLOCATE"}, BLANK(),
+			        d <= 30, 1,
+			        d <= 60, 2,
+			        d <= 80, 3,
+			        4
+			    )
+		formatString: 0
+		lineageTag: 609571f1-5852-4c5e-8300-77340ef274a3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w4w_factinquiry = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External", [HierarchicalNavigation=true, MultiSubnetFailover=true]),
+				    dbo = Source{[Schema="dbo"]}[Data],
+				    gold_dpmc_vs_2w3w4w_factinquiry1 = dbo{[Name="gold_dpmc_vs_2w3w4w_factinquiry"]}[Data]
+				in
+				    gold_dpmc_vs_2w3w4w_factinquiry1
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

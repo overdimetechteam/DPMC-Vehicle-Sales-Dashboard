@@ -1,0 +1,16 @@
+expression 'Sales Forecast Result' =
+		let
+		    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External", [Query="SELECT #(lf)    DATEFROMPARTS(YEAR(InvoiceDate), MONTH(InvoiceDate), 1) AS InvoiceDateSort,#(lf)    CONVERT(varchar(10), DATEFROMPARTS(YEAR(InvoiceDate), MONTH(InvoiceDate), 1), 23) AS InvoiceDate,#(lf)    SUM(InvoiceValue) AS SalesValue#(lf)FROM gold_dpmc_vs_2w3w4w_factsales#(lf)GROUP BY DATEFROMPARTS(YEAR(InvoiceDate), MONTH(InvoiceDate), 1)#(lf)ORDER BY InvoiceDateSort;"]),
+		    #"Run Python script" = Python.Execute("import os#(lf)os.environ['OPENBLAS_NUM_THREADS'] = '1'#(lf)os.environ['OMP_NUM_THREADS'] = '1'#(lf)os.environ['MKL_NUM_THREADS'] = '1'#(lf)#(lf)import pandas as pd#(lf)from statsmodels.tsa.holtwinters import ExponentialSmoothing#(lf)#(lf)df = dataset.copy()#(lf)df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])#(lf)df = df.sort_values('InvoiceDate').set_index('InvoiceDate')#(lf)#(lf)model = ExponentialSmoothing(df['SalesValue'], trend='mul', seasonal='mul', seasonal_periods=12)#(lf)fitted_model = model.fit()#(lf)#(lf)forecast = fitted_model.forecast(steps=3)#(lf)forecast_df = pd.DataFrame({'ForecastValue': forecast}).reset_index().rename(columns={'index': 'InvoiceDate'})#(lf)",[dataset=Source]),
+		    forecast_df = #"Run Python script"{[Name="forecast_df"]}[Value],
+		    #"Changed Type" = Table.TransformColumnTypes(forecast_df,{{"InvoiceDate", type date}, {"ForecastValue", type number}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type", "SalesValue", each null),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"SalesValue", type number}})
+		in
+		    #"Changed Type1"
+	lineageTag: 36b49969-7906-446e-afcb-26f19363f100
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

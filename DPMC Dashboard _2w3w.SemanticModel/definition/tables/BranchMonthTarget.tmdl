@@ -1,0 +1,68 @@
+table BranchMonthTarget
+	lineageTag: 6a659828-36d2-4b9c-9d11-661d4fd8a835
+
+	column DATE
+		formatString: General Date
+		lineageTag: e3077c65-d407-476d-85f0-74a797307de9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w_target[DATE]
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_BRANCH
+		lineageTag: 289f8a41-6734-4599-9cd6-a3a0c6356bb7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w_target[STR_BRANCH]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Target2W
+		formatString: 0
+		lineageTag: ed63d1a5-3780-4769-b0e9-22eeac49a350
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Target2W]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Target3W
+		formatString: 0
+		lineageTag: 6fb34b0b-74fb-4315-a122-79a7f7542449
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Target3W]
+
+		annotation SummarizationSetBy = Automatic
+
+	column BranchMonthKey =
+			
+			FORMAT ( BranchMonthTarget[DATE], "YYYYMM" ) & "|" & TRIM ( BranchMonthTarget[STR_BRANCH] )
+		lineageTag: 1623878f-8587-4cee-ac0e-dcc64f8ae623
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column SRM
+		lineageTag: 00342792-c213-4eb7-a6da-4545c2424693
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w_target[SRM]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_Owner
+		lineageTag: 96173320-1e45-41e5-ae9b-ff555b78bf45
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_vs_2w3w_target[Product_Owner]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BranchMonthTarget = calculated
+		mode: import
+		source = CALCULATETABLE( SUMMARIZECOLUMNS( gold_dpmc_vs_2w3w_target[DATE], gold_dpmc_vs_2w3w_target[STR_BRANCH], gold_dpmc_vs_2w3w_target[SRM], gold_dpmc_vs_2w3w_target[Product_Owner], "Target2W", SUM(gold_dpmc_vs_2w3w_target[2WTarget]), "Target3W", SUM(gold_dpmc_vs_2w3w_target[3WTarget]) ), NOT ISBLANK(gold_dpmc_vs_2w3w_target[STR_BRANCH]) )
+
+	annotation PBI_Id = 48b7414cc6714326b0ea0634cff6467c
+

@@ -1,0 +1,93 @@
+table gold_dpmc_vs_2w3w4w_dimproduct
+	lineageTag: 276c2aa3-946e-4150-83fe-f4cfaeffa0c3
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: decf3555-6c31-42fa-b37a-5dac9f530538
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_PRODUCT_HIERARCHY_CODE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 80d539b9-21b6-47b1-a151-5dd5b658e130
+		summarizeBy: none
+		sourceColumn: STR_PRODUCT_HIERARCHY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_PRODLINE_DESC
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4dbb7fa1-c01d-419b-9f42-0fe5d15c4e63
+		summarizeBy: none
+		sourceColumn: STR_PRODLINE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_MAKE_DESC
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5055db71-b6c5-4c6b-bfff-89815789bb9d
+		summarizeBy: none
+		sourceColumn: STR_MAKE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_MODEL_DESC
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0a4f4a69-105b-40d0-9029-59a64895ca2d
+		summarizeBy: none
+		sourceColumn: STR_MODEL_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_SMODEL_DESC
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0c29eb72-0a42-43f6-a0b7-a44107ee2b01
+		summarizeBy: none
+		sourceColumn: STR_SMODEL_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 6fdfd2bc-e85b-47f8-a66f-b5b1f7c2e926
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		variation Variation
+			isDefault
+			relationship: 37694f80-4d03-44ee-bdc4-5086a8b83ced
+			defaultHierarchy: LocalDateTable_3cd4d963-cc36-487d-9bc0-4b9ec2b735dd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column VehicleTypeShort = IF(gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = "2 WHEELERS", "2W", IF(gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = "3 WHEELERS", "3W", BLANK()))
+		lineageTag: e87c0838-8c1d-46ef-9b01-5fb6163eec52
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w4w_dimproduct = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External", [HierarchicalNavigation=true, MultiSubnetFailover=true]),
+				    dbo = Source{[Schema="dbo"]}[Data],
+				    gold_dpmc_vs_2w3w4w_dimproduct1 = dbo{[Name="gold_dpmc_vs_2w3w4w_dimproduct"]}[Data]
+				in
+				    gold_dpmc_vs_2w3w4w_dimproduct1
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

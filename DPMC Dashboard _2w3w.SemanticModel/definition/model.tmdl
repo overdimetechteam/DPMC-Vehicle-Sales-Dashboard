@@ -1,0 +1,93 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["gold_dpmc_dimdate","gold_dpmc_vs_2w3w_target","gold_dpmc_vs_2w3w4w_dimcompany","gold_dpmc_vs_2w3w4w_dimdivision","gold_dpmc_vs_2w3w4w_dimpremises","gold_dpmc_vs_2w3w4w_dimproduct","gold_dpmc_vs_2w3w4w_factdeliverynotes","gold_dpmc_vs_2w3w4w_factgrndetails","gold_dpmc_vs_2w3w4w_factinquiry","gold_dpmc_vs_2w3w4w_factsales","gold_dpmc_vs_2w3w4w_factstock","gold_dpmc_vs_2w3w4w_competitorwisereg","Vw_dpmc_vs_DimDate","Vw_gold_dpmc_vs_2w3w_Thresholds","Sales Forecast Result","gold_dpmc_2w3w_forecast_units_1","gold_dpmc_2w3w_forecast_units","gold_dpmc_2w3w_forecast_sales_1"]
+
+annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop","TMDL-Extension"]
+
+ref table gold_dpmc_dimdate
+ref table gold_dpmc_vs_2w3w_target
+ref table gold_dpmc_vs_2w3w4w_dimcompany
+ref table gold_dpmc_vs_2w3w4w_dimdivision
+ref table gold_dpmc_vs_2w3w4w_dimpremises
+ref table gold_dpmc_vs_2w3w4w_dimproduct
+ref table gold_dpmc_vs_2w3w4w_factdeliverynotes
+ref table gold_dpmc_vs_2w3w4w_factgrndetails
+ref table gold_dpmc_vs_2w3w4w_factinquiry
+ref table gold_dpmc_vs_2w3w4w_factsales
+ref table gold_dpmc_vs_2w3w4w_factstock
+ref table VehicleTypeSelector
+ref table Measures_Table
+ref table DimDealer
+ref table DimProductFilter
+ref table DimRegion
+ref table Stage
+ref table gold_dpmc_vs_2w3w4w_competitorwisereg
+ref table Vw_dpmc_vs_DimDate
+ref table DateTableTemplate_55d6ae3a-790e-49ca-a963-e25288afb661
+ref table LocalDateTable_9da29efa-ab57-4315-ab1b-7aa7cd7c5a35
+ref table LocalDateTable_64d6d604-9c9f-4357-8995-1629575fc509
+ref table BranchMonthTarget
+ref table TopBottomSelector
+ref table LocalDateTable_d894c362-d534-44dc-a835-432c84bfc2a0
+ref table MonthBridge
+ref table LocalDateTable_51815c0f-adc3-4045-9491-1eb4203b692f
+ref table AsOfDateSelector
+ref table AgeBucketTable
+ref table LocalDateTable_63b5c2f2-4696-4366-9928-76ed2c56c027
+ref table Vw_gold_dpmc_vs_2w3w_Thresholds
+ref table FactGRNDetails_Dedup
+ref table LocalDateTable_4c2c0d3c-8f49-47cd-90e5-5fd1dc7715d6
+ref table LocalDateTable_195cf829-2185-4b05-a5b5-371797f09edb
+ref table LocalDateTable_8cb1b4ba-025c-4197-b3a7-88c5c694a686
+ref table AlertThresholds
+ref table MonthsWithTargetTable
+ref table KPI_Measures
+ref table LocalDateTable_b3258b9d-76df-4cc7-9059-5b9979bc4077
+ref table MonthsBackSelector
+ref table WorkingDayLookup
+ref table LocalDateTable_ac1e6156-bae0-424a-8346-f560214fab84
+ref table gold_dpmc_2w3w_forecast_units_1
+ref table LocalDateTable_f2b5d2c9-bbf0-4665-8b67-7b8b2ac2c734
+ref table gold_dpmc_2w3w_forecast_units
+ref table LocalDateTable_17f4a05f-89d3-483f-8dd2-0055821c7a9f
+ref table gold_dpmc_2w3w_forecast_sales_1
+ref table LocalDateTable_b71c0ebb-d6be-42a7-b6ca-598719569255
+ref table LocalDateTable_aecd6cd8-120b-418d-8f21-8b47f351ae44
+ref table LocalDateTable_41d63db9-9e95-47c2-82aa-42eb1c94f7fa
+ref table LocalDateTable_74fec9b1-647a-41e0-b3ad-e56f8cd52ce8
+ref table LocalDateTable_3cd4d963-cc36-487d-9bc0-4b9ec2b735dd
+ref table LocalDateTable_454b848d-0fc4-4c91-874a-0cebfc9db5f4
+ref table LocalDateTable_ee2a8ffb-19a4-4cfd-b29f-26b9543253e8
+ref table LocalDateTable_3149e84e-2900-4b07-820e-04073be03ed7
+ref table LocalDateTable_60dcd2e1-e48e-4573-8faa-6f3158662fe1
+ref table LocalDateTable_b6a2f01f-3d7c-41a8-8e59-b33830da742a
+ref table LocalDateTable_9b3e11e2-f843-4d7b-af3a-81e2d4dd0d9d
+ref table LocalDateTable_954e5880-698b-4056-8379-7fff7e514f20
+ref table LocalDateTable_e3715d4b-394e-4149-bc8f-4c87d2737ad1
+ref table LocalDateTable_20ac0e3f-e749-4ae4-90bc-df58cbd30008
+ref table LocalDateTable_7f8b7f80-1091-420c-a7c2-ec91fd464108
+ref table LocalDateTable_38583cf8-1c31-4c5d-95c0-be4a60359f26
+ref table LocalDateTable_125980db-861f-4c4d-91b8-4aaabbab8435
+ref table LocalDateTable_98846d00-89a6-4716-82eb-dbe71c0dd90d
+ref table LocalDateTable_4eac1445-3981-40c3-9e16-a7333ac001e5
+ref table LocalDateTable_1161c95f-a935-4610-96e1-4e44d62bd7f2
+ref table LocalDateTable_1b1e842d-6939-4644-8469-b6d62036b7dd
+ref table LocalDateTable_b60ff057-f981-4c13-b2d1-854c80ddcd01
+ref table LocalDateTable_2942f0c0-0fdf-4d29-a787-6d5114edc261
+ref table LocalDateTable_132da61d-2f13-4a53-a88e-c53e566275e0
+ref table LocalDateTable_1a0a3b6a-3bc4-4a66-bd69-a5588b9e13cf
+ref table LocalDateTable_b1ff85d0-f904-4de6-ba71-69ef15711402
+ref table LocalDateTable_8fa256c7-1689-4a13-bd67-dd46cf02866a
+ref table LocalDateTable_2b82303d-27d5-4700-b8c8-440c8265b4b3
+ref table LocalDateTable_00b49d70-07ac-4fed-a74b-6400707bb5a9
+
+ref cultureInfo en-US
+

@@ -1,0 +1,41 @@
+table MonthsWithTargetTable
+	lineageTag: 6d2e261a-02ee-47f5-af56-e6254713154b
+
+	column TheFirstOfMonth
+		formatString: General Date
+		lineageTag: 5b640f38-b4ca-424e-9410-a8bbac16ca13
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_dimdate[TheFirstOfMonth]
+
+		variation Variation
+			isDefault
+			relationship: e142fb57-ebbe-4511-959c-97ebc728dd9b
+			defaultHierarchy: LocalDateTable_b3258b9d-76df-4cc7-9059-5b9979bc4077.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column @HasTarget
+		formatString: 0
+		lineageTag: 0daa4830-473d-4f69-aa4e-cb58ae3c1bff
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [@HasTarget]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MonthsWithTargetTable = calculated
+		mode: import
+		source =
+				
+				FILTER (
+				    ADDCOLUMNS (
+				        VALUES ( gold_dpmc_dimdate[TheFirstOfMonth] ),
+				        "@HasTarget", CALCULATE ( [Target (Selected)] )
+				    ),
+				    NOT ISBLANK ( [@HasTarget] ) &&
+				    [TheFirstOfMonth] < DATE ( YEAR ( TODAY () ), MONTH ( TODAY () ), 1 )
+				)
+
+	annotation PBI_Id = 808501fe6f9b4760a9eb6f85e2378094
+

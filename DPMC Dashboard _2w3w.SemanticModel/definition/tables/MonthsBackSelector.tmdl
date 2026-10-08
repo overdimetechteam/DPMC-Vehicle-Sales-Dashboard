@@ -1,0 +1,18 @@
+table MonthsBackSelector
+	lineageTag: 9e932881-576b-4893-a3df-b64c1303839c
+
+	column MonthsBack
+		formatString: 0
+		lineageTag: 834a5f2d-59ca-41dc-bc52-df8f6add152c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MonthsBack]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MonthsBackSelector = calculated
+		mode: import
+		source = DATATABLE("MonthsBack", INTEGER, {{0},{1},{2},{3}})
+
+	annotation PBI_Id = bcc67a053ba249d3a12a35cd644a4906
+

@@ -1,0 +1,65 @@
+table gold_dpmc_vs_2w3w4w_competitorwisereg
+	lineageTag: 636613fb-5001-4542-b4b0-ba010a832310
+
+	column Make
+		dataType: string
+		lineageTag: c3d7aa12-9dbd-4e06-912a-2bb649833134
+		summarizeBy: none
+		sourceColumn: Make
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 33f85298-56c1-4bdb-b458-0ee3318a6173
+		summarizeBy: none
+		sourceColumn: Month
+
+		variation Variation
+			isDefault
+			relationship: b14d6582-d52f-46ee-82f1-1751c250e08f
+			defaultHierarchy: LocalDateTable_d894c362-d534-44dc-a835-432c84bfc2a0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Units
+		dataType: int64
+		formatString: 0
+		lineageTag: 13af4dfa-40b2-4a40-ba8b-9036aff2df0a
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column productline
+		dataType: string
+		lineageTag: 3af5cf7e-1467-4eb4-a56b-52f0fbb39509
+		summarizeBy: none
+		sourceColumn: productline
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthStart = DATE(YEAR(gold_dpmc_vs_2w3w4w_competitorwisereg[Month]), MONTH(gold_dpmc_vs_2w3w4w_competitorwisereg[Month]), 1)
+		formatString: General Date
+		lineageTag: 9b14879a-522d-4edc-9404-f4b7f551d2db
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w4w_competitorwisereg = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w4w_competitorwisereg = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w4w_competitorwisereg"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(dbo_gold_dpmc_vs_2w3w4w_competitorwisereg,{{"Units", Int64.Type}, {"Month", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

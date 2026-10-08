@@ -1,0 +1,63 @@
+table AlertThresholds
+	lineageTag: 54bdcb31-92b7-4d91-9d11-7332c846195c
+
+	measure 'RM In Threshold View' =
+			
+			VAR Sel = [Top Bottom]
+			VAR RMAch = [Achievement %]
+			VAR RMLowerLimit = CALCULATE ( AVERAGE ( Vw_gold_dpmc_vs_2w3w_Thresholds[ThresholdLower] ) )
+			VAR RMUpperLimit = CALCULATE ( AVERAGE ( Vw_gold_dpmc_vs_2w3w_Thresholds[ThresholdUpper] ) )
+			RETURN
+			    IF (
+			        Sel = "Bottom",
+			        IF ( RMAch < RMLowerLimit, 1, 0 ),
+			        IF ( RMAch > RMUpperLimit, 1, 0 )
+			    )
+		formatString: 0
+		lineageTag: 9bbd64a0-1334-482c-b67e-de7a555be635
+
+	measure 'Branch In Threshold View' =
+			
+			VAR Sel = [Top Bottom]
+			VAR BranchAch = [Achievement %]
+			VAR LowerLimit = CALCULATE ( MAX ( Vw_gold_dpmc_vs_2w3w_Thresholds[ThresholdLower] ) )
+			VAR UpperLimit = CALCULATE ( MAX ( Vw_gold_dpmc_vs_2w3w_Thresholds[ThresholdUpper] ) )
+			RETURN
+			    IF (
+			        Sel = "Bottom",
+			        IF ( BranchAch < LowerLimit, 1, 0 ),
+			        IF ( BranchAch > UpperLimit, 1, 0 )
+			    )
+		formatString: 0
+		lineageTag: b69d0595-574c-49c9-a684-e458ac6fc506
+
+	measure 'Regional Head In Threshold View' =
+			
+			VAR Sel = [Top Bottom]
+			VAR SRMAch = [Achievement %]
+			VAR SRMLowerLimit = CALCULATE ( AVERAGE ( Vw_gold_dpmc_vs_2w3w_Thresholds[ThresholdLower] ) )
+			VAR SRMUpperLimit = CALCULATE ( AVERAGE ( Vw_gold_dpmc_vs_2w3w_Thresholds[ThresholdUpper] ) )
+			RETURN
+			    IF (
+			        Sel = "Bottom",
+			        IF ( SRMAch < SRMLowerLimit, 1, 0 ),
+			        IF ( SRMAch > SRMUpperLimit, 1, 0 )
+			    )
+		formatString: 0
+		lineageTag: 210174a5-04cf-4891-a9f0-f692f229b84a
+
+	column Placeholder
+		formatString: 0
+		lineageTag: 20b028bc-b810-4845-9acc-a689c80982e8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AlertThresholds = calculated
+		mode: import
+		source = ROW("Placeholder", BLANK())
+
+	annotation PBI_Id = 23f7765ce19d4c65b3d95586733a24f5
+

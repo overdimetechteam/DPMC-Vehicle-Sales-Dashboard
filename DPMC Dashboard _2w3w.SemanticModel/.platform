@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "DPMC Dashboard _2w3w"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a9d6e1c0-e6ea-4ffe-9e7d-03a2ebcdec60"
+  }
+}

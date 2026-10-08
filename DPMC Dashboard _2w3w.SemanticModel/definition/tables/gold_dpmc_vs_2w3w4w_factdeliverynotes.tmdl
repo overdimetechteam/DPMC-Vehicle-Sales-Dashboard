@@ -1,0 +1,140 @@
+table gold_dpmc_vs_2w3w4w_factdeliverynotes
+	lineageTag: 6dfeccf8-f088-4fb5-a5ab-91b2e696fd9b
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ca12ee25-23a3-4f34-916a-63b2ace2c7af
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column PremiseSK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d6f042d7-1eb8-45c2-bee5-2a17d92c659c
+		summarizeBy: none
+		sourceColumn: PremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 154b5d71-a485-4a9c-be37-1293651d9044
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeliveryNoteNo
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d0a89de2-9443-4a4b-9a62-50eb8cfa04b3
+		summarizeBy: count
+		sourceColumn: DeliveryNoteNo
+
+		annotation SummarizationSetBy = User
+
+	column ChassisNo
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 533b5148-703d-446d-b682-f1d91b19ef6f
+		summarizeBy: none
+		sourceColumn: ChassisNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActualDeliveryDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: d996c53e-8744-4dfb-a152-f57619240ce3
+		summarizeBy: none
+		sourceColumn: ActualDeliveryDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeliveryPremisesCode
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3993830d-ae9f-431c-a459-9e43e81a0a5b
+		summarizeBy: none
+		sourceColumn: DeliveryPremisesCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeliveryPremises
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 39bdb80b-84c8-4fa8-a337-e55d3fa4ccec
+		summarizeBy: none
+		sourceColumn: DeliveryPremises
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssemblyCategory
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 40e075a8-1ed0-4c05-86f1-220be5487966
+		summarizeBy: none
+		sourceColumn: AssemblyCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ee501f3b-c528-489d-9171-5d7a6f631e92
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2eada311-5575-4e7d-be17-cbe47b6df4ad
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 695e0e49-59a5-46a5-949b-5ad27525e2c5
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b559d792-8dd6-4725-88a4-8281018589b4
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w4w_factdeliverynotes = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External", [HierarchicalNavigation=true, MultiSubnetFailover=true]),
+				    dbo = Source{[Schema="dbo"]}[Data],
+				    gold_dpmc_vs_2w3w4w_factdeliverynotes1 = dbo{[Name="gold_dpmc_vs_2w3w4w_factdeliverynotes"]}[Data]
+				in
+				    gold_dpmc_vs_2w3w4w_factdeliverynotes1
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

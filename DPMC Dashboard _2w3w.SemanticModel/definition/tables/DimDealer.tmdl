@@ -1,0 +1,53 @@
+table DimDealer
+	lineageTag: ddb2d5ae-2e5f-480f-b2bd-4b152d2c9453
+
+	measure 'Avg Sales Units (Last 3 Months)' =
+			
+			VAR CurrentDate = CALCULATE(MAX(gold_dpmc_vs_2w3w4w_factsales[InvoiceDate]), ALL(gold_dpmc_vs_2w3w4w_factsales))
+			VAR StartDate = EDATE(CurrentDate, -3)
+			RETURN
+			DIVIDE(
+			    CALCULATE(
+			        COUNTROWS(gold_dpmc_vs_2w3w4w_factsales),
+			        FILTER(
+			            ALL(gold_dpmc_dimdate),
+			            gold_dpmc_dimdate[TheDate] > StartDate &&
+			            gold_dpmc_dimdate[TheDate] <= CurrentDate
+			        )
+			    ),
+			    3
+			)
+		lineageTag: 9bf2b764-012a-4f63-8454-35e60f5213dc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Check Date Pattern' =
+			
+			CALCULATE (
+			    COUNTROWS ( gold_dpmc_vs_2w3w_target ),
+			    gold_dpmc_vs_2w3w_target[DATE] <> EOMONTH ( gold_dpmc_vs_2w3w_target[DATE], 0 )
+			)
+		formatString: 0
+		lineageTag: ef32e3f2-0f75-46ef-8da1-57f1860f1e9a
+
+	column Dealer
+		lineageTag: 60838548-d6cc-47f3-bd1a-3dde39039e77
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dealer]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDealer = calculated
+		mode: import
+		source =
+				
+				DISTINCT(
+				    SELECTCOLUMNS(
+				        gold_dpmc_vs_2w3w4w_factinquiry,
+				        "Dealer", gold_dpmc_vs_2w3w4w_factinquiry[DealerPremiseDesc]
+				    )
+				)
+
+	annotation PBI_Id = e91d797403f948da88789d52651083f5
+

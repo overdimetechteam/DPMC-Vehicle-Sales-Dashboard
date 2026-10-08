@@ -1,0 +1,60 @@
+table gold_dpmc_2w3w_forecast_sales_1
+	lineageTag: b21cd99e-c2b9-4c85-a182-fb565bdb6f35
+
+	column InvoiceDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1324ce88-9e22-405b-9d0b-eafdc63f164a
+		summarizeBy: none
+		sourceColumn: InvoiceDate
+
+		variation Variation
+			isDefault
+			relationship: 657e8d67-5141-420e-83fa-09980e760cea
+			defaultHierarchy: LocalDateTable_b71c0ebb-d6be-42a7-b6ca-598719569255.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ForecastValue
+		dataType: double
+		lineageTag: 823f51c1-7ecf-4e44-a255-4bb783d0c3b7
+		summarizeBy: sum
+		sourceColumn: ForecastValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SalesValue
+		dataType: double
+		lineageTag: ce6052d9-7009-4214-a005-93b32c11f894
+		summarizeBy: sum
+		sourceColumn: SalesValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Product
+		dataType: string
+		lineageTag: c8048939-1ec6-4b15-a32d-69629863b957
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_2w3w_forecast_sales_1 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_2w3w_forecast_sales_1 = Source{[Schema="dbo",Item="gold_dpmc_2w3w_forecast_sales_1"]}[Data]
+				in
+				    dbo_gold_dpmc_2w3w_forecast_sales_1
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

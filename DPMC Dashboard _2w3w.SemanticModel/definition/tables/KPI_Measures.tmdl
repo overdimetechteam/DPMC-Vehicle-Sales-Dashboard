@@ -1,0 +1,233 @@
+table KPI_Measures
+	lineageTag: c6df2a79-aef8-4dfb-8015-789bdb9cdb52
+
+	measure 'CF MoM' = SWITCH(TRUE(),[Sales % Change vs Last Month]>0,"Green",[Sales % Change vs Last Month]<0,"Red","Grey")
+		lineageTag: b177e7d2-e52a-4e1e-932e-f7a125a64b55
+
+	measure 'Sales Display Text' = ```
+			
+			VAR RawValue = [Sales (MTD as of Selected Date)] * 1000000
+			VAR AbsValue = ABS ( RawValue )
+			VAR ScaledText = 
+			    SWITCH (
+			        TRUE (),
+			        AbsValue >= 1000000000, FORMAT ( RawValue / 1000000000, "#,##0.00" ) & " B",
+			        AbsValue >= 10000000,   FORMAT ( RawValue / 1000000, "#,##0.00" ) & " M",
+			        AbsValue >= 100000,     FORMAT ( RawValue / 100000, "#,##0.00" ) & " Lakh",
+			        AbsValue >= 1000,       FORMAT ( RawValue / 1000, "#,##0.00" ) & " K",
+			        FORMAT ( RawValue, "#,##0.00" )
+			    )
+			RETURN
+			    "LKR " & ScaledText
+			```
+		lineageTag: 9dc2c212-9f98-4376-b0e2-8ca2626ec0f5
+
+	measure 'Sales Format String' =
+			
+			VAR Q = UNICHAR ( 34 )
+			VAR RawValue = [Sales (MTD as of Selected Date)] * 1000000
+			VAR AbsValue = ABS ( RawValue )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        AbsValue >= 1000000000, Q & "LKR " & Q & "#,##0.00,,," & Q & " B" & Q,
+			        AbsValue >= 1000000,    Q & "LKR " & Q & "#,##0.00,," & Q & " M" & Q,
+			        AbsValue >= 1000,       Q & "LKR " & Q & "#,##0.00," & Q & " K" & Q,
+			        Q & "LKR " & Q & "#,##0.00"
+			    )
+		lineageTag: 574faeba-f87e-4323-b4df-fc30fbd6584b
+
+	measure 'Sales (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [Sales Value (LKR M)],
+			        gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			        gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			    )
+		lineageTag: 1def8ade-7bb7-4d24-9380-9e6e270fa03f
+
+		formatStringDefinition = ""
+
+	measure 'Total Bookings (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [Total Bookings],
+			        gold_dpmc_dimdate[TheDate] >= MonthStart,
+			        gold_dpmc_dimdate[TheDate] <= SelectedDate
+			    )
+		formatString: 0
+		lineageTag: c2105e6c-d94d-46af-8fff-2327f2050540
+
+	measure 'GRN Count (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [GRN Count],
+			        FactGRNDetails_Dedup[GatePassDate] >= MonthStart,
+			        FactGRNDetails_Dedup[GatePassDate] <= SelectedDate
+			    )
+		formatString: 0
+		lineageTag: 901dc8ed-5205-4cb4-bcbc-19ca18dead2e
+
+	measure 'Delivery Notes (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [Delivery Notes],
+			        gold_dpmc_dimdate[TheDate] >= MonthStart,
+			        gold_dpmc_dimdate[TheDate] <= SelectedDate
+			    )
+		formatString: 0
+		lineageTag: 55bdb9c3-9454-4161-8cc3-f712a69c9f02
+
+	measure 'No of Inquiries (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [No of Inquiries],
+			        gold_dpmc_dimdate[TheDate] >= MonthStart,
+			        gold_dpmc_dimdate[TheDate] <= SelectedDate
+			    )
+		formatString: 0
+		lineageTag: f91480c8-8e4d-46ae-b959-da22dc04bf9d
+
+	measure 'Target (Selected Month)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR MonthEnd = EOMONTH ( MonthStart, 0 )
+			RETURN
+			    CALCULATE (
+			        [Target (Selected)],
+			        gold_dpmc_dimdate[TheDate] >= MonthStart,
+			        gold_dpmc_dimdate[TheDate] <= MonthEnd
+			    )
+		formatString: 0
+		lineageTag: ad9bc42e-c52d-4bcc-a86c-697b57642296
+
+	measure 'Remaining Target (MTD as of Selected Date)' =
+			
+			[Target (Selected Month)] - [Sales (MTD as of Selected Date)]
+		lineageTag: fc28f729-ac8b-4e15-8d51-df58bff54d84
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Achievement Ring SVG' = ```
+			
+			VAR Actual = [Sales (MTD as of Selected Date)]
+			VAR Target = [Target (Selected Month)]
+			VAR Remaining = [Remaining Target (MTD as of Selected Date)]
+			VAR AchPct = DIVIDE ( Actual, Target )
+			VAR AchPctDisplay = FORMAT ( AchPct, "0%" )
+			VAR Circumference = 282.74
+			VAR ProgressLength = Circumference * AchPct
+			VAR ActualDisplay = "LKR " & FORMAT ( Actual, "#,##0.0" ) & "M"
+			VAR TargetDisplay = "LKR " & FORMAT ( Target, "#,##0.0" ) & "M"
+			VAR RemainingDisplay = "LKR " & FORMAT ( Remaining, "#,##0.0" ) & "M"
+			VAR SVGString = 
+			    "<svg xmlns='http://www.w3.org/2000/svg' width='400' height='160' viewBox='0 0 400 160'>" &
+			    "<rect x='0' y='0' width='400' height='160' rx='12' fill='#ffffff'/>" &
+			    "<circle cx='85' cy='80' r='45' fill='none' stroke='#e9e6fb' stroke-width='10'/>" &
+			    "<circle cx='85' cy='80' r='45' fill='none' stroke='#6c4ce6' stroke-width='10' stroke-linecap='round' stroke-dasharray='" & FORMAT(ProgressLength,"0.0") & " " & FORMAT(Circumference,"0.0") & "' transform='rotate(-90 85 80)'/>" &
+			    "<text x='85' y='78' text-anchor='middle' font-size='22' font-weight='bold' font-family='Segoe UI' fill='#1f2937'>" & AchPctDisplay & "</text>" &
+			    "<text x='85' y='96' text-anchor='middle' font-size='10' font-family='Segoe UI' fill='#6b7280'>of target</text>" &
+			    "<text x='180' y='30' font-size='12' font-family='Segoe UI' font-weight='bold' fill='#6b7280'>TOTAL SALES</text>" &
+			    "<text x='180' y='60' font-size='24' font-family='Segoe UI' font-weight='bold' fill='#111827'>" & ActualDisplay & "</text>" &
+			    "<line x1='180' y1='75' x2='380' y2='75' stroke='#e5e7eb' stroke-width='1'/>" &
+			    "<text x='180' y='95' font-size='12' font-family='Segoe UI' fill='#6b7280'>TARGET</text>" &
+			    "<text x='380' y='95' text-anchor='end' font-size='12' font-family='Segoe UI' font-weight='bold' fill='#111827'>" & TargetDisplay & "</text>" &
+			    "<text x='180' y='115' font-size='12' font-family='Segoe UI' fill='#6b7280'>REMAINING</text>" &
+			    "<text x='380' y='115' text-anchor='end' font-size='12' font-family='Segoe UI' font-weight='bold' fill='#111827'>" & RemainingDisplay & "</text>" &
+			    "</svg>"
+			VAR EncodedSVG = SUBSTITUTE ( SUBSTITUTE ( SVGString, "#", "%23" ), " ", "%20" )
+			RETURN
+			    "data:image/svg+xml;utf8," & EncodedSVG
+			```
+		lineageTag: 3f283923-4372-48fa-9ef6-6fea7ab8b5d1
+
+	measure 'Sales Achievement Ring HTML' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR SelectedType = SELECTEDVALUE ( VehicleTypeSelector[Vehicle Type] )
+			VAR Q = UNICHAR ( 34 )
+			VAR Actual =
+			    SWITCH (
+			        SelectedType,
+			        "2W", CALCULATE (
+			                  DISTINCTCOUNT ( gold_dpmc_vs_2w3w4w_factsales[ChassisNo] ),
+			                  NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factsales[InvoiceNo] ),
+			                  gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = "2 WHEELERS",
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			              ),
+			        "3W", CALCULATE (
+			                  DISTINCTCOUNT ( gold_dpmc_vs_2w3w4w_factsales[ChassisNo] ),
+			                  NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factsales[InvoiceNo] ),
+			                  gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = "3 WHEELERS",
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			              ),
+			        CALCULATE (
+			            DISTINCTCOUNT ( gold_dpmc_vs_2w3w4w_factsales[ChassisNo] ),
+			            NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factsales[InvoiceNo] ),
+			            gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] IN { "2 WHEELERS", "3 WHEELERS" },
+			            gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			            gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			        )
+			    )
+			VAR Target = [Target (Selected Month)]
+			VAR Remaining = Target - Actual
+			VAR AchPct = DIVIDE ( Actual, Target )
+			VAR AchPctDisplay = FORMAT ( AchPct, "0%" )
+			VAR Circumference = 282.74
+			VAR ProgressLength = Circumference * AchPct
+			VAR ActualDisplay = FORMAT ( Actual, "#,##0" )
+			VAR TargetDisplay = FORMAT ( Target, "#,##0" )
+			VAR RemainingDisplay = FORMAT ( Remaining, "#,##0" )
+			RETURN
+			"<div style=" & Q & "display:flex;align-items:center;font-family:Segoe UI,sans-serif;background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" & Q & ">" &
+			  "<svg width=" & Q & "130" & Q & " height=" & Q & "130" & Q & " viewBox=" & Q & "0 0 100 100" & Q & ">" &
+			    "<circle cx=" & Q & "50" & Q & " cy=" & Q & "50" & Q & " r=" & Q & "45" & Q & " fill=" & Q & "none" & Q & " stroke=" & Q & "#e9e6fb" & Q & " stroke-width=" & Q & "10" & Q & "/>" &
+			    "<circle cx=" & Q & "50" & Q & " cy=" & Q & "50" & Q & " r=" & Q & "45" & Q & " fill=" & Q & "none" & Q & " stroke=" & Q & "#6c4ce6" & Q & " stroke-width=" & Q & "10" & Q & " stroke-linecap=" & Q & "round" & Q & " stroke-dasharray=" & Q & FORMAT(ProgressLength,"0.0") & " " & FORMAT(Circumference,"0.0") & Q & " transform=" & Q & "rotate(-90 50 50)" & Q & "/>" &
+			    "<text x=" & Q & "50" & Q & " y=" & Q & "48" & Q & " text-anchor=" & Q & "middle" & Q & " font-size=" & Q & "20" & Q & " font-weight=" & Q & "bold" & Q & " fill=" & Q & "#1f2937" & Q & ">" & AchPctDisplay & "</text>" &
+			    "<text x=" & Q & "50" & Q & " y=" & Q & "62" & Q & " text-anchor=" & Q & "middle" & Q & " font-size=" & Q & "8" & Q & " fill=" & Q & "#6b7280" & Q & ">of target</text>" &
+			  "</svg>" &
+			  "<div style=" & Q & "margin-left:20px;" & Q & ">" &
+			    "<div style=" & Q & "font-size:12px;color:#6b7280;font-weight:600;letter-spacing:0.5px;" & Q & ">TOTAL UNITS SOLD</div>" &
+			    "<div style=" & Q & "font-size:26px;font-weight:bold;color:#111827;margin-bottom:8px;" & Q & ">" & ActualDisplay & "</div>" &
+			    "<div style=" & Q & "border-top:1px solid #e5e7eb;padding-top:8px;font-size:12px;" & Q & ">" &
+			      "<div style=" & Q & "display:flex;justify-content:space-between;color:#6b7280;" & Q & "><span>TARGET </span><span style=" & Q & "color:#111827;font-weight:600;" & Q & ">" & TargetDisplay & "</span></div>" &
+			      "<div style=" & Q & "display:flex;justify-content:space-between;color:#6b7280;margin-top:4px;" & Q & "><span>REMAINING </span><span style=" & Q & "color:#111827;font-weight:600;" & Q & ">" & RemainingDisplay & "</span></div>" &
+			    "</div>" &
+			  "</div>" &
+			"</div>"
+		lineageTag: e07c37f7-86ae-457d-b523-4dcbba6c49f4
+
+	column Placeholder
+		formatString: 0
+		lineageTag: 36676873-846a-439f-9954-e7225f75afc6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI_Measures = calculated
+		mode: import
+		source = ROW("Placeholder", BLANK())
+
+	annotation PBI_Id = 68f336133eb64ff8a34b902fd019d6bd
+

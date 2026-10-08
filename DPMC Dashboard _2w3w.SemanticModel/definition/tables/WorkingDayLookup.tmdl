@@ -1,0 +1,47 @@
+table WorkingDayLookup
+	lineageTag: 917ed96c-66b9-4ec9-94ae-bc7d416e925b
+
+	column Date
+		formatString: General Date
+		lineageTag: ea50f90e-d1a1-4816-a4eb-205d1b1639f8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: c70e612c-ae79-4529-b091-7866c7202532
+			defaultHierarchy: LocalDateTable_ac1e6156-bae0-424a-8346-f560214fab84.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkingDayOfMonth
+		formatString: 0
+		lineageTag: 0bbbb0cb-d983-42c3-8306-03186e615a79
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [WorkingDayOfMonth]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition WorkingDayLookup = calculated
+		mode: import
+		source =
+				
+				VAR DateRange = CALENDAR(DATE(2024,1,1), DATE(2028,12,31))
+				RETURN
+				ADDCOLUMNS(
+				    DateRange,
+				    "WorkingDayOfMonth",
+				    VAR ThisDate = [Date]
+				    VAR MonthStart = DATE(YEAR(ThisDate), MONTH(ThisDate), 1)
+				    RETURN
+				    IF(
+				        WEEKDAY(ThisDate, 2) > 6,
+				        BLANK(),
+				        COUNTROWS(FILTER(DateRange, [Date] >= MonthStart && [Date] <= ThisDate && WEEKDAY([Date], 2) <= 6))
+				    )
+				)
+
+	annotation PBI_Id = 41a2a2888e5f4d21bf846d36c1c746c0
+

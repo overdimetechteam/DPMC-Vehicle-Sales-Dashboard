@@ -1,0 +1,206 @@
+table gold_dpmc_dimdate
+	lineageTag: 84fde573-bfcd-48ec-9ed8-b678efe3ef48
+
+	column TheDate
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: fa8d7755-7aaf-48aa-8a2d-46725daef362
+		summarizeBy: none
+		sourceColumn: TheDate
+
+		variation Variation
+			isDefault
+			relationship: 644c8b1a-bf7b-49cb-b195-b4cd2deaa9a2
+			defaultHierarchy: LocalDateTable_8fa256c7-1689-4a13-bd67-dd46cf02866a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TheDay
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2ce184d3-d837-47ba-960b-a1215226a33b
+		summarizeBy: sum
+		sourceColumn: TheDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheDayName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b9c1aadc-5026-4742-9c47-07cefa1304f9
+		summarizeBy: none
+		sourceColumn: TheDayName
+		sortByColumn: TheDayOfWeek
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheWeek
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2c979bd9-c158-46db-8af9-69a5ab9aaa59
+		summarizeBy: sum
+		sourceColumn: TheWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheISOWeek
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0b4cb28c-7b87-4e4f-837d-29b471f7d270
+		summarizeBy: sum
+		sourceColumn: TheISOWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheDayOfWeek
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 616eef37-169d-4142-a475-677ff94f0ece
+		summarizeBy: sum
+		sourceColumn: TheDayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheMonth
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6f1111bc-7760-44b8-a0bc-3df7d78e3f33
+		summarizeBy: sum
+		sourceColumn: TheMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheMonthName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 02ccc24b-8992-4567-8203-773392d23c9f
+		summarizeBy: none
+		sourceColumn: TheMonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheQuarter
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b5bcd137-230f-4e1d-ad57-e9f43a6f2e5f
+		summarizeBy: sum
+		sourceColumn: TheQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheYear
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 06631a1b-2334-4313-98c9-cf4a13fb11db
+		summarizeBy: sum
+		sourceColumn: TheYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheFirstOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 079c31ad-3113-4daf-a0c8-836ad1eb1fc1
+		summarizeBy: none
+		sourceColumn: TheFirstOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TheLastOfYear
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 7a3fcf2d-d342-40ea-b7b0-b830b8e5828c
+		summarizeBy: none
+		sourceColumn: TheLastOfYear
+
+		variation Variation
+			isDefault
+			relationship: aa2ae7ad-566f-45af-bd7c-4c22652d70bf
+			defaultHierarchy: LocalDateTable_2b82303d-27d5-4700-b8c8-440c8265b4b3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TheDayOfYear
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 20ed56a9-f1fd-424c-b84f-50271050f2a6
+		summarizeBy: sum
+		sourceColumn: TheDayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Holiday
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ae03d3a1-bef4-470e-9803-481d7bba12e0
+		summarizeBy: sum
+		sourceColumn: Holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesHoliday
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: d89b2917-e01a-4d07-b433-33a6f59a7308
+		summarizeBy: sum
+		sourceColumn: SalesHoliday
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYearShort =
+			
+			SWITCH(
+			    gold_dpmc_dimdate[TheMonth],
+			    1, "Jan-", 2, "Feb-", 3, "Mar-", 4, "Apr-",
+			    5, "May-", 6, "Jun-", 7, "Jul-", 8, "Aug-",
+			    9, "Sep-", 10, "Oct-", 11, "Nov-", 12, "Dec-"
+			) & RIGHT ( gold_dpmc_dimdate[TheYear], 2 )
+		lineageTag: 69665a0b-8607-406d-ab65-80bba9746500
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYearSort =
+			
+			gold_dpmc_dimdate[TheYear] * 100 + gold_dpmc_dimdate[TheMonth]
+		formatString: 0
+		lineageTag: 8006e4c9-c536-4ac7-ba9a-9967d6e4b0fb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_dimdate = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External", [HierarchicalNavigation=true, MultiSubnetFailover=true]),
+				    dbo = Source{[Schema="dbo"]}[Data],
+				    gold_dpmc_dimdate1 = dbo{[Name="gold_dpmc_dimdate"]}[Data]
+				in
+				    gold_dpmc_dimdate1
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

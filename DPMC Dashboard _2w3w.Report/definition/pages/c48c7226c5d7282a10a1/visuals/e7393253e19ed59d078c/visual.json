@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "e7393253e19ed59d078c",
+  "position": {
+    "x": 79.977433004231315,
+    "y": 195.45945945945945,
+    "z": 9000,
+    "height": 700.54054054054052,
+    "width": 1872.0225669957686,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factdeliverynotes"
+                    }
+                  },
+                  "Property": "ChassisNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factdeliverynotes.ChassisNo",
+              "nativeQueryRef": "ChassisNo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factdeliverynotes"
+                    }
+                  },
+                  "Property": "AssemblyCategory"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factdeliverynotes.AssemblyCategory",
+              "nativeQueryRef": "AssemblyCategory"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factdeliverynotes"
+                    }
+                  },
+                  "Property": "ActualDeliveryDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factdeliverynotes.ActualDeliveryDate",
+              "nativeQueryRef": "ActualDeliveryDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factdeliverynotes"
+                    }
+                  },
+                  "Property": "DeliveryNoteNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factdeliverynotes.DeliveryNoteNo",
+              "nativeQueryRef": "DeliveryNoteNo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factdeliverynotes"
+                    }
+                  },
+                  "Property": "DeliveryPremises"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factdeliverynotes.DeliveryPremises",
+              "nativeQueryRef": "DeliveryPremises"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_dpmc_vs_2w3w4w_factdeliverynotes"
+                  }
+                },
+                "Property": "ChassisNo"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

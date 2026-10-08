@@ -1,0 +1,597 @@
+table Measures_Table
+	lineageTag: 2fe036ca-a21b-47ce-9933-a9d26bf1aabd
+
+	measure 'Inquiry Count' =
+			
+			CALCULATE(
+			    COUNT(gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo]),
+			    gold_dpmc_vs_2w3w4w_factinquiry[Type] = "INQ"
+			)
+		formatString: 0
+		lineageTag: 750946c3-ee08-4210-8500-87e0192b053a
+
+	measure 'Booking Count' =
+			
+			CALCULATE(
+			    COUNT(gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo]),
+			    gold_dpmc_vs_2w3w4w_factinquiry[Type] = "CONFIRM"
+			)
+		formatString: 0
+		lineageTag: 05df34e6-1886-4dfa-801e-2eefae801edc
+
+	measure 'Current Month Inquiry' =
+			
+			VAR AnchorDate = [Selected Date Field]
+			VAR StartCurrentMonth = DATE(YEAR(AnchorDate), MONTH(AnchorDate), 1)
+			VAR StartNextMonth = EDATE(StartCurrentMonth, 1)
+			RETURN
+			    CALCULATE(
+			        [Inquiry Count],
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartCurrentMonth,
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] < StartNextMonth
+			    )
+		formatString: 0
+		lineageTag: 25341901-1c9c-4177-993a-5991999c9b84
+
+	measure 'Previous Month Inquiry' =
+			
+			VAR AnchorDate = [Selected Date Field]
+			VAR StartCurrentMonth = DATE(YEAR(AnchorDate), MONTH(AnchorDate), 1)
+			VAR StartPreviousMonth = EDATE(StartCurrentMonth, -1)
+			RETURN
+			    CALCULATE(
+			        [Inquiry Count],
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartPreviousMonth,
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] < StartCurrentMonth
+			    )
+		formatString: 0
+		lineageTag: 06b664fe-d1a9-4525-ab4b-fa2b8d3b8dee
+
+	measure 'Current Month Booking' =
+			
+			VAR AnchorDate = [Selected Date Field]
+			VAR StartCurrentMonth = DATE(YEAR(AnchorDate), MONTH(AnchorDate), 1)
+			VAR StartNextMonth = EDATE(StartCurrentMonth, 1)
+			RETURN
+			    CALCULATE(
+			        [Booking Count],
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartCurrentMonth,
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] < StartNextMonth
+			    )
+		formatString: 0
+		lineageTag: 917bd643-dd9b-4a4a-886f-59c820dd171c
+
+	measure 'Previous Month Booking' =
+			
+			VAR AnchorDate = [Selected Date Field]
+			VAR StartCurrentMonth = DATE(YEAR(AnchorDate), MONTH(AnchorDate), 1)
+			VAR StartPreviousMonth = EDATE(StartCurrentMonth, -1)
+			RETURN
+			    CALCULATE(
+			        [Booking Count],
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartPreviousMonth,
+			        gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] < StartCurrentMonth
+			    )
+		formatString: 0
+		lineageTag: cadca2c2-d4aa-41cd-98ea-53e6d47ba1f6
+
+	measure 'Funnel Value' =
+			
+			VAR CurrentStage =
+			    SELECTEDVALUE(
+			        'Stage'[StageName]
+			    )
+			RETURN
+			    SWITCH(
+			        CurrentStage,
+			        "Inquiry",    [Funnel Inquiry],
+			        "Confirmed Booking",    [Funnel Booking],
+			        "Allocation", [Funnel Allocation],
+			        "Invoice",    [Funnel Invoice],
+			        BLANK()
+			    )
+		formatString: 0
+		lineageTag: 2565c278-5108-41ae-a8a2-16186854b747
+
+	measure 'Selected Date' =
+			
+			COALESCE(
+			    SELECTEDVALUE(
+			        gold_dpmc_dimdate[TheDate]
+			    ),
+			    TODAY() - 1
+			)
+		formatString: General Date
+		lineageTag: 2eb42069-581b-45fa-9211-8c2982dbcd6f
+
+	measure 'Yesterday Stock' =
+			
+			CALCULATE(
+			    DISTINCTCOUNTNOBLANK(
+			        gold_dpmc_vs_2w3w4w_factstock[ChassisNo]
+			    ),
+			    gold_dpmc_vs_2w3w4w_factstock[CurrentStock] = 1,
+			    gold_dpmc_vs_2w3w4w_factstock[Status] <> "INVOICE"
+			)
+		formatString: 0
+		lineageTag: 73e9ea71-de2f-4531-98e1-e4b6788e32f6
+
+	measure Measure
+		lineageTag: 8f89f001-8e1d-4dc0-a0cf-65b26f0d2118
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	measure 'Selected Date Stock' =
+			
+			VAR SelectedDate =
+			    [Selected Date]
+			
+			VAR EligibleStock =
+			    FILTER(
+			        gold_dpmc_vs_2w3w4w_factstock,
+			        gold_dpmc_vs_2w3w4w_factstock[CurrentStock] IN { 0, 1 }
+			            && gold_dpmc_vs_2w3w4w_factstock[Status] <> "INVOICE"
+			            && gold_dpmc_vs_2w3w4w_factstock[GRNDate] <= SelectedDate
+			            &&
+			            (
+			                gold_dpmc_vs_2w3w4w_factstock[DeliveryDate] > SelectedDate
+			                    || gold_dpmc_vs_2w3w4w_factstock[CalMaxDate] >= SelectedDate
+			            )
+			    )
+			
+			VAR LatestEligibleRows =
+			    FILTER(
+			        EligibleStock,
+			        VAR CurrentChassis =
+			            gold_dpmc_vs_2w3w4w_factstock[ChassisNo]
+			        VAR CurrentLoadedDate =
+			            gold_dpmc_vs_2w3w4w_factstock[DMT_LOADED_DATE]
+			        VAR LatestLoadedDate =
+			            MAXX(
+			                FILTER(
+			                    EligibleStock,
+			                    gold_dpmc_vs_2w3w4w_factstock[ChassisNo] = CurrentChassis
+			                ),
+			                gold_dpmc_vs_2w3w4w_factstock[DMT_LOADED_DATE]
+			            )
+			        RETURN
+			            CurrentLoadedDate = LatestLoadedDate
+			    )
+			
+			RETURN
+			    COUNTROWS(
+			        SUMMARIZE(
+			            LatestEligibleRows,
+			            gold_dpmc_vs_2w3w4w_factstock[ChassisNo]
+			        )
+			    )
+		formatString: 0
+		lineageTag: 0d741b50-f816-4b05-8b02-70f8a8dda4bd
+
+	measure 'Current Stock' =
+			
+			VAR SelectedDate =
+			    [Selected Date]
+			RETURN
+			    IF(
+			        SelectedDate = TODAY() - 1,
+			        [Yesterday Stock],
+			        [Selected Date Stock]
+			    )
+		formatString: 0
+		lineageTag: e73165ea-db64-46d7-97d0-1ccec0acf120
+
+	measure 'Funnel Inquiry' =
+			
+			VAR HasManualDateFilter = ISFILTERED ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] )
+			VAR EndDate = [Selected As Of Date]
+			VAR ThreeMonthsBack = EDATE ( EndDate, -3 )
+			VAR StartDate = DATE ( YEAR ( ThreeMonthsBack ), MONTH ( ThreeMonthsBack ), 1 )
+			RETURN
+			    IF (
+			        HasManualDateFilter,
+			        CALCULATE ( COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ), gold_dpmc_vs_2w3w4w_factinquiry[Type] = "INQ" ),
+			        CALCULATE (
+			            COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ),
+			            gold_dpmc_vs_2w3w4w_factinquiry[Type] = "INQ",
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartDate,
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] <= EndDate
+			        )
+			    )
+		formatString: 0
+		lineageTag: dd8bafa2-0d72-4bca-9d45-f3daa89ca0d7
+
+	measure 'Funnel Booking' =
+			
+			VAR HasManualDateFilter = ISFILTERED ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] )
+			VAR EndDate = [Selected As Of Date]
+			VAR ThreeMonthsBack = EDATE ( EndDate, -3 )
+			VAR StartDate = DATE ( YEAR ( ThreeMonthsBack ), MONTH ( ThreeMonthsBack ), 1 )
+			RETURN
+			    IF (
+			        HasManualDateFilter,
+			        CALCULATE ( COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ), gold_dpmc_vs_2w3w4w_factinquiry[Type] = "CONFIRM" ),
+			        CALCULATE (
+			            COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ),
+			            gold_dpmc_vs_2w3w4w_factinquiry[Type] = "CONFIRM",
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartDate,
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] <= EndDate
+			        )
+			    )
+		formatString: 0
+		lineageTag: a1bcd704-770b-409f-848c-07e65b024133
+
+	measure 'Funnel Allocation' =
+			
+			VAR HasManualDateFilter = ISFILTERED ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] )
+			VAR EndDate = [Selected As Of Date]
+			VAR ThreeMonthsBack = EDATE ( EndDate, -3 )
+			VAR StartDate = DATE ( YEAR ( ThreeMonthsBack ), MONTH ( ThreeMonthsBack ), 1 )
+			RETURN
+			    IF (
+			        HasManualDateFilter,
+			        CALCULATE ( COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ), gold_dpmc_vs_2w3w4w_factinquiry[Type] = "ALLOCATE" ),
+			        CALCULATE (
+			            COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ),
+			            gold_dpmc_vs_2w3w4w_factinquiry[Type] = "ALLOCATE",
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartDate,
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] <= EndDate
+			        )
+			    )
+		formatString: 0
+		lineageTag: b1cbd04a-1d41-4bb3-9657-f887a5134ced
+
+	measure 'Funnel Invoice' =
+			
+			VAR HasManualDateFilter = ISFILTERED ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] )
+			VAR EndDate = [Selected As Of Date]
+			VAR ThreeMonthsBack = EDATE ( EndDate, -3 )
+			VAR StartDate = DATE ( YEAR ( ThreeMonthsBack ), MONTH ( ThreeMonthsBack ), 1 )
+			RETURN
+			    IF (
+			        HasManualDateFilter,
+			        CALCULATE ( COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ), gold_dpmc_vs_2w3w4w_factinquiry[Type] = "INVOICE" ),
+			        CALCULATE (
+			            COUNT ( gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo] ),
+			            gold_dpmc_vs_2w3w4w_factinquiry[Type] = "INVOICE",
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] >= StartDate,
+			            gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate] <= EndDate
+			        )
+			    )
+		formatString: 0
+		lineageTag: eb0f635e-5451-4b16-842d-19916d87f9e5
+
+	measure 'Allocated Bookings' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(gold_dpmc_vs_2w3w4w_factstock[BookingNo]),
+			    NOT ISBLANK(gold_dpmc_vs_2w3w4w_factstock[BookingNo]),
+			    NOT ISBLANK(gold_dpmc_vs_2w3w4w_factstock[AllocatedDate])
+			)
+		formatString: 0
+		lineageTag: 7bc9a9d9-2e4b-4813-8a24-acaf78d1e124
+
+	measure 'Non-allocated Bookings' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(gold_dpmc_vs_2w3w4w_factstock[BookingNo]),
+			    NOT ISBLANK(gold_dpmc_vs_2w3w4w_factstock[BookingNo]),
+			    ISBLANK(gold_dpmc_vs_2w3w4w_factstock[AllocatedDate])
+			)
+		formatString: 0
+		lineageTag: 200a6ac7-3067-47ec-90a0-c98a0cd54532
+
+	measure 'Pending Bookings New' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo]),
+			    gold_dpmc_vs_2w3w4w_factinquiry[Type] IN {"INQ", "CONFIRM", "ALLOCATE"}
+			)
+		formatString: 0
+		lineageTag: 72330776-b3c4-4ac4-8ce5-caf4d1534ffe
+
+	measure Inquiry =
+			
+			CALCULATE(
+			    COUNT('gold_dpmc_vs_2w3w4w_factinquiry'[InquiryNo]),
+			    'gold_dpmc_vs_2w3w4w_factinquiry'[Type] = "INQ"
+			)
+		formatString: 0
+		lineageTag: 10ade63d-0e95-4764-ae57-73d08fb504b6
+
+	measure Booking =
+			
+			CALCULATE(
+			    COUNT('gold_dpmc_vs_2w3w4w_factinquiry'[InquiryNo]),
+			    'gold_dpmc_vs_2w3w4w_factinquiry'[Type] = "CONFIRM"
+			)
+		formatString: 0
+		lineageTag: 8c246d70-3cf8-4076-9991-ae169d758121
+
+	measure 'Confirmed Booking' =
+			
+			VAR MinD = CALCULATE(MIN(gold_dpmc_dimdate[TheDate]))
+			VAR MaxD = CALCULATE(MAX(gold_dpmc_dimdate[TheDate])) + 1
+			RETURN
+			CALCULATE(
+			    DISTINCTCOUNT(gold_dpmc_vs_2w3w4w_factsales[BookingNo]),
+			    REMOVEFILTERS(gold_dpmc_vs_2w3w4w_factsales),
+			    gold_dpmc_vs_2w3w4w_factsales[ConfirmDate] >= MinD,
+			    gold_dpmc_vs_2w3w4w_factsales[ConfirmDate] < MaxD,
+			    NOT ISBLANK(gold_dpmc_vs_2w3w4w_factsales[ConfirmDate])
+			)
+		formatString: 0
+		lineageTag: 2c9096d2-bab3-4fbf-867e-db13ec37ec15
+
+	measure Allocation =
+			
+			CALCULATE(
+			    COUNT('gold_dpmc_vs_2w3w4w_factinquiry'[InquiryNo]),
+			    'gold_dpmc_vs_2w3w4w_factinquiry'[Type] = "ALLOCATE"
+			)
+		formatString: 0
+		lineageTag: 632d1bec-29d4-40cd-97ae-e1de4289a1fe
+
+	measure Invoice =
+			
+			CALCULATE(
+			    COUNT('gold_dpmc_vs_2w3w4w_factinquiry'[InquiryNo]),
+			    'gold_dpmc_vs_2w3w4w_factinquiry'[Type] = "INVOICE"
+			)
+		formatString: 0
+		lineageTag: 06dc55b1-960d-46d4-b187-9a19780092a8
+
+	measure 'Selected Date Field' =
+			
+			COALESCE(
+			    SELECTEDVALUE(gold_dpmc_vs_2w3w4w_factinquiry[InquiryDate]),
+			    TODAY() - 1
+			)
+		formatString: General Date
+		lineageTag: 61a77099-0e03-4ce2-a63b-7f11d69d274e
+
+	measure 'Allocation Count' =
+			
+			CALCULATE(
+			    COUNT(gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo]),
+			    gold_dpmc_vs_2w3w4w_factinquiry[Type] = "ALLOCATE"
+			)
+		formatString: 0
+		lineageTag: 5776a924-97cf-4aaf-b25a-c1454744274a
+
+	measure 'Inquiry And Confirm Count' =
+			
+			CALCULATE(
+			    COUNT(gold_dpmc_vs_2w3w4w_factinquiry[InquiryNo]),
+			    gold_dpmc_vs_2w3w4w_factinquiry[Type] IN { "INQ", "CONFIRM" }
+			)
+		formatString: 0
+		lineageTag: d4fff464-431f-4741-befa-0b8458da2e89
+
+	measure 'Working Day Number' =
+			
+			VAR CurrentDate =
+			    CALCULATE(MAX(gold_dpmc_vs_2w3w4w_factsales[InvoiceDate]), ALLSELECTED(gold_dpmc_vs_2w3w4w_factsales))
+			VAR MonthStart = DATE(YEAR(CurrentDate), MONTH(CurrentDate), 1)
+			RETURN
+			CALCULATE(
+			    COUNTROWS(gold_dpmc_dimdate),
+			    FILTER(
+			        ALL(gold_dpmc_dimdate),
+			        gold_dpmc_dimdate[TheDate] >= MonthStart &&
+			        gold_dpmc_dimdate[TheDate] <= CurrentDate &&
+			        WEEKDAY(gold_dpmc_dimdate[TheDate], 2) <= 6
+			    )
+			)
+		formatString: 0
+		lineageTag: 7b446831-f5ad-4df6-a297-1b706d6398b0
+
+	measure 'Working Days Title Text' =
+			
+			"Units Comparison - Working Day " & [Anchor Working Day N]
+		lineageTag: 55c93bd2-8c48-431b-bf3c-b961c6924c18
+
+	measure 'Total Units Trend' =
+			
+			VAR CurrentDayNum =
+			    CALCULATE(MIN(gold_dpmc_dimdate[TheDayOfWeek]), ALLEXCEPT(gold_dpmc_dimdate, gold_dpmc_dimdate[TheDayName]))
+			VAR CurrentTotal = [Total Units Sold]
+			VAR PrevTotal =
+			    CALCULATE(
+			        [Total Units Sold],
+			        REMOVEFILTERS(gold_dpmc_dimdate[TheDayName]),
+			        gold_dpmc_dimdate[TheDayOfWeek] = CurrentDayNum - 1
+			    )
+			VAR Diff = CurrentTotal - PrevTotal
+			RETURN
+			IF(ISBLANK(PrevTotal) || Diff = 0, BLANK(), SIGN(Diff))
+		formatString: 0
+		lineageTag: 937b244f-a3c9-4fd0-82ad-abd4968715e0
+
+	measure 'Test CurrentDayNum' =
+			
+			CALCULATE(MIN(gold_dpmc_dimdate[TheDayOfWeek]), ALLEXCEPT(gold_dpmc_dimdate, gold_dpmc_dimdate[TheDayName]))
+		formatString: 0
+		lineageTag: caf65101-286b-4414-a04b-ea9cab51e0a4
+
+	measure 'Month Units Trend' =
+			
+			VAR CurrentMonthNum =
+			    CALCULATE(
+			        MIN(YEAR(gold_dpmc_dimdate[TheDate]) * 12 + MONTH(gold_dpmc_dimdate[TheDate])),
+			        ALLEXCEPT(gold_dpmc_dimdate, gold_dpmc_dimdate[TheMonthName])
+			    )
+			VAR CurrentTotal = [Total Units Sold]
+			VAR PrevTotal =
+			    CALCULATE(
+			        [Total Units Sold],
+			        REMOVEFILTERS(gold_dpmc_dimdate[TheMonthName]),
+			        FILTER(
+			            ALL(gold_dpmc_dimdate),
+			            YEAR(gold_dpmc_dimdate[TheDate]) * 12 + MONTH(gold_dpmc_dimdate[TheDate]) = CurrentMonthNum - 1
+			        )
+			    )
+			VAR Diff = CurrentTotal - PrevTotal
+			RETURN
+			IF(ISBLANK(PrevTotal) || Diff = 0, BLANK(), SIGN(Diff))
+		lineageTag: 810d3f1c-990b-414b-a46c-d37d6749a004
+
+	measure 'Anchor Working Day N' =
+			
+			VAR AnchorDate = [Anchor Selected Date]
+			VAR EffectiveDate =
+			    CALCULATE(
+			        MAX(WorkingDayLookup[Date]),
+			        WorkingDayLookup[Date] <= AnchorDate,
+			        NOT ISBLANK(WorkingDayLookup[WorkingDayOfMonth])
+			    )
+			RETURN
+			LOOKUPVALUE(WorkingDayLookup[WorkingDayOfMonth], WorkingDayLookup[Date], EffectiveDate)
+		formatString: 0
+		lineageTag: 3fa6c943-2988-40c0-a9ff-02010681029d
+
+	measure 'Row Target Date' =
+			
+			VAR AnchorDate = [Anchor Selected Date]
+			VAR AnchorMonthStart = DATE(YEAR(AnchorDate), MONTH(AnchorDate), 1)
+			VAR N = [Anchor Working Day N]
+			VAR MonthsBack = SELECTEDVALUE(MonthsBackSelector[MonthsBack])
+			VAR TargetMonthStart = EDATE(AnchorMonthStart, -MonthsBack)
+			VAR TargetMonthEnd = EDATE(TargetMonthStart, 1)
+			RETURN
+			CALCULATE(
+			    MIN(WorkingDayLookup[Date]),
+			    WorkingDayLookup[Date] >= TargetMonthStart,
+			    WorkingDayLookup[Date] < TargetMonthEnd,
+			    WorkingDayLookup[WorkingDayOfMonth] = N
+			)
+		formatString: General Date
+		lineageTag: b9c7a6df-7386-47fd-93d3-f830c7fd99b9
+
+	measure 'SameDay Total Units Sold' =
+			
+			VAR TargetDate = [Row Target Date]
+			RETURN
+			CALCULATE(
+			    [Total Units Sold],
+			    REMOVEFILTERS(gold_dpmc_dimdate),
+			    gold_dpmc_dimdate[TheDate] = TargetDate
+			)
+		formatString: 0
+		lineageTag: 0d1a9ecb-9545-4357-b7e7-82fc2d18fe1f
+
+	measure 'SameDay Cash Sales' =
+			
+			VAR TargetDate = [Row Target Date]
+			RETURN
+			CALCULATE([Cash Sales], REMOVEFILTERS(gold_dpmc_dimdate), gold_dpmc_dimdate[TheDate] = TargetDate)
+		formatString: 0
+		lineageTag: 3708495d-2677-4495-9643-4ffb597e198a
+
+	measure 'SameDay Finance Sales' =
+			
+			VAR TargetDate = [Row Target Date]
+			RETURN
+			CALCULATE([Finance Sales], REMOVEFILTERS(gold_dpmc_dimdate), gold_dpmc_dimdate[TheDate] = TargetDate)
+		formatString: 0
+		lineageTag: 2905983e-4a97-404f-b120-d2014641212d
+
+	measure 'SameDay Dealer Count' =
+			
+			VAR TargetDate = [Row Target Date]
+			RETURN
+			CALCULATE([Dealer Count], REMOVEFILTERS(gold_dpmc_dimdate), gold_dpmc_dimdate[TheDate] = TargetDate)
+		formatString: 0
+		lineageTag: 0e46590a-b91b-4e58-b01f-c7e9192dc698
+
+	measure 'SameDay Premise Count' =
+			
+			VAR TargetDate = [Row Target Date]
+			RETURN
+			CALCULATE([Premise Count], REMOVEFILTERS(gold_dpmc_dimdate), gold_dpmc_dimdate[TheDate] = TargetDate)
+		formatString: 0
+		lineageTag: 6bbba086-4484-4ba2-a147-a20d39c74ba8
+
+	measure 'Row Month Label' = VAR AnchorDate = [Anchor Selected Date] VAR AnchorMonthStart = DATE(YEAR(AnchorDate), MONTH(AnchorDate), 1) VAR MonthsBack = SELECTEDVALUE(MonthsBackSelector[MonthsBack]) RETURN FORMAT(EDATE(AnchorMonthStart, -MonthsBack), "MMM-yy")
+		lineageTag: f5230739-9421-4751-9276-77b4be079fe2
+
+	measure 'Anchor Selected Date' =
+			
+			COALESCE(
+			    SELECTEDVALUE(AsOfDateSelector[SelectedDate]),
+			    TODAY() - 1
+			)
+		formatString: General Date
+		lineageTag: 2433db57-ae8c-4952-91ac-b19d8e6e422a
+
+	measure 'SameDay Total Units Trend' =
+			
+			VAR CurrentMonthsBack = SELECTEDVALUE(MonthsBackSelector[MonthsBack])
+			VAR HasPrevRow =
+			    CALCULATE(COUNTROWS(MonthsBackSelector), REMOVEFILTERS(MonthsBackSelector), MonthsBackSelector[MonthsBack] = CurrentMonthsBack + 1) > 0
+			VAR CurrentTotal = [SameDay Total Units Sold]
+			VAR PrevTotal =
+			    IF(
+			        HasPrevRow,
+			        CALCULATE(
+			            [SameDay Total Units Sold],
+			            REMOVEFILTERS(MonthsBackSelector),
+			            MonthsBackSelector[MonthsBack] = CurrentMonthsBack + 1
+			        )
+			    )
+			VAR Diff = CurrentTotal - PrevTotal
+			RETURN
+			IF(ISBLANK(PrevTotal) || Diff = 0, BLANK(), SIGN(Diff))
+		formatString: 0
+		lineageTag: 21d30c23-c4d7-49fe-9c80-9550510beeb6
+
+	measure Confirmed_Bookings =
+			CALCULATE(
+			    COUNT('gold_dpmc_vs_2w3w4w_factinquiry'[InquiryNo]),
+			    'gold_dpmc_vs_2w3w4w_factinquiry'[Type] IN {"INQ", "CONFIRM"}
+			)
+		formatString: 0
+		lineageTag: 300200dd-fa9d-4aa8-8bdd-962c747a4a72
+
+	measure 'Selected As Of Date - Rolling Start' = ```
+			
+			    VAR EndDate = [Selected As Of Date]
+			    RETURN
+			        DATE ( YEAR ( EndDate ), MONTH ( EndDate ) - 3, 1 )
+			```
+		formatString: General Date
+		lineageTag: c2e9d313-80cc-4b86-90cb-302eb1e25498
+
+	measure 'Your Measure (Rolling 3M)' = ```
+			
+			    VAR StartDate = [Selected As Of Date - Rolling Start]
+			    VAR EndDate = [Selected As Of Date]
+			    RETURN
+			        CALCULATE (
+			            [Funnel Value],
+			            gold_dpmc_dimdate[TheDate] >= StartDate,
+			            gold_dpmc_dimdate[TheDate] <= EndDate
+			    )
+			```
+		formatString: 0
+		lineageTag: 1b3b5bcd-2486-4745-987d-c0872dfb5243
+
+	column Column
+		formatString: 0
+		lineageTag: 194b6994-0780-4091-9b5f-56fdb64ff5df
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Measures_Table = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = ea8fd3edbc174c8ea1108c5301fade10
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":null}
+
+	annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = To use special characters in a calculated table name, enclose the entire name in brackets ( [] ) and add a ] to any closing brackets in the name.
+

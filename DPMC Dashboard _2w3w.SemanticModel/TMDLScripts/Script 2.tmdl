@@ -1,0 +1,15 @@
+createOrReplace
+
+	ref table gold_dpmc_vs_2w3w4w_dimdivision
+
+		column CompanySK
+			dataType: int64
+			formatString: 0
+			sourceProviderType: int
+			lineageTag: 81994b7a-0788-4ad4-8346-817d1f816efb
+			summarizeBy: sum
+			sourceColumn: CompanySK
+
+			annotation SummarizationSetBy = Automatic
+			
+

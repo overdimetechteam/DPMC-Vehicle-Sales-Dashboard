@@ -1,0 +1,60 @@
+table gold_dpmc_vs_2w3w4w_dimpremises
+	lineageTag: 3684e382-0f7e-4669-b282-c8dff1b7ee2e
+
+	column PremiseSK
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: f7b12145-29e1-49d6-92ef-3bbc5db9f3f3
+		summarizeBy: none
+		sourceColumn: PremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column PremiseCode
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 296828af-e118-4084-b40a-f4560b486ad7
+		summarizeBy: none
+		sourceColumn: PremiseCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column PremisesDesc
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 20aac752-545e-48bd-a480-91bacbb59d5f
+		summarizeBy: none
+		sourceColumn: PremisesDesc
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 3c007cd2-7875-4c9a-88e7-08d525d3484d
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		variation Variation
+			isDefault
+			relationship: 06ada7ac-ebc8-46c5-9015-9e3fa7ef0674
+			defaultHierarchy: LocalDateTable_74fec9b1-647a-41e0-b3ad-e56f8cd52ce8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w4w_dimpremises = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External", [HierarchicalNavigation=true, MultiSubnetFailover=true]),
+				    dbo = Source{[Schema="dbo"]}[Data],
+				    gold_dpmc_vs_2w3w4w_dimpremises1 = dbo{[Name="gold_dpmc_vs_2w3w4w_dimpremises"]}[Data]
+				in
+				    gold_dpmc_vs_2w3w4w_dimpremises1
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

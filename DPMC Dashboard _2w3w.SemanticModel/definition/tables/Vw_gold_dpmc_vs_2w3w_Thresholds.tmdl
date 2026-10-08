@@ -1,0 +1,42 @@
+table Vw_gold_dpmc_vs_2w3w_Thresholds
+	lineageTag: 09975af1-1ef8-471d-b3cb-ec60a1b59ffd
+
+	column PremiseCode
+		dataType: string
+		lineageTag: c14fdc00-4da7-43cc-ae27-83d1cd6e7cb5
+		summarizeBy: none
+		sourceColumn: PremiseCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ThresholdUpper
+		dataType: int64
+		formatString: 0
+		lineageTag: 78f1295f-d379-49b9-b39f-61914d49e0c4
+		summarizeBy: sum
+		sourceColumn: ThresholdUpper
+
+		annotation SummarizationSetBy = Automatic
+
+	column ThresholdLower
+		dataType: int64
+		formatString: 0
+		lineageTag: 21a096ab-9fd2-4abc-ae88-4d5e6f7b5afa
+		summarizeBy: sum
+		sourceColumn: ThresholdLower
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Vw_gold_dpmc_vs_2w3w_Thresholds = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_Vw_gold_dpmc_vs_2w3w_Thresholds = Source{[Schema="dbo",Item="Vw_gold_dpmc_vs_2w3w_Thresholds"]}[Data]
+				in
+				    dbo_Vw_gold_dpmc_vs_2w3w_Thresholds
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

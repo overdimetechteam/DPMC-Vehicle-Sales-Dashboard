@@ -1,0 +1,168 @@
+table AgeBucketTable
+	lineageTag: 0285f138-3f85-41a2-b3f6-b0460d02d8af
+
+	measure Vehicle_Count_(Unregistered) = COUNTROWS(AgeBucketTable)
+		formatString: 0
+		lineageTag: fd7e8c38-4609-4110-b044-043db77be266
+
+	measure 'Units (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR CutoffDate = SelectedDate - 1
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [Actual Units],
+			        gold_dpmc_dimdate[TheDate] >= MonthStart,
+			        gold_dpmc_dimdate[TheDate] <= CutoffDate
+			    )
+		formatString: 0
+		lineageTag: 55aea53a-2a4b-442c-99ac-ae774f3767ae
+
+	measure 'Sales % Change vs Last Month' =
+			
+			DIVIDE (
+			    [Sales (MTD as of Selected Date)] - [Sales Last Month (MTD)],
+			    [Sales Last Month (MTD)]
+			)
+		lineageTag: 362fdefb-9b04-4596-8589-3a4f388a8f3a
+
+		formatStringDefinition = "+0.0%;-0.0%;0.0%"
+
+	measure 'Model Wise Target' = ```
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR CutoffDate = SelectedDate - 1
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR MonthEndDate = EOMONTH ( SelectedDate, 0 )
+			VAR ModelLine = SELECTEDVALUE ( gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC])
+			
+			VAR BranchCodes = 
+			    CALCULATETABLE (
+			        VALUES ( gold_dpmc_vs_2w3w_target[STR_BRANCH] ),
+			        gold_dpmc_vs_2w3w_target[DATE] = MonthEndDate
+			    )
+			
+			VAR LineTarget = 
+			    SWITCH (
+			        ModelLine,
+			        "2 WHEELERS", CALCULATE ( SUM ( gold_dpmc_vs_2w3w_target[2WTarget] ), gold_dpmc_vs_2w3w_target[DATE] = MonthEndDate ),
+			        "3 WHEELERS", CALCULATE ( SUM ( gold_dpmc_vs_2w3w_target[3WTarget] ), gold_dpmc_vs_2w3w_target[DATE] = MonthEndDate ),
+			        BLANK ()
+			    )
+			
+			VAR ModelActual = [Model Wise Actual Units]
+			
+			VAR LineTotalActual = 
+			    CALCULATE (
+			        [Model Wise Actual Units],
+			        ALLSELECTED ( gold_dpmc_vs_2w3w4w_dimproduct[STR_MODEL_DESC] ),
+			        gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = ModelLine
+			    )
+			
+			RETURN
+			DIVIDE ( ModelActual, LineTotalActual ) * LineTarget
+			```
+		lineageTag: 465f2902-d160-46be-89e9-382dd9641bd8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ChassisNo
+		lineageTag: 8567da71-08e9-49b1-9b8e-8729fd479d0a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ChassisNo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PremiseSK
+		formatString: 0
+		lineageTag: 4544d10f-6544-4763-abeb-69aa1cc34c99
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [PremiseSK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		formatString: 0
+		lineageTag: 5a1eb26a-c42b-4895-9c52-da642a802efc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ProductSK]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DtmDeclareDate
+		formatString: General Date
+		lineageTag: 9d68ab9c-6a05-4b7f-8340-6e0228ff94e6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DtmDeclareDate]
+
+		variation Variation
+			isDefault
+			relationship: e271855d-b3dc-4c4a-afc0-dcf97499ffed
+			defaultHierarchy: LocalDateTable_63b5c2f2-4696-4366-9928-76ed2c56c027.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegistrationAgeDays
+		formatString: 0
+		lineageTag: d7a1bd31-7a3f-4716-a3bc-07e8f44ab32a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [RegistrationAgeDays]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age Bucket' =
+			
+			SWITCH(
+			    TRUE(),
+			    AgeBucketTable[RegistrationAgeDays] <= 30, "0-30 days",
+			    AgeBucketTable[RegistrationAgeDays] <= 60, "31-60 days",
+			    AgeBucketTable[RegistrationAgeDays] <= 80, "61-80 days",
+			    "81 days above"
+			)
+		lineageTag: 647dbf53-40d5-4cf7-84eb-1b7d7fc0d0e8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column BucketSortOrder =
+			
+			SWITCH(
+			    TRUE(),
+			    AgeBucketTable[RegistrationAgeDays] <= 30, 1,
+			    AgeBucketTable[RegistrationAgeDays] <= 60, 2,
+			    AgeBucketTable[RegistrationAgeDays] <= 80, 3,
+			    4
+			)
+		formatString: 0
+		lineageTag: a88299c0-3efa-428e-895f-1c0a31617126
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AgeBucketTable = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS(
+				    SELECTCOLUMNS(
+				        FILTER(
+				            gold_dpmc_vs_2w3w4w_factstock,
+				            ISBLANK ( gold_dpmc_vs_2w3w4w_factstock[VehicleNo] ) &&
+				            NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factstock[DtmDeclareDate] )
+				        ),
+				        "ChassisNo", gold_dpmc_vs_2w3w4w_factstock[ChassisNo],
+				        "PremiseSK", gold_dpmc_vs_2w3w4w_factstock[PremiseSK],
+				        "ProductSK", gold_dpmc_vs_2w3w4w_factstock[ProductSK],
+				        "DtmDeclareDate", gold_dpmc_vs_2w3w4w_factstock[DtmDeclareDate]
+				    ),
+				    "RegistrationAgeDays", DATEDIFF ( [DtmDeclareDate], TODAY (), DAY )
+				)
+
+	annotation PBI_Id = 1abdfe3b9b2c4293bcf17cdb2658f093
+
