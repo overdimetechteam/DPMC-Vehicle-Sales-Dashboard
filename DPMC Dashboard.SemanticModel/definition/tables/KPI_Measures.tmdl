@@ -1,0 +1,800 @@
+table KPI_Measures
+	lineageTag: c6df2a79-aef8-4dfb-8015-789bdb9cdb52
+
+	measure 'CF MoM' = SWITCH(TRUE(),[Sales % Change vs Last Month]>0,"Green",[Sales % Change vs Last Month]<0,"Red","Grey")
+		lineageTag: b177e7d2-e52a-4e1e-932e-f7a125a64b55
+
+	measure 'Sales Display Text' = ```
+			
+			VAR RawValue = [Sales (MTD as of Selected Date)] * 1000000
+			VAR AbsValue = ABS ( RawValue )
+			VAR ScaledText = 
+			    SWITCH (
+			        TRUE (),
+			        AbsValue >= 1000000000, FORMAT ( RawValue / 1000000000, "#,##0.00" ) & " B",
+			        AbsValue >= 10000000,   FORMAT ( RawValue / 1000000, "#,##0.00" ) & " M",
+			        AbsValue >= 100000,     FORMAT ( RawValue / 100000, "#,##0.00" ) & " Lakh",
+			        AbsValue >= 1000,       FORMAT ( RawValue / 1000, "#,##0.00" ) & " K",
+			        FORMAT ( RawValue, "#,##0.00" )
+			    )
+			RETURN
+			    "LKR " & ScaledText
+			```
+		lineageTag: 9dc2c212-9f98-4376-b0e2-8ca2626ec0f5
+
+	measure 'Sales Format String' =
+			
+			VAR Q = UNICHAR ( 34 )
+			VAR RawValue = [Sales (MTD as of Selected Date)] * 1000000
+			VAR AbsValue = ABS ( RawValue )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        AbsValue >= 1000000000, Q & "LKR " & Q & "#,##0.00,,," & Q & " B" & Q,
+			        AbsValue >= 1000000,    Q & "LKR " & Q & "#,##0.00,," & Q & " M" & Q,
+			        AbsValue >= 1000,       Q & "LKR " & Q & "#,##0.00," & Q & " K" & Q,
+			        Q & "LKR " & Q & "#,##0.00"
+			    )
+		lineageTag: 574faeba-f87e-4323-b4df-fc30fbd6584b
+
+	measure 'Sales (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [Sales Value (LKR M)],
+			        gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			        gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			    )
+		lineageTag: 1def8ade-7bb7-4d24-9380-9e6e270fa03f
+
+		formatStringDefinition = ""
+
+	measure 'Total Bookings V2' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR MonthStart   = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR SnapDate     = [Inquiry Snapshot Date]
+			RETURN
+			CALCULATE (
+			    SUM ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[VehicleCount] ),
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[AllocationType] = "CONFIRM",
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] = SnapDate,
+			    NOT ISBLANK ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[ConfirmDate] ),
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[ConfirmDate] >= MonthStart,
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[ConfirmDate] < SelectedDate + 1
+			)
+		formatString: 0
+		lineageTag: c2105e6c-d94d-46af-8fff-2327f2050540
+
+	measure 'No of Inquiries V2' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR MonthStart   = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR SnapDate     = [Inquiry Snapshot Date]
+			RETURN
+			CALCULATE (
+			    SUM ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[VehicleCount] ),
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[AllocationType] = "INQ",
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] = SnapDate,
+			    NOT ISBLANK ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[InquiryDate] ),
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[InquiryDate] >= MonthStart,
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[InquiryDate] < SelectedDate + 1
+			)
+		formatString: 0
+		lineageTag: f91480c8-8e4d-46ae-b959-da22dc04bf9d
+
+	measure 'Target (Selected Month)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR MonthEnd = EOMONTH ( MonthStart, 0 )
+			RETURN
+			    CALCULATE (
+			        [Target (Selected)],
+			        gold_dpmc_dimdate[TheDate] >= MonthStart,
+			        gold_dpmc_dimdate[TheDate] <= MonthEnd
+			    )
+		formatString: 0
+		lineageTag: ad9bc42e-c52d-4bcc-a86c-697b57642296
+
+	measure 'Remaining Target (MTD as of Selected Date)' =
+			
+			[Target (Selected Month)] - [Sales (MTD as of Selected Date)]
+		formatString: 0
+		lineageTag: fc28f729-ac8b-4e15-8d51-df58bff54d84
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Sales Achievement Ring SVG' = ```
+			
+			VAR Actual = [Sales (MTD as of Selected Date)]
+			VAR Target = [Target (Selected Month)]
+			VAR Remaining = [Remaining Target (MTD as of Selected Date)]
+			VAR AchPct = DIVIDE ( Actual, Target )
+			VAR AchPctDisplay = FORMAT ( AchPct, "0%" )
+			VAR Circumference = 282.74
+			VAR ProgressLength = Circumference * AchPct
+			VAR ActualDisplay = "LKR " & FORMAT ( Actual, "#,##0.0" ) & "M"
+			VAR TargetDisplay = "LKR " & FORMAT ( Target, "#,##0.0" ) & "M"
+			VAR RemainingDisplay = "LKR " & FORMAT ( Remaining, "#,##0.0" ) & "M"
+			VAR SVGString = 
+			    "<svg xmlns='http://www.w3.org/2000/svg' width='400' height='160' viewBox='0 0 400 160'>" &
+			    "<rect x='0' y='0' width='400' height='160' rx='12' fill='#ffffff'/>" &
+			    "<circle cx='85' cy='80' r='45' fill='none' stroke='#e9e6fb' stroke-width='10'/>" &
+			    "<circle cx='85' cy='80' r='45' fill='none' stroke='#6c4ce6' stroke-width='10' stroke-linecap='round' stroke-dasharray='" & FORMAT(ProgressLength,"0.0") & " " & FORMAT(Circumference,"0.0") & "' transform='rotate(-90 85 80)'/>" &
+			    "<text x='85' y='78' text-anchor='middle' font-size='22' font-weight='bold' font-family='Segoe UI' fill='#1f2937'>" & AchPctDisplay & "</text>" &
+			    "<text x='85' y='96' text-anchor='middle' font-size='10' font-family='Segoe UI' fill='#6b7280'>of target</text>" &
+			    "<text x='180' y='30' font-size='12' font-family='Segoe UI' font-weight='bold' fill='#6b7280'>TOTAL SALES</text>" &
+			    "<text x='180' y='60' font-size='24' font-family='Segoe UI' font-weight='bold' fill='#111827'>" & ActualDisplay & "</text>" &
+			    "<line x1='180' y1='75' x2='380' y2='75' stroke='#e5e7eb' stroke-width='1'/>" &
+			    "<text x='180' y='95' font-size='12' font-family='Segoe UI' fill='#6b7280'>TARGET</text>" &
+			    "<text x='380' y='95' text-anchor='end' font-size='12' font-family='Segoe UI' font-weight='bold' fill='#111827'>" & TargetDisplay & "</text>" &
+			    "<text x='180' y='115' font-size='12' font-family='Segoe UI' fill='#6b7280'>REMAINING</text>" &
+			    "<text x='380' y='115' text-anchor='end' font-size='12' font-family='Segoe UI' font-weight='bold' fill='#111827'>" & RemainingDisplay & "</text>" &
+			    "</svg>"
+			VAR EncodedSVG = SUBSTITUTE ( SUBSTITUTE ( SVGString, "#", "%23" ), " ", "%20" )
+			RETURN
+			    "data:image/svg+xml;utf8," & EncodedSVG
+			```
+		lineageTag: 3f283923-4372-48fa-9ef6-6fea7ab8b5d1
+
+	measure 'Sales Achievement Ring HTML' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR SelectedType = SELECTEDVALUE ( VehicleTypeSelector[Vehicle Type] )
+			VAR Q = UNICHAR ( 34 )
+			VAR Actual =
+			    SWITCH (
+			        SelectedType,
+			        "2W", CALCULATE (
+			                  DISTINCTCOUNT ( gold_dpmc_vs_2w3w4w_factsales[ChassisNo] ),
+			                  NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factsales[InvoiceNo] ),
+			                  gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = "2 WHEELERS",
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			              ),
+			        "3W", CALCULATE (
+			                  DISTINCTCOUNT ( gold_dpmc_vs_2w3w4w_factsales[ChassisNo] ),
+			                  NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factsales[InvoiceNo] ),
+			                  gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = "3 WHEELERS",
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			                  gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			              ),
+			        CALCULATE (
+			            DISTINCTCOUNT ( gold_dpmc_vs_2w3w4w_factsales[ChassisNo] ),
+			            NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factsales[InvoiceNo] ),
+			            gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] IN { "2 WHEELERS", "3 WHEELERS" },
+			            gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] >= MonthStart,
+			            gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] <= SelectedDate
+			        )
+			    )
+			VAR Target = [Target (Selected Month)]
+			VAR Remaining = Target - Actual
+			VAR AchPct = DIVIDE ( Actual, Target )
+			VAR AchPctDisplay = FORMAT ( AchPct, "0%" )
+			VAR Circumference = 282.74
+			VAR ProgressLength = Circumference * AchPct
+			VAR ActualDisplay = FORMAT ( Actual, "#,##0" )
+			VAR TargetDisplay = FORMAT ( Target, "#,##0" )
+			VAR RemainingDisplay = FORMAT ( Remaining, "#,##0" )
+			RETURN
+			"<div style=" & Q & "display:flex;align-items:center;font-family:Segoe UI,sans-serif;background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);" & Q & ">" &
+			  "<svg width=" & Q & "130" & Q & " height=" & Q & "130" & Q & " viewBox=" & Q & "0 0 100 100" & Q & ">" &
+			    "<circle cx=" & Q & "50" & Q & " cy=" & Q & "50" & Q & " r=" & Q & "45" & Q & " fill=" & Q & "none" & Q & " stroke=" & Q & "#e9e6fb" & Q & " stroke-width=" & Q & "10" & Q & "/>" &
+			    "<circle cx=" & Q & "50" & Q & " cy=" & Q & "50" & Q & " r=" & Q & "45" & Q & " fill=" & Q & "none" & Q & " stroke=" & Q & "#6c4ce6" & Q & " stroke-width=" & Q & "10" & Q & " stroke-linecap=" & Q & "round" & Q & " stroke-dasharray=" & Q & FORMAT(ProgressLength,"0.0") & " " & FORMAT(Circumference,"0.0") & Q & " transform=" & Q & "rotate(-90 50 50)" & Q & "/>" &
+			    "<text x=" & Q & "50" & Q & " y=" & Q & "48" & Q & " text-anchor=" & Q & "middle" & Q & " font-size=" & Q & "20" & Q & " font-weight=" & Q & "bold" & Q & " fill=" & Q & "#1f2937" & Q & ">" & AchPctDisplay & "</text>" &
+			    "<text x=" & Q & "50" & Q & " y=" & Q & "62" & Q & " text-anchor=" & Q & "middle" & Q & " font-size=" & Q & "8" & Q & " fill=" & Q & "#6b7280" & Q & ">of target</text>" &
+			  "</svg>" &
+			  "<div style=" & Q & "margin-left:20px;" & Q & ">" &
+			    "<div style=" & Q & "font-size:12px;color:#6b7280;font-weight:600;letter-spacing:0.5px;" & Q & ">TOTAL UNITS SOLD</div>" &
+			    "<div style=" & Q & "font-size:26px;font-weight:bold;color:#111827;margin-bottom:8px;" & Q & ">" & ActualDisplay & "</div>" &
+			    "<div style=" & Q & "border-top:1px solid #e5e7eb;padding-top:8px;font-size:12px;" & Q & ">" &
+			      "<div style=" & Q & "display:flex;justify-content:space-between;color:#6b7280;" & Q & "><span>TARGET </span><span style=" & Q & "color:#111827;font-weight:600;" & Q & ">" & TargetDisplay & "</span></div>" &
+			      "<div style=" & Q & "display:flex;justify-content:space-between;color:#6b7280;margin-top:4px;" & Q & "><span>REMAINING </span><span style=" & Q & "color:#111827;font-weight:600;" & Q & ">" & RemainingDisplay & "</span></div>" &
+			    "</div>" &
+			  "</div>" &
+			"</div>"
+		lineageTag: e07c37f7-86ae-457d-b523-4dcbba6c49f4
+
+	measure 'SRM In Selected Month' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate], TODAY() - 1 )
+			VAR MS = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR ME = EOMONTH ( SelectedDate, 0 )
+			RETURN
+			    CALCULATE (
+			        COUNTROWS ( BranchMonthTarget ),
+			        BranchMonthTarget[DATE] >= MS,
+			        BranchMonthTarget[DATE] <= ME
+			    )
+		formatString: 0
+		lineageTag: 84c81823-e9fa-40fa-8e91-a5f46ac8ed9a
+
+	measure 'GRN Cumulative' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR MonthStart   = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNT ( gold_dpmc_vs_2w3w_factgrndetails_v2[ChassisNo] ),
+			    NOT ISBLANK ( gold_dpmc_vs_2w3w_factgrndetails_v2[GRNDate] ),
+			    gold_dpmc_vs_2w3w_factgrndetails_v2[GRNDate] >= MonthStart,
+			    gold_dpmc_vs_2w3w_factgrndetails_v2[GRNDate] < SelectedDate + 1
+			)
+		formatString: 0
+		lineageTag: 1e6a47b8-95b7-4ff7-8018-9edfe4566d5b
+
+	measure 'Delivery Notes Cumulative' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR MonthStart   = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNT ( gold_dpmc_vs_2w3w_factdeliverynotes_v2[STR_CHASSIS_NO] ),
+			    NOT ISBLANK ( gold_dpmc_vs_2w3w_factdeliverynotes_v2[DTM_ACT_DEL_DATE] ),
+			    gold_dpmc_vs_2w3w_factdeliverynotes_v2[DTM_ACT_DEL_DATE] >= MonthStart,
+			    gold_dpmc_vs_2w3w_factdeliverynotes_v2[DTM_ACT_DEL_DATE] < SelectedDate + 1
+			)
+		formatString: 0
+		lineageTag: d7599d03-9c3d-477a-b3a1-6b9ead8d0479
+
+	measure 'Delivery vs GRN %' =
+			
+			DIVIDE ( [Delivery Notes Cumulative], [GRN Cumulative] )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: c3c2fdd8-a7c9-44b4-93b1-234c4f7d0d7f
+
+	measure 'Pending GRN Snapshot Date' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			RETURN
+			CALCULATE (
+			    MAX ( gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] ),
+			    ALL ( gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] ),
+			    gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] < SelectedDate + 1
+			)
+		formatString: General Date
+		lineageTag: f48c5d4c-5139-4c1c-8488-57be974a30fa
+
+	measure 'Pending GRN Count' =
+			
+			VAR SnapDate = [Pending GRN Snapshot Date]
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNT ( gold_dpmc_vs_2w3w_factpendinggrn_v2[ChassisNo] ),
+			    gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] = SnapDate
+			)
+		formatString: 0
+		lineageTag: c2456e94-f2f2-4363-ae69-e27d484f1bd2
+
+	measure 'Avg Pending Days' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR SnapDate     = [Pending GRN Snapshot Date]
+			RETURN
+			AVERAGEX (
+			    FILTER (
+			        gold_dpmc_vs_2w3w_factpendinggrn_v2,
+			        gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] = SnapDate
+			            && NOT ISBLANK ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate] )
+			    ),
+			    DATEDIFF ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate], SelectedDate, DAY )
+			)
+		lineageTag: 2e60e1a6-73bd-4cc3-980f-6ea4f275bf9e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pending Days' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR SnapDate     = [Pending GRN Snapshot Date]
+			VAR Approved =
+			    CALCULATE (
+			        MAX ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate] ),
+			        gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] = SnapDate
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( Approved ), DATEDIFF ( Approved, SelectedDate, DAY ) )
+		formatString: 0
+		lineageTag: c601198c-1d1c-4e15-aae5-0484bded79a8
+
+	measure 'Overdue Row Color' =
+			
+			IF ( [Pending Days] >= 4, "#FFC7CE", "#FFFFFF" )
+		lineageTag: 59cf8fd9-b2d3-4a5c-aa06-25f23f90a197
+
+	measure 'Stock Snapshot Date' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			RETURN
+			CALCULATE (
+			    MAX ( gold_dpmc_vs_2w3w_factstock_v2[DMT_LOADED_DATE] ),
+			    ALL ( gold_dpmc_vs_2w3w_factstock_v2[DMT_LOADED_DATE] ),
+			    gold_dpmc_vs_2w3w_factstock_v2[DMT_LOADED_DATE] < SelectedDate + 1
+			)
+		formatString: General Date
+		lineageTag: 23035dea-1c76-4cfa-ac75-444cd181dff8
+
+	measure 'Model Wise Current Stock' =
+			
+			VAR SnapDate = [Stock Snapshot Date]
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNTNOBLANK ( gold_dpmc_vs_2w3w_factstock_v2[STR_CHASSIS_NO] ),
+			    gold_dpmc_vs_2w3w_factstock_v2[DMT_LOADED_DATE] = SnapDate
+			)
+		formatString: 0
+		lineageTag: 81dc579e-701c-4fe4-a3d6-25ec5a13b16c
+
+	measure 'Stock Units Text' = FORMAT ( [Model Wise Current Stock], "#,0" )
+		lineageTag: 8455180f-ae7e-43b2-aa71-422397b93ff0
+
+	measure 'GRN Text' = FORMAT ( [GRN Cumulative], "#,0" )
+		lineageTag: 91f429b6-0aa9-4797-bce3-90cb52b6946a
+
+	measure 'Delivery Notes Text' = FORMAT ( [Delivery Notes Cumulative], "#,0" )
+		lineageTag: 3b1d13b1-a4ca-44d1-86c5-0c958269d676
+
+	measure 'Inquiry Snapshot Date' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR Snap =
+			    CALCULATE (
+			        MAX ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] ),
+			        ALL ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] ),
+			        gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] < SelectedDate + 1
+			    )
+			RETURN
+			IF (
+			    ISBLANK ( Snap ),
+			    CALCULATE (
+			        MIN ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] ),
+			        ALL ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] )
+			    ),
+			    Snap
+			)
+		formatString: General Date
+		lineageTag: 0ce885e2-6fb0-491b-8eb0-872837ab94f4
+
+	measure 'Inquiry Units' = ```
+			
+			CALCULATE (
+			    SUM ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[VehicleCount] ),
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[AllocationType] = "INQ"
+			)
+			
+			```
+		lineageTag: 33f6e90f-3f65-4c5a-91b0-2e735d592c10
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Allocated Units' =
+			
+			CALCULATE (
+			    SUM ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[VehicleCount] ),
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[AllocationType] = "ALLOCATED"
+			)
+		lineageTag: 5e9fc41a-75be-408b-a7d8-c4023bfb8474
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Confirm Units' =
+			
+			CALCULATE (
+			    SUM ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[VehicleCount] ),
+			    gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[AllocationType] = "CONFIRM"
+			)
+		lineageTag: e598bddb-bba0-4ef2-85d3-15f702d20986
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Point Date' =
+			
+			VAR PointMonthEnd = MAX ( gold_dpmc_2w3w_forecast_units[MonthEnd] )
+			VAR SelectedDate  = [Selected As Of Date]
+			RETURN
+			IF ( PointMonthEnd = EOMONTH ( SelectedDate, 0 ), SelectedDate, PointMonthEnd )
+		formatString: dd/mm/yyyy
+		lineageTag: 33529150-3778-469f-b5f7-c884ea81985f
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure 'Avg Sales Units (Last 3 Months)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			
+			VAR CurrentDate = CALCULATE(MAX(gold_dpmc_vs_2w3w4w_factsales[InvoiceDate]), ALL(gold_dpmc_vs_2w3w4w_factsales))
+			VAR StartDate = EOMONTH(SelectedDate, -4)
+			VAR StartEnd = EOMONTH(SelectedDate, -1)
+			
+			
+			RETURN
+			DIVIDE(
+			    CALCULATE(
+			        COUNT(gold_dpmc_vs_2w3w4w_factsales[ChassisNo]),
+			        FILTER(
+			            ALL(gold_dpmc_dimdate),
+			            gold_dpmc_dimdate[TheDate] > StartDate &&
+			            gold_dpmc_dimdate[TheDate] <= StartEnd
+			        )
+			    ),
+			    3
+			)
+		formatString: 0
+		lineageTag: 9bf2b764-012a-4f63-8454-35e60f5213dc
+
+	measure 'Check Date Pattern' =
+			
+			CALCULATE (
+			    COUNTROWS ( gold_dpmc_vs_2w3w_target ),
+			    gold_dpmc_vs_2w3w_target[DATE] <> EOMONTH ( gold_dpmc_vs_2w3w_target[DATE], 0 )
+			)
+		formatString: 0
+		lineageTag: ef32e3f2-0f75-46ef-8da1-57f1860f1e9a
+
+	measure 'Sales % Change vs Last Month' =
+			
+			DIVIDE (
+			    [Sales (MTD as of Selected Date)] - [Sales Last Month (MTD)],
+			    [Sales Last Month (MTD)]
+			)
+		lineageTag: 362fdefb-9b04-4596-8589-3a4f388a8f3a
+
+		formatStringDefinition = "+0.0%;-0.0%;0.0%"
+
+	measure 'Units (MTD as of Selected Date)' =
+			
+			VAR SelectedDate = SELECTEDVALUE ( AsOfDateSelector[SelectedDate] )
+			VAR CutoffDate = SelectedDate - 1
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			    CALCULATE (
+			        [Actual Units],
+			        gold_dpmc_dimdate[TheDate] >= MonthStart,
+			        gold_dpmc_dimdate[TheDate] <= CutoffDate
+			    )
+		formatString: 0
+		lineageTag: 55aea53a-2a4b-442c-99ac-ae774f3767ae
+
+	measure 'Model Wise Target' = ```
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR CutoffDate = SelectedDate - 1
+			VAR MonthStart = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR MonthEndDate = EOMONTH ( SelectedDate, 0 )
+			VAR ModelLine = SELECTEDVALUE ( gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC])
+			
+			VAR BranchCodes = 
+			    CALCULATETABLE (
+			        VALUES ( gold_dpmc_vs_2w3w_target[STR_BRANCH] ),
+			        gold_dpmc_vs_2w3w_target[DATE] = MonthEndDate
+			    )
+			
+			VAR LineTarget = 
+			    SWITCH (
+			        ModelLine,
+			        "2 WHEELERS", CALCULATE ( SUM ( gold_dpmc_vs_2w3w_target[2WTarget] ), gold_dpmc_vs_2w3w_target[DATE] = MonthEndDate ),
+			        "3 WHEELERS", CALCULATE ( SUM ( gold_dpmc_vs_2w3w_target[3WTarget] ), gold_dpmc_vs_2w3w_target[DATE] = MonthEndDate ),
+			        BLANK ()
+			    )
+			
+			VAR ModelActual = [Model Wise Actual Units]
+			
+			VAR LineTotalActual = 
+			    CALCULATE (
+			        [Model Wise Actual Units],
+			        ALLSELECTED ( gold_dpmc_vs_2w3w4w_dimproduct[STR_MODEL_DESC] ),
+			        gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC] = ModelLine
+			    )
+			
+			RETURN
+			DIVIDE ( ModelActual, LineTotalActual ) * LineTarget
+			```
+		formatString: 0
+		lineageTag: 465f2902-d160-46be-89e9-382dd9641bd8
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Remaining Target_2' = [Model Wise Actual Units]-[Model Wise Target] +0
+		lineageTag: 90a04304-7f0a-4d21-8060-f6258ac63974
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Is In Stock Snapshot' =
+			
+			IF ( MAX ( gold_dpmc_vs_2w3w_factstock_v2[DMT_LOADED_DATE] ) = [Stock Snapshot Date], 1, 0 )
+		formatString: 0
+		lineageTag: 020a6bc7-d958-4121-8a32-57bba76a095d
+
+	measure 'Stock Details Row Flag' =
+			
+			IF (
+			    [Is In Stock Snapshot] = 0,
+			    0,
+			    IF (
+			        ISFILTERED ( AgeBucketV2[Age Bucket] ),
+			        [Is In Selected Age Bucket],
+			        1
+			    )
+			)
+		lineageTag: 14c63d86-8448-439a-a6e4-57d02588fcef
+
+	measure 'Is In Selected Age Bucket' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR Declared     = MAX ( gold_dpmc_vs_2w3w_factstock_v2[DTM_DECLARE] )
+			VAR AgeDays      = INT ( SelectedDate ) - INT ( Declared )
+			RETURN
+			IF (
+			    [Is In Stock Snapshot] = 1
+			        && ISBLANK ( MAX ( gold_dpmc_vs_2w3w_factstock_v2[STR_VEHICLE_NO] ) )
+			        && NOT ISBLANK ( Declared )
+			        && AgeDays >= MIN ( AgeBucketV2[MinDays] )
+			        && AgeDays <= MAX ( AgeBucketV2[MaxDays] ),
+			    1, 0
+			)
+		formatString: 0
+		lineageTag: 53563763-5b50-4f40-9d13-6e71609f62ad
+
+	measure 'Is Sale In MTD' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR MonthStart   = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			VAR D            = MAX ( gold_dpmc_vs_2w3w4w_factsales[InvoiceDate] )
+			RETURN
+			IF ( NOT ISBLANK ( MAX ( gold_dpmc_vs_2w3w4w_factsales[InvoiceNo] ) ) && D >= MonthStart && D <= SelectedDate, 1, 0 )
+		formatString: 0
+		lineageTag: 82e77671-2b32-4956-9ce3-911e89571f0f
+
+	measure 'Pending GRN Gate Passes' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR SnapDate     = [Pending GRN Snapshot Date]
+			VAR MinD         = MIN ( GRNAgeBucket[MinDays] )
+			VAR MaxD         = MAX ( GRNAgeBucket[MaxDays] )
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNT ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassNo] ),
+			    gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] = SnapDate,
+			    NOT ISBLANK ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate] ),
+			    gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate] < SelectedDate - MinD + 1,
+			    gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate] >= SelectedDate - MaxD
+			)+0
+		formatString: 0
+		lineageTag: b265e411-aa85-4737-a11e-478d10059476
+
+	measure 'Model Wise Remaining Target' =
+			
+			VAR Tgt = [Model Wise Target]
+			VAR Act = [Model Wise Actual Units]
+			RETURN
+			IF ( ISBLANK ( Tgt ), BLANK (), MAX ( Tgt - Act, 0 ) )
+		formatString: 0
+		lineageTag: eda4a3a6-e997-441a-b4b3-944b4b75e0e2
+
+	measure 'Stock Treemap Color' =
+			
+			VAR CurrentStock = [Model Wise Current Stock]
+			VAR MaxStock =
+			    MAXX (
+			        ALLSELECTED ( gold_dpmc_vs_2w3w4w_dimproduct[Model (Sales)] ),
+			        [Model Wise Current Stock]
+			    )
+			VAR MinStock =
+			    MINX (
+			        ALLSELECTED ( gold_dpmc_vs_2w3w4w_dimproduct[Model (Sales)] ),
+			        [Model Wise Current Stock]
+			    )
+			VAR Ratio = DIVIDE ( CurrentStock - MinStock, MaxStock - MinStock, 0 )
+			RETURN
+			SWITCH (
+			    TRUE (),
+			    Ratio >= 0.75, "#2FA4C7",  -- Largest: Medium Cerulean Blue
+			    Ratio >= 0.45, "#36966E",  -- Upper-Mid: Deep Emerald
+			    Ratio >= 0.25, "#5EB08E",  -- Mid: Medium Sage
+			    Ratio >= 0.12, "#DFC256",  -- Lower-Mid: Mustard Gold
+			    Ratio >= 0.05, "#D48B4B",  -- Small: Warm Terracotta
+			    "#B55E65"                  -- Smallest: Deep Dusty Crimson
+			)
+		lineageTag: 05fb24ad-af57-450e-bfb0-80b782f936b2
+
+	measure 'Funnel Detail Value' =
+			
+			VAR HasManualDateFilter =
+			    ISFILTERED ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] )
+			VAR LatestLoadedDate =
+			    CALCULATE (
+			        MAX ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] ),
+			        ALL ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2 )
+			    )
+			VAR AllocType =
+			    SWITCH (
+			        SELECTEDVALUE ( 'Stage'[StageName] ),
+			        "Inquiry",           "INQ",
+			        "Confirmed Booking", "CONFIRM",
+			        "Allocation",        "ALLOCATED",
+			        "Invoice",           "INVOICE"
+			    )
+			RETURN
+			IF (
+			    HasManualDateFilter,
+			    CALCULATE (
+			        SUM ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[VehicleCount] ),
+			        KEEPFILTERS (
+			            gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[AllocationType] = AllocType
+			                || ISBLANK ( AllocType )
+			        )
+			    ),
+			    CALCULATE (
+			        SUM ( gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[VehicleCount] ),
+			        KEEPFILTERS (
+			            gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[AllocationType] = AllocType
+			                || ISBLANK ( AllocType )
+			        ),
+			        gold_dpmc_vs_2w3w_factinquirytoinvoice_v2[DMT_LOADED_DATE] = LatestLoadedDate
+			    )
+			)
+		formatString: 0
+		lineageTag: 692ab464-0dcb-4dd1-b689-6220c35b510e
+
+	measure 'Unit Comp Value' =
+			
+			VAR K = SELECTEDVALUE ( UnitComp[Key] )
+			RETURN
+			SWITCH (
+			    K,
+			    "Month",   [Row Month Label],
+			    "Cash",    FORMAT ( [Cum Cash Sales],       "#,0" ),
+			    "Finance", FORMAT ( [Cum Finance Sales],    "#,0" ),
+			    "Dealer",  FORMAT ( [Cum Dealer Count],     "#,0" ),
+			    "Premise", FORMAT ( [Cum Premise Count],    "#,0" ),
+			    "Total",   FORMAT ( [Cum Total Units Sold], "#,0" ),
+			    "Trend",   SWITCH ( [Cum Units Trend], 1, UNICHAR ( 9650 ), -1, UNICHAR ( 9660 ), "" ),
+			    BLANK ()
+			)
+		lineageTag: f7719857-b9f2-41b2-b68e-49857ea45032
+
+	measure 'Unit Comp Color' =
+			
+			IF (
+			    SELECTEDVALUE ( UnitComp[Key] ) = "Trend",
+			    SWITCH ( [Cum Units Trend], 1, "#2E7D32", -1, "#C62828", "#000000" ),
+			    "#000000"
+			)
+		lineageTag: 9b96100d-fbb9-44db-acee-2bf6776785c9
+
+	measure 'Unit Comp Value (Completed Month)' =
+			
+			VAR K          = SELECTEDVALUE ( UnitComp[Key] )
+			VAR AnchorDate = [Anchor Selected Date]
+			VAR MB         = SELECTEDVALUE ( MonthsBackSelector[MonthsBack] )
+			VAR StartDate  = EDATE ( DATE ( YEAR ( AnchorDate ), MONTH ( AnchorDate ), 1 ), -( MB + 1 ) )
+			VAR EndDate    = EOMONTH ( StartDate, 0 )
+			VAR PrevStart  = EDATE ( StartDate, -1 )
+			VAR PrevEnd    = EOMONTH ( PrevStart, 0 )
+			VAR Cash   = CALCULATE ( [Cash Sales],       REMOVEFILTERS ( gold_dpmc_dimdate ), gold_dpmc_dimdate[TheDate] >= StartDate, gold_dpmc_dimdate[TheDate] <= EndDate )
+			VAR Fin    = CALCULATE ( [Finance Sales],    REMOVEFILTERS ( gold_dpmc_dimdate ), gold_dpmc_dimdate[TheDate] >= StartDate, gold_dpmc_dimdate[TheDate] <= EndDate )
+			VAR Total  = CALCULATE ( [Total Units Sold], REMOVEFILTERS ( gold_dpmc_dimdate ), gold_dpmc_dimdate[TheDate] >= StartDate, gold_dpmc_dimdate[TheDate] <= EndDate )
+			VAR Dealer = CALCULATE ( COUNTROWS ( gold_dpmc_vs_2w3w4w_factsales ), gold_dpmc_vs_2w3w4w_factsales[InqType] = "DEALER",  REMOVEFILTERS ( gold_dpmc_dimdate ), gold_dpmc_dimdate[TheDate] >= StartDate, gold_dpmc_dimdate[TheDate] <= EndDate )
+			VAR Prem   = CALCULATE ( COUNTROWS ( gold_dpmc_vs_2w3w4w_factsales ), gold_dpmc_vs_2w3w4w_factsales[InqType] = "PREMISE", REMOVEFILTERS ( gold_dpmc_dimdate ), gold_dpmc_dimdate[TheDate] >= StartDate, gold_dpmc_dimdate[TheDate] <= EndDate )
+			VAR PrevTotal = CALCULATE ( [Total Units Sold], REMOVEFILTERS ( gold_dpmc_dimdate ), gold_dpmc_dimdate[TheDate] >= PrevStart, gold_dpmc_dimdate[TheDate] <= PrevEnd )
+			RETURN
+			SWITCH (
+			    K,
+			    "Month",   FORMAT ( StartDate, "MMM-yy" ),
+			    "Cash",    FORMAT ( Cash,   "#,0" ),
+			    "Finance", FORMAT ( Fin,    "#,0" ),
+			    "Dealer",  FORMAT ( Dealer, "#,0" ),
+			    "Premise", FORMAT ( Prem,   "#,0" ),
+			    "Total",   FORMAT ( Total,  "#,0" ),
+			    "Trend",   SWITCH ( SIGN ( Total - PrevTotal ), 1, UNICHAR ( 9650 ), -1, UNICHAR ( 9660 ), "" ),
+			    BLANK ()
+			)
+		lineageTag: c72851df-b36f-4b1d-af99-fca19c411e8c
+
+	measure 'Unit Comp Value (Year)' =
+			
+			VAR K          = SELECTEDVALUE ( UnitCompYear[Key] )
+			VAR Yr         = SELECTEDVALUE ( gold_dpmc_dimdate[TheYear] )
+			VAR AnchorDate = [Anchor Selected Date]
+			VAR CurrEnd    = MIN ( AnchorDate, DATE ( Yr, 12, 31 ) )
+			VAR HasSales   = NOT ISBLANK ( [Total Units Sold] )
+			VAR CurrTotal  =
+			    CALCULATE ( [Total Units Sold], REMOVEFILTERS ( gold_dpmc_dimdate ),
+			        gold_dpmc_dimdate[TheDate] >= DATE ( Yr, 1, 1 ),
+			        gold_dpmc_dimdate[TheDate] <= CurrEnd )
+			VAR PrevTotal  =
+			    CALCULATE ( [Total Units Sold], REMOVEFILTERS ( gold_dpmc_dimdate ),
+			        gold_dpmc_dimdate[TheDate] >= DATE ( Yr - 1, 1, 1 ),
+			        gold_dpmc_dimdate[TheDate] <= EDATE ( CurrEnd, -12 ) )
+			RETURN
+			IF (
+			    HasSales,
+			    SWITCH (
+			        K,
+			        "Cash",    FORMAT ( [Cash Sales],       "#,0" ),
+			        "Finance", FORMAT ( [Finance Sales],    "#,0" ),
+			        "Dealer",  FORMAT ( [Dealer Count],     "#,0" ),
+			        "Premise", FORMAT ( [Premise Count],    "#,0" ),
+			        "Total",   FORMAT ( [Total Units Sold], "#,0" ),
+			        "Trend",   SWITCH ( SIGN ( CurrTotal - PrevTotal ), 1, UNICHAR ( 9650 ), -1, UNICHAR ( 9660 ), "" ),
+			        BLANK ()
+			    ),
+			    BLANK ()
+			)
+		lineageTag: fcada27b-68e5-465f-bc4c-b207b134da0f
+
+	measure 'Measure 2'
+		lineageTag: c37d5dbe-e441-45de-ba97-5f764e58edd3
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	measure 'Unit Comp Color (Year)' =
+			
+			IF (
+			    SELECTEDVALUE ( UnitCompYear[Key] ) = "Trend",
+			    SWITCH ( [Unit Comp Value (Year)], UNICHAR ( 9650 ), "#2E7D32", UNICHAR ( 9660 ), "#C62828", "#000000" ),
+			    "#000000"
+			)
+		lineageTag: def6c1f5-2759-4d41-8e96-4246a0f94cf8
+
+	measure 'GRN Detail Value' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR MonthStart   = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNT ( gold_dpmc_vs_2w3w_factgrndetails_v2[ChassisNo] ),
+			    KEEPFILTERS ( gold_dpmc_vs_2w3w_factgrndetails_v2[GRNDate] >= MonthStart ),
+			    KEEPFILTERS ( gold_dpmc_vs_2w3w_factgrndetails_v2[GRNDate] < SelectedDate + 1 )
+			)
+		formatString: 0
+		lineageTag: 9f53a41d-b347-4200-8451-93e6208f9ff8
+
+	measure 'Delivery Note Detail Value' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR MonthStart   = DATE ( YEAR ( SelectedDate ), MONTH ( SelectedDate ), 1 )
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNT ( gold_dpmc_vs_2w3w_factdeliverynotes_v2[STR_CHASSIS_NO] ),
+			    KEEPFILTERS ( gold_dpmc_vs_2w3w_factdeliverynotes_v2[DTM_ACT_DEL_DATE] >= MonthStart ),
+			    KEEPFILTERS ( gold_dpmc_vs_2w3w_factdeliverynotes_v2[DTM_ACT_DEL_DATE] < SelectedDate + 1 )
+			)
+		formatString: 0
+		lineageTag: 1e67df81-7377-4c2d-b335-8ad6e2465f95
+
+	measure 'Pending GRN Detail Value' =
+			
+			VAR SelectedDate = [Selected As Of Date]
+			VAR SnapDate     = [Pending GRN Snapshot Date]
+			VAR MinD         = MIN ( GRNAgeBucket[MinDays] )
+			VAR MaxD         = MAX ( GRNAgeBucket[MaxDays] )
+			RETURN
+			CALCULATE (
+			    DISTINCTCOUNT ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassNo] ),
+			    gold_dpmc_vs_2w3w_factpendinggrn_v2[DMT_LOADED_DATE] = SnapDate,
+			    KEEPFILTERS ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate] < SelectedDate - MinD + 1 ),
+			    KEEPFILTERS ( gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate] >= SelectedDate - MaxD )
+			)
+		formatString: 0
+		lineageTag: bc96627a-6e7c-462d-bc34-853f57d54dc3
+
+	column Placeholder
+		formatString: 0
+		lineageTag: 36676873-846a-439f-9954-e7225f75afc6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI_Measures = calculated
+		mode: import
+		source = ROW("Placeholder", BLANK())
+
+	annotation PBI_Id = 68f336133eb64ff8a34b902fd019d6bd
+

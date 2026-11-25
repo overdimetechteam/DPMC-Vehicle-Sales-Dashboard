@@ -1,0 +1,75 @@
+table AgeBucketDim
+	lineageTag: b01be477-d3e2-4301-9623-faec5aa224eb
+
+	measure VehicleCount(Unregistered) =
+			
+			VAR SelectedDate = INT ( SELECTEDVALUE ( AsOfDateSelector[SelectedDate], TODAY() - 1 ) )
+			VAR MinAge = MIN ( AgeBucketDim[MinDays] )
+			VAR MaxAge = MAX ( AgeBucketDim[MaxDays] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( gold_dpmc_vs_2w3w4w_factstock[ChassisNo] ),
+			        FILTER (
+			            gold_dpmc_vs_2w3w4w_factstock,
+			            ISBLANK ( gold_dpmc_vs_2w3w4w_factstock[VehicleNo] )
+			                && NOT ISBLANK ( gold_dpmc_vs_2w3w4w_factstock[DtmDeclareDate] )
+			                && INT ( gold_dpmc_vs_2w3w4w_factstock[DtmDeclareDate] ) <= SelectedDate
+			                && VAR Age = SelectedDate - INT ( gold_dpmc_vs_2w3w4w_factstock[DtmDeclareDate] )
+			                   RETURN Age >= MinAge && Age <= MaxAge
+			        )
+			    )
+		formatString: 0
+		lineageTag: df517826-8c97-4d0b-9269-2cbafbfcc4ca
+
+	column 'Age Bucket'
+		lineageTag: 8d3bdac7-6843-4255-9107-ea8c2c886e06
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Age Bucket]
+		sortByColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		formatString: 0
+		lineageTag: e0e80bad-f077-4f9e-b84f-a98a68cde576
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MinDays
+		formatString: 0
+		lineageTag: a83681d0-f14e-4975-b313-11744ac220a4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MinDays]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaxDays
+		formatString: 0
+		lineageTag: 8239545c-24b3-4524-a2da-cf5ccb19b02e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MaxDays]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AgeBucketDim = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "Age Bucket", STRING, "Sort", INTEGER, "MinDays", INTEGER, "MaxDays", INTEGER,
+				    {
+				        { "0-30 days",      1,  0,    30    },
+				        { "31-60 days",     2,  31,   60    },
+				        { "61-80 days",     3,  61,   80    },
+				        { "81-90 days",  4,  81,   90 },{ "91-120 days",  5,  91,   120 },{ "121-150 days",  6,  121,   150 },{ "150 above",  7,  150,   1000 }
+				    }
+				)
+
+	annotation PBI_Id = bf1aecd0ad734c41ad280a3db3a1163f
+

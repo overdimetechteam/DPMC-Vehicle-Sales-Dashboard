@@ -1,0 +1,25 @@
+table DimRegion
+	lineageTag: 71ac275f-9325-4de0-b171-31c19f070ffd
+
+	column Region
+		lineageTag: 0871844f-5ce0-4d36-8c7f-5d96af6f1a15
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Region]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimRegion = calculated
+		mode: import
+		source =
+				
+				DISTINCT(
+				    SELECTCOLUMNS(
+				        gold_dpmc_vs_2w3w4w_dimpremises,
+				        "Region",
+				        gold_dpmc_vs_2w3w4w_dimpremises[PremisesDesc]
+				    )
+				)
+
+	annotation PBI_Id = 07fb9edec5b44aae8141f869f1f6cb2d
+

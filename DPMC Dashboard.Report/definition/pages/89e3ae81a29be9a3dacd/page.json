@@ -1,0 +1,147 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "89e3ae81a29be9a3dacd",
+  "displayName": "GRN and DeliveryNotes",
+  "displayOption": "FitToWidth",
+  "height": 3058,
+  "width": 2852,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "09e8b8fd6c98d4a9a395",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "Location (GRN-DN)"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "g",
+              "Entity": "gold_dpmc_vs_2w3w4w_dimpremises",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "g"
+                          }
+                        },
+                        "Property": "Location (GRN-DN)"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'MTG'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "b0b6358b723a4259a50d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factdeliverynotes_v2"
+              }
+            },
+            "Property": "STR_DELIVERY_LOCATION"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "268b96dbac481c855a81",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "8a212d0cb81165a47488",
+        "boundFilter": "09e8b8fd6c98d4a9a395",
+        "asAggregation": false,
+        "qnaSingleSelectRequired": false,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "Location (GRN-DN)"
+          }
+        }
+      },
+      {
+        "name": "d221adc9bd627cdc03a9",
+        "boundFilter": "b0b6358b723a4259a50d",
+        "asAggregation": false,
+        "qnaSingleSelectRequired": false,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factdeliverynotes_v2"
+              }
+            },
+            "Property": "STR_DELIVERY_LOCATION"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "displayArea": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Middle'"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

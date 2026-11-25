@@ -1,0 +1,183 @@
+table Vw_dpmc_vs_DimDate
+	lineageTag: d85fbed9-82ff-4000-ad8e-d4991227cd8c
+
+	column TheDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2d5c3d7f-7188-4b35-b9f2-5720fb91a2d7
+		summarizeBy: none
+		sourceColumn: TheDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TheDay
+		dataType: int64
+		formatString: 0
+		lineageTag: f8c46ff3-3951-4955-80e6-36a09e8ad785
+		summarizeBy: sum
+		sourceColumn: TheDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheDayName
+		dataType: string
+		lineageTag: bcea5d62-76d1-4bd1-bb59-a30215e3464b
+		summarizeBy: none
+		sourceColumn: TheDayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: bb072981-0f33-4090-879f-9b4443da5b43
+		summarizeBy: sum
+		sourceColumn: TheWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheISOWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: e40f8491-308f-42d7-be7a-6fdc80bf3500
+		summarizeBy: sum
+		sourceColumn: TheISOWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheDayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: 98b81048-985c-40ea-8e83-e349bad3f728
+		summarizeBy: sum
+		sourceColumn: TheDayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 3cbb331b-2ef2-487c-8313-d8050d08b889
+		summarizeBy: sum
+		sourceColumn: TheMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheMonthName
+		dataType: string
+		lineageTag: 30e94d4d-7d68-4960-9e9f-71b7e6af0722
+		summarizeBy: none
+		sourceColumn: TheMonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheQuarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 34a113bc-dcec-4761-ba6f-fb8b8d813cba
+		summarizeBy: sum
+		sourceColumn: TheQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 74dd5f66-8061-4fb2-8264-49b2c163982c
+		summarizeBy: sum
+		sourceColumn: TheYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column TheFirstOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8be9f946-9eff-494d-b2c6-6b91ab71e3b8
+		summarizeBy: none
+		sourceColumn: TheFirstOfMonth
+
+		variation Variation
+			isDefault
+			relationship: 87d2971f-412f-4503-a45a-d772325b78ba
+			defaultHierarchy: LocalDateTable_9da29efa-ab57-4315-ab1b-7aa7cd7c5a35.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TheLastOfYear
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c664647b-ac98-43b3-8d7c-652e298f4129
+		summarizeBy: none
+		sourceColumn: TheLastOfYear
+
+		variation Variation
+			isDefault
+			relationship: 9d4f4807-b3ef-4f0f-98a3-158b3eddc794
+			defaultHierarchy: LocalDateTable_64d6d604-9c9f-4357-8995-1629575fc509.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TheDayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 49e0bc2f-0c66-49dc-b469-94562d18e9e1
+		summarizeBy: sum
+		sourceColumn: TheDayOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Holiday
+		dataType: int64
+		formatString: 0
+		lineageTag: 801a55ea-99ae-470e-8ef6-277a71c8de69
+		summarizeBy: sum
+		sourceColumn: Holiday
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesHoliday
+		dataType: int64
+		formatString: 0
+		lineageTag: be6dd3b2-7961-4c02-a6bb-7b8f1e8b5c0b
+		summarizeBy: sum
+		sourceColumn: SalesHoliday
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkingDay
+		dataType: int64
+		formatString: 0
+		lineageTag: dfc199a8-85ad-4431-bfe3-89108efa788d
+		summarizeBy: sum
+		sourceColumn: WorkingDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column Remaining
+		dataType: int64
+		formatString: 0
+		lineageTag: 744184a4-48ef-40a4-a1f7-299b2a9a675e
+		summarizeBy: sum
+		sourceColumn: Remaining
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Vw_dpmc_vs_DimDate = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_Vw_dpmc_vs_DimDate = Source{[Schema="dbo",Item="Vw_dpmc_vs_DimDate"]}[Data]
+				in
+				    dbo_Vw_dpmc_vs_DimDate
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

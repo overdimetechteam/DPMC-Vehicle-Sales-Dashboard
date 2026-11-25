@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "590dc8fc3845a2295701",
+  "displayName": "No of Inquiries",
+  "displayOption": "FitToWidth",
+  "height": 3068,
+  "width": 2852,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d0f14d8124e35605c50a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "No of Inquiries V2"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "23d90ebc4aca03aa66b0",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "9e61e2e6b83d60482041",
+        "boundFilter": "d0f14d8124e35605c50a",
+        "fieldExpr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "No of Inquiries V2"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "displayArea": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Middle'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "70436bb8a7ab68073f95",
+  "displayName": "Bookings Details",
+  "displayOption": "FitToWidth",
+  "height": 3068,
+  "width": 2852,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9e8f928fdb77cd8da9b0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+              }
+            },
+            "Property": "STR_MODEL_DESC"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "e6f8037dac8c60ad4c86",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "PremisesDesc"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "a0b2878966d04d273c51",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_target"
+              }
+            },
+            "Property": "SRM"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "706183170b89fb8b6c03",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_dimdate"
+              }
+            },
+            "Property": "TheMonthName"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "e20533c24fa09c3b6aa3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "AssemblyCategory"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "4c7b9fe4101bf87fb9b3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AsOfDateSelector"
+              }
+            },
+            "Property": "SelectedDate"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "87dd771da8028e62eb1f",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Total Bookings V2"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "e9aac2543db0e6397e06",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2"
+              }
+            },
+            "Property": "ConfirmDate"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "fa34b7e51c64ac35b18b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2"
+              }
+            },
+            "Property": "DMT_LOADED_DATE"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "94856606456c6da24ce0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2"
+              }
+            },
+            "Property": "AllocationType"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "dfba3748131995b345da",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AgeBuckets"
+              }
+            },
+            "Property": "Age Bucket"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "447270e4182449248819",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "Location (Pending)"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "g",
+              "Entity": "gold_dpmc_vs_2w3w4w_dimpremises",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "g"
+                          }
+                        },
+                        "Property": "Location (Pending)"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'BTM'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "ea02b294e8e60a27afe7_afc8aaaaa0db5317899c",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "3d77ddd8bd2006a3d391",
+        "boundFilter": "87dd771da8028e62eb1f",
+        "fieldExpr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Total Bookings V2"
+          }
+        }
+      },
+      {
+        "name": "b03ca46b231a051d9026",
+        "boundFilter": "e9aac2543db0e6397e06",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2"
+              }
+            },
+            "Property": "ConfirmDate"
+          }
+        }
+      },
+      {
+        "name": "45c94560a5285a2d5ebe",
+        "boundFilter": "fa34b7e51c64ac35b18b",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2"
+              }
+            },
+            "Property": "DMT_LOADED_DATE"
+          }
+        }
+      },
+      {
+        "name": "7d0af4c0858ab77b039c",
+        "boundFilter": "94856606456c6da24ce0",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2"
+              }
+            },
+            "Property": "AllocationType"
+          }
+        }
+      },
+      {
+        "name": "40274683c23165bbade9",
+        "boundFilter": "dfba3748131995b345da",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AgeBuckets"
+              }
+            },
+            "Property": "Age Bucket"
+          }
+        }
+      },
+      {
+        "name": "afff710b5643d4bd30d8",
+        "boundFilter": "447270e4182449248819",
+        "asAggregation": false,
+        "qnaSingleSelectRequired": false,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "Location (Pending)"
+          }
+        }
+      }
+    ],
+    "acceptsFilterContext": "None"
+  },
+  "objects": {
+    "displayArea": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Middle'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "3D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

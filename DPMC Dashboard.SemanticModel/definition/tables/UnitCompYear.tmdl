@@ -1,0 +1,66 @@
+table UnitCompYear
+	lineageTag: 802c3f73-4638-4d79-b45e-311eee175bb6
+
+	column Group
+		lineageTag: 89c76cbe-8747-4311-8bda-c3aa6c6833d5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Group]
+		sortByColumn: GroupSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		lineageTag: ee6a2c53-f4af-4a31-80fb-e8e1bbe558f1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Metric]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Key
+		lineageTag: 01968271-a5ef-4375-8e9e-1b2064c94042
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Key]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GroupSort
+		formatString: 0
+		lineageTag: 3d9c5405-7c0f-4408-9ff5-d3d34b5ba9fe
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [GroupSort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MetricSort
+		formatString: 0
+		lineageTag: 082c6966-9013-4632-a440-c55411597e38
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MetricSort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition UnitCompYear = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "Group", STRING, "Metric", STRING, "Key", STRING,
+				    "GroupSort", INTEGER, "MetricSort", INTEGER,
+				    {
+				        { "Year",                     " ",             "Month",   0, 0 },
+				        { "Payment Break-UP",         "Cash Sales",    "Cash",    1, 1 },
+				        { "Payment Break-UP",         "Finance Sales", "Finance", 1, 2 },
+				        { "Inquiry Premise Break-Up", "Dealer Count",  "Dealer",  2, 3 },
+				        { "Inquiry Premise Break-Up", "Premises",      "Premise", 2, 4 },
+				        { "Total Units",              " ",             "Total",   3, 5 },
+				        { "Trend",                    " ",             "Trend",   4, 6 }
+				    }
+				)
+
+	annotation PBI_Id = 273aace3628442b7a5deb48208cb93c4
+

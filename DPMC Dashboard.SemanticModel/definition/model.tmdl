@@ -1,0 +1,120 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["gold_dpmc_dimdate","gold_dpmc_vs_2w3w_target","gold_dpmc_vs_2w3w4w_dimcompany","gold_dpmc_vs_2w3w4w_dimdivision","gold_dpmc_vs_2w3w4w_dimpremises","gold_dpmc_vs_2w3w4w_dimproduct","gold_dpmc_vs_2w3w4w_factsales","gold_dpmc_vs_2w3w4w_competitorwisereg","Vw_dpmc_vs_DimDate","Vw_gold_dpmc_vs_2w3w_Thresholds","Sales Forecast Result","gold_dpmc_2w3w_forecast_units","gold_dpmc_vs_2w3w_factdeliverynotes_v2","gold_dpmc_vs_2w3w_factgrndetails_v2","gold_dpmc_vs_2w3w_factinquirytoinvoice_v2","gold_dpmc_vs_2w3w_factpendingbooking_v2","gold_dpmc_vs_2w3w_factpendinggrn_v2","gold_dpmc_vs_2w3w_factstock_v2","gold_dpmc_vs_2w3w4w_factstock_summary_1","gold_dpmc_vs_2w3w4w_factstock_summary"]
+
+annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop","TMDL-Extension"]
+
+ref table gold_dpmc_dimdate
+ref table gold_dpmc_vs_2w3w_target
+ref table gold_dpmc_vs_2w3w4w_dimcompany
+ref table gold_dpmc_vs_2w3w4w_dimdivision
+ref table gold_dpmc_vs_2w3w4w_dimpremises
+ref table gold_dpmc_vs_2w3w4w_dimproduct
+ref table gold_dpmc_vs_2w3w4w_factsales
+ref table VehicleTypeSelector
+ref table Measures_Table
+ref table DimProductFilter
+ref table DimRegion
+ref table Stage
+ref table gold_dpmc_vs_2w3w4w_competitorwisereg
+ref table Vw_dpmc_vs_DimDate
+ref table DateTableTemplate_55d6ae3a-790e-49ca-a963-e25288afb661
+ref table LocalDateTable_9da29efa-ab57-4315-ab1b-7aa7cd7c5a35
+ref table LocalDateTable_64d6d604-9c9f-4357-8995-1629575fc509
+ref table BranchMonthTarget
+ref table TopBottomSelector
+ref table LocalDateTable_d894c362-d534-44dc-a835-432c84bfc2a0
+ref table MonthBridge
+ref table LocalDateTable_51815c0f-adc3-4045-9491-1eb4203b692f
+ref table AsOfDateSelector
+ref table Vw_gold_dpmc_vs_2w3w_Thresholds
+ref table AlertThresholds
+ref table MonthsWithTargetTable
+ref table KPI_Measures
+ref table LocalDateTable_b3258b9d-76df-4cc7-9059-5b9979bc4077
+ref table MonthsBackSelector
+ref table WorkingDayLookup
+ref table gold_dpmc_2w3w_forecast_units
+ref table LocalDateTable_17f4a05f-89d3-483f-8dd2-0055821c7a9f
+ref table LocalDateTable_aecd6cd8-120b-418d-8f21-8b47f351ae44
+ref table LocalDateTable_41d63db9-9e95-47c2-82aa-42eb1c94f7fa
+ref table LocalDateTable_74fec9b1-647a-41e0-b3ad-e56f8cd52ce8
+ref table LocalDateTable_3cd4d963-cc36-487d-9bc0-4b9ec2b735dd
+ref table LocalDateTable_60dcd2e1-e48e-4573-8faa-6f3158662fe1
+ref table LocalDateTable_b6a2f01f-3d7c-41a8-8e59-b33830da742a
+ref table LocalDateTable_9b3e11e2-f843-4d7b-af3a-81e2d4dd0d9d
+ref table LocalDateTable_954e5880-698b-4056-8379-7fff7e514f20
+ref table LocalDateTable_e3715d4b-394e-4149-bc8f-4c87d2737ad1
+ref table LocalDateTable_20ac0e3f-e749-4ae4-90bc-df58cbd30008
+ref table LocalDateTable_7f8b7f80-1091-420c-a7c2-ec91fd464108
+ref table LocalDateTable_b1ff85d0-f904-4de6-ba71-69ef15711402
+ref table LocalDateTable_8fa256c7-1689-4a13-bd67-dd46cf02866a
+ref table LocalDateTable_2b82303d-27d5-4700-b8c8-440c8265b4b3
+ref table LocalDateTable_00b49d70-07ac-4fed-a74b-6400707bb5a9
+ref table AgeBucketDim
+ref table LocalDateTable_ebaf551a-b146-407a-b88f-9b4c9e32c730
+ref table gold_dpmc_vs_2w3w_factdeliverynotes_v2
+ref table LocalDateTable_24cfd0a2-2da5-4b33-bfa2-c037738df1fa
+ref table LocalDateTable_635e95f6-9963-4082-b0a1-132ebb3884f7
+ref table LocalDateTable_3f700683-cd36-4bc8-94b2-d622cd351f24
+ref table gold_dpmc_vs_2w3w_factgrndetails_v2
+ref table LocalDateTable_846287c3-8a83-4faf-9823-9bf0e0a41aff
+ref table LocalDateTable_c3b26ab0-b852-48a4-9930-985469d21dd7
+ref table LocalDateTable_5f9b1d91-3b56-47a3-81db-2122f8f0abfe
+ref table LocalDateTable_86826f4c-f580-4fbc-aa1a-c03aef185b6a
+ref table LocalDateTable_a559d40c-f8cc-4ada-9d02-58fe710c877c
+ref table gold_dpmc_vs_2w3w_factinquirytoinvoice_v2
+ref table LocalDateTable_ccc57224-6484-4c8c-94a7-c96d98c87ebe
+ref table LocalDateTable_6612d60e-3307-4d70-96c6-a14191176921
+ref table LocalDateTable_5c27d986-e327-41ca-a4a9-f5542653c8d8
+ref table gold_dpmc_vs_2w3w_factpendingbooking_v2
+ref table LocalDateTable_f4d0c4eb-a8f8-4862-a681-673ac9832e02
+ref table LocalDateTable_b0a9a949-9301-4a20-a1c8-a33944a73921
+ref table LocalDateTable_c3571995-d67f-4885-8df0-1a8a99350a75
+ref table gold_dpmc_vs_2w3w_factpendinggrn_v2
+ref table LocalDateTable_f02ed9d7-2330-4b64-9352-e8b7301faf55
+ref table LocalDateTable_cc354b97-47a5-411f-843e-0f11a6480476
+ref table LocalDateTable_5e11a55e-5ea4-4b18-ae87-65951d847891
+ref table LocalDateTable_eeef8eb9-e33f-44ee-8478-f7ffb845a784
+ref table gold_dpmc_vs_2w3w_factstock_v2
+ref table LocalDateTable_53f3ecba-a479-4d0a-92ff-5e0f9eece046
+ref table LocalDateTable_8d295dc8-d1e7-4813-a7ef-e9d44e54c726
+ref table LocalDateTable_9cf00419-0775-4a68-871d-fce98e3a7fd9
+ref table LocalDateTable_e35b980e-d15a-4232-a763-57ee1fd55980
+ref table LocalDateTable_2e31e607-1ace-4017-83cd-725fedf86ffa
+ref table LocalDateTable_ba9ab22e-dd2f-4652-bb02-949309088908
+ref table LocalDateTable_209e3056-3bd9-4583-8541-75a7c934a7f3
+ref table LocalDateTable_b95a0688-1905-42da-b019-d8416f28cabd
+ref table LocalDateTable_1119ed84-b215-4c10-85c4-9b569ab58dca
+ref table LocalDateTable_483f53e3-b27c-4030-bc91-30a1a6228087
+ref table LocalDateTable_83dbda8b-8e29-4311-b619-0ee29aefde98
+ref table gold_dpmc_vs_2w3w4w_factstock_summary_1
+ref table LocalDateTable_ebd9bc47-d9de-4064-9428-80622a80763d
+ref table LocalDateTable_cd878483-0e90-4e3c-a3f5-0f4fde36a9f0
+ref table LocalDateTable_b18c7d53-ef5c-4a5f-8da0-886335175e87
+ref table gold_dpmc_vs_2w3w4w_factstock_summary
+ref table LocalDateTable_345ad0ce-f2b5-48d0-97a4-cbff0297e10d
+ref table LocalDateTable_c306dd28-55d1-4095-9a75-f86191ac2629
+ref table LocalDateTable_36a1eda3-c5a5-44a2-916a-f22bb549f449
+ref table AgeBucketV2
+ref table LocalDateTable_0c97e980-470f-4eed-b81a-b62ff5cd450a
+ref table AgeBuckets
+ref table LocalDateTable_32e73160-962f-45f7-8095-405e19434ebc
+ref table LocalDateTable_ac1e6156-bae0-424a-8346-f560214fab84
+ref table LocalDateTable_fe33ab5e-8383-427e-8902-1f5c343e5ffb
+ref table GRNAgeBucket
+ref table 'Location View'
+ref table UnitComp
+ref table YearsBackSelector
+ref table UnitCompYear
+
+ref cultureInfo en-US
+

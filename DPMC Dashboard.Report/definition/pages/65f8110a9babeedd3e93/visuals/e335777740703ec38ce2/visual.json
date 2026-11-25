@@ -1,0 +1,350 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "e335777740703ec38ce2",
+  "position": {
+    "x": 110,
+    "y": 273.33333333333337,
+    "z": 3000,
+    "height": 1363.3333333333335,
+    "width": 2446.666666666667,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                    }
+                  },
+                  "Property": "GRNDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factgrndetails_v2.GRNDate",
+              "nativeQueryRef": "GRN Date",
+              "displayName": "GRN Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                    }
+                  },
+                  "Property": "DMT_LOADED_DATE"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factgrndetails_v2.DMT_LOADED_DATE",
+              "nativeQueryRef": "DMT Loaded Date",
+              "displayName": "DMT Loaded Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                    }
+                  },
+                  "Property": "ChassisNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factgrndetails_v2.ChassisNo",
+              "nativeQueryRef": "ChassisNo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                    }
+                  },
+                  "Property": "AssemblyCategory"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factgrndetails_v2.AssemblyCategory",
+              "nativeQueryRef": "Assembly Category",
+              "displayName": "Assembly Category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                    }
+                  },
+                  "Property": "GatePassApprovedDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factgrndetails_v2.GatePassApprovedDate",
+              "nativeQueryRef": "Gate Pass Approved Date",
+              "displayName": "Gate Pass Approved Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                    }
+                  },
+                  "Property": "FromDealerName"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factgrndetails_v2.FromDealerName",
+              "nativeQueryRef": "Dealer Name",
+              "displayName": "Dealer Name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                    }
+                  },
+                  "Property": "GatePassDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factgrndetails_v2.GatePassDate",
+              "nativeQueryRef": "Gate Pass Date",
+              "displayName": "Gate Pass Date"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+                  }
+                },
+                "Property": "FromDealerName"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "200.8787677415606D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factgrndetails_v2.GRNDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "321.181808490938D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factgrndetails_v2.DMT_LOADED_DATE"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "347.27271657285104D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factgrndetails_v2.ChassisNo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "295.8787691246116D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factgrndetails_v2.AssemblyCategory"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "363.03028104264814D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factgrndetails_v2.GatePassApprovedDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "714.3030260421497D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factgrndetails_v2.FromDealerName"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

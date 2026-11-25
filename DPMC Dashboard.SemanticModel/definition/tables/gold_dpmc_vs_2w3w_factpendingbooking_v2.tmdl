@@ -1,0 +1,203 @@
+table gold_dpmc_vs_2w3w_factpendingbooking_v2
+	lineageTag: 24b3e7ae-047b-41de-9075-032f780db13e
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		lineageTag: 754a08c4-9fb9-4509-af9d-5dd722cda8dd
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c62cc5f-5820-4854-ae24-4327476125e6
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		lineageTag: e99d4719-a90f-4831-87de-5e434fc07cf3
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column AttachedPremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: f00b474e-1d92-4155-82f2-4a4584cff7ef
+		summarizeBy: sum
+		sourceColumn: AttachedPremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryNo
+		dataType: string
+		lineageTag: 00624d9e-fc89-4381-bbf7-736b9b26a509
+		summarizeBy: none
+		sourceColumn: InquiryNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column VehicleCount
+		dataType: double
+		lineageTag: 883ea431-10d6-4634-b3bc-51d396fd1903
+		summarizeBy: sum
+		sourceColumn: VehicleCount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column InquiryDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ef7fc688-017a-40b7-b7fc-fb1e4364a247
+		summarizeBy: none
+		sourceColumn: InquiryDate
+
+		variation Variation
+			isDefault
+			relationship: e601deba-aec9-4db1-9d15-f6967f4b34de
+			defaultHierarchy: LocalDateTable_f4d0c4eb-a8f8-4862-a681-673ac9832e02.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ConfirmDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 33078e69-153f-4874-9b1c-b4c263c71051
+		summarizeBy: none
+		sourceColumn: ConfirmDate
+
+		variation Variation
+			isDefault
+			relationship: d38f0d8d-6c41-4f88-bc84-e6256099f82e
+			defaultHierarchy: LocalDateTable_b0a9a949-9301-4a20-a1c8-a33944a73921.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column CompanyHierarchyCode
+		dataType: string
+		lineageTag: ae8a8404-53a6-469f-82f6-1bf216658e28
+		summarizeBy: none
+		sourceColumn: CompanyHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductHireCode
+		dataType: string
+		lineageTag: b9945af1-40f7-464e-991c-810896c94f69
+		summarizeBy: none
+		sourceColumn: ProductHireCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryType
+		dataType: string
+		lineageTag: 55590fa6-9530-4fac-97b8-305df37c2ae1
+		summarizeBy: none
+		sourceColumn: InquiryType
+
+		annotation SummarizationSetBy = Automatic
+
+	column AttachedPremisesCode
+		dataType: string
+		lineageTag: 8673af7f-c7c3-44b7-aaaf-b6d1bd74e651
+		summarizeBy: none
+		sourceColumn: AttachedPremisesCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssemblyCategory
+		dataType: string
+		lineageTag: 4eb311ba-2677-4590-af8a-e64ff76ec124
+		summarizeBy: none
+		sourceColumn: AssemblyCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvoiceStatus
+		dataType: string
+		lineageTag: c2bac3b9-324f-4af6-ab03-d7d44aa4b1a4
+		summarizeBy: none
+		sourceColumn: InvoiceStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column AllocationType
+		dataType: string
+		lineageTag: 1edb3039-cbb8-4969-a786-2458db210cc5
+		summarizeBy: none
+		sourceColumn: AllocationType
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7392cbe7-1c1e-47b4-b5e2-ebb1c6a39a18
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		lineageTag: 96b0dfbf-7f44-4d80-a451-168fce0f6315
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2286c44f-876b-4b44-a06d-1625849e71b7
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		variation Variation
+			isDefault
+			relationship: 081eb999-3914-4eed-ad11-876558744814
+			defaultHierarchy: LocalDateTable_c3571995-d67f-4885-8df0-1a8a99350a75.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		lineageTag: edf0ff7d-1551-46fc-a436-462b9143d4e4
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w_factpendingbooking_v2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w_factpendingbooking_v2 = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w_factpendingbooking_v2"]}[Data]
+				in
+				    dbo_gold_dpmc_vs_2w3w_factpendingbooking_v2
+
+	annotation PBI_ResultType = Table
+

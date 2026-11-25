@@ -1,0 +1,339 @@
+table gold_dpmc_vs_2w3w_factstock_v2
+	lineageTag: 0b765c76-8c09-4ce0-ad8e-76a53aba1404
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		lineageTag: 1016565a-4218-477b-ba40-95c408114281
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		lineageTag: e506513e-7f02-4050-bff7-7adc1a1fa732
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column PremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: a817dd1c-7bc9-429b-843f-f2b6dc44e921
+		summarizeBy: none
+		sourceColumn: PremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 329338c8-1246-4f90-9573-d58bf1ff4aa9
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_VEHICLE_NO
+		dataType: string
+		lineageTag: 02a75ed8-83df-4d65-9267-583a0bf519b8
+		summarizeBy: none
+		sourceColumn: STR_VEHICLE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_CHASSIS_NO
+		dataType: string
+		lineageTag: 39e67e00-cf7d-4d79-acfd-92dd867779a3
+		summarizeBy: none
+		sourceColumn: STR_CHASSIS_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_ENGINE_NO
+		dataType: string
+		lineageTag: ad8b0529-7dea-4f7a-b97d-c773f8ad18ac
+		summarizeBy: none
+		sourceColumn: STR_ENGINE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRATE_STATUS
+		dataType: string
+		lineageTag: 658fef3c-ecf5-4ade-a17e-7c39233c633b
+		summarizeBy: none
+		sourceColumn: CRATE_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STATUS
+		dataType: string
+		lineageTag: 07389fb2-8638-4562-b57a-3fe2a06d301e
+		summarizeBy: none
+		sourceColumn: STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_STATUS
+		dataType: string
+		lineageTag: f4e9a967-f591-45b8-b86b-1dff44b53f6d
+		summarizeBy: none
+		sourceColumn: STR_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_FREEZE_STATUS
+		dataType: string
+		lineageTag: 796cecf3-800b-4f8f-bb65-34c00faa2ddf
+		summarizeBy: none
+		sourceColumn: STR_FREEZE_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_INQUIRY_NO
+		dataType: string
+		lineageTag: aa293dd4-0ff4-4fcb-8c29-372a729b2d38
+		summarizeBy: none
+		sourceColumn: STR_INQUIRY_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_BOOKING_NO
+		dataType: string
+		lineageTag: cde8cf54-94f8-4282-91bb-6bc6bd79d183
+		summarizeBy: none
+		sourceColumn: STR_BOOKING_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_EMISSION_STANDARD
+		dataType: string
+		lineageTag: 1f9ddb6e-2704-4e9d-a1c4-734f3e8f775b
+		summarizeBy: none
+		sourceColumn: STR_EMISSION_STANDARD
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_STR_ASSEMBLE_CAT
+		dataType: string
+		lineageTag: c132ddfa-f251-413a-b5be-cf16d4f0773e
+		summarizeBy: none
+		sourceColumn: STR_STR_ASSEMBLE_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRN_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5089839d-4666-47cd-9f93-a3968fa1bd83
+		summarizeBy: none
+		sourceColumn: TRN_DATE
+
+		variation Variation
+			isDefault
+			relationship: 475d7a06-7858-44ea-8e17-dbd351f89de7
+			defaultHierarchy: LocalDateTable_53f3ecba-a479-4d0a-92ff-5e0f9eece046.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRN_DATE
+		dataType: dateTime
+		formatString: mm/dd/yyyy
+		lineageTag: 659f2fe2-ff68-4169-9787-80b2394b11c4
+		summarizeBy: none
+		sourceColumn: GRN_DATE
+
+		variation Variation
+			isDefault
+			relationship: af371933-4556-4b17-be22-7c390630e043
+			defaultHierarchy: LocalDateTable_8d295dc8-d1e7-4813-a7ef-e9d44e54c726.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column MAX_GRN_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e6e82735-126b-42a3-a255-511c0b5d6385
+		summarizeBy: none
+		sourceColumn: MAX_GRN_DATE
+
+		variation Variation
+			isDefault
+			relationship: 0d674f04-4a3d-484c-b175-b0755d9dcd87
+			defaultHierarchy: LocalDateTable_9cf00419-0775-4a68-871d-fce98e3a7fd9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column SCHEDULE_START_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 04b7d260-dc7c-45f2-85af-f2ead82e21b8
+		summarizeBy: none
+		sourceColumn: SCHEDULE_START_DATE
+
+		variation Variation
+			isDefault
+			relationship: 0cfe20ee-5a31-4514-aa0c-5bdf417dd326
+			defaultHierarchy: LocalDateTable_e35b980e-d15a-4232-a763-57ee1fd55980.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column SCHEDULE_END_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7db94259-1faa-4f26-acb6-e6db6d703a71
+		summarizeBy: none
+		sourceColumn: SCHEDULE_END_DATE
+
+		variation Variation
+			isDefault
+			relationship: 2e21947d-b0df-47fd-a8cb-7eb199508c4b
+			defaultHierarchy: LocalDateTable_2e31e607-1ace-4017-83cd-725fedf86ffa.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CSU_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 551627be-5644-4e4f-a646-c2c468da201b
+		summarizeBy: none
+		sourceColumn: CSU_DATE
+
+		variation Variation
+			isDefault
+			relationship: 35bdfa47-4662-4766-b01c-6b49586a6bd2
+			defaultHierarchy: LocalDateTable_ba9ab22e-dd2f-4652-bb02-949309088908.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column MDP_DEP_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d565ca19-8d35-4ddd-9995-72217589b280
+		summarizeBy: none
+		sourceColumn: MDP_DEP_DATE
+
+		variation Variation
+			isDefault
+			relationship: 6e6f7dc2-f320-4884-8250-46ce6b8a7731
+			defaultHierarchy: LocalDateTable_209e3056-3bd9-4583-8541-75a7c934a7f3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ALLOCATED_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2800bc79-cef7-4b0d-abf9-72878b5687be
+		summarizeBy: none
+		sourceColumn: ALLOCATED_DATE
+
+		variation Variation
+			isDefault
+			relationship: e0b11f83-9b1c-42af-9614-bd5937a31848
+			defaultHierarchy: LocalDateTable_b95a0688-1905-42da-b019-d8416f28cabd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVOICE_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 24053d31-325e-42d5-9193-7354234d3ee9
+		summarizeBy: none
+		sourceColumn: INVOICE_DATE
+
+		variation Variation
+			isDefault
+			relationship: 8222665e-2f8d-4de1-898b-057b9681caf1
+			defaultHierarchy: LocalDateTable_1119ed84-b215-4c10-85c4-9b569ab58dca.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DTM_DECLARE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 96b7d1d4-c6d4-46ea-98e7-0ec9d4325f5f
+		summarizeBy: none
+		sourceColumn: DTM_DECLARE
+
+		variation Variation
+			isDefault
+			relationship: 0182e415-ac4c-4762-a622-9f91c2bedc43
+			defaultHierarchy: LocalDateTable_483f53e3-b27c-4030-bc91-30a1a6228087.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PENDING_DAYS_FROM_MDP
+		dataType: double
+		lineageTag: 7d5073a4-10ca-4f02-9b77-2955fe37bbe2
+		summarizeBy: sum
+		sourceColumn: PENDING_DAYS_FROM_MDP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 147602d0-e70d-462b-8c2e-6411bd4578ed
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ac6de71-7a46-41b3-bea0-35da2a09508d
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5db97d05-501f-4310-b39c-8a8604c9df08
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		variation Variation
+			isDefault
+			relationship: 0ad5f6ee-0b11-45b2-bba9-ea80102cf06c
+			defaultHierarchy: LocalDateTable_83dbda8b-8e29-4311-b619-0ee29aefde98.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		lineageTag: 060d2dbd-e0b3-4729-8252-f5b0f5870e94
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w_factstock_v2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w_factstock_v2 = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w_factstock_v2"]}[Data]
+				in
+				    dbo_gold_dpmc_vs_2w3w_factstock_v2
+
+	annotation PBI_ResultType = Table
+

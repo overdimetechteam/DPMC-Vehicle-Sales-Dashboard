@@ -1,0 +1,48 @@
+table 'Location View'
+	lineageTag: 8fb64c8d-5641-47c7-bc99-26a4d16c69de
+
+	column 'Location View'
+		lineageTag: f8b69343-887b-47f1-a4a3-ce8cb6254d01
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Location View Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Location View Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location View Fields'
+		isHidden
+		lineageTag: 2130463b-955e-415f-a270-d42ed9ad435c
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Location View Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Location View Order'
+		isHidden
+		formatString: 0
+		lineageTag: f5023dc6-e540-4770-951d-c180d07dac35
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Location View' = calculated
+		mode: import
+		source =
+				{
+				    ("FromPremisesDescription", NAMEOF('gold_dpmc_vs_2w3w_factpendinggrn_v2'[FromPremisesDescription]), 0),
+				    ("ToPremisesDescription", NAMEOF('gold_dpmc_vs_2w3w_factpendinggrn_v2'[ToPremisesDescription]), 1)
+				}
+
+	annotation PBI_Id = 2d7a388b506a47088e31b56c018da298
+

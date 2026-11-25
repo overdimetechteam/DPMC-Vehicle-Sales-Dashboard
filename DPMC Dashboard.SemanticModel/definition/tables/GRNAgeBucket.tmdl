@@ -1,0 +1,60 @@
+table GRNAgeBucket
+	lineageTag: 3b3218f9-74fc-4347-ad77-3070e56f8444
+
+	column 'Age Bucket'
+		lineageTag: 5d232e33-666c-4029-9860-4e74cf45eef7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Age Bucket]
+		sortByColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column MinDays
+		formatString: 0
+		lineageTag: 5c0bf37c-75f4-4940-be2b-b346a895bda3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MinDays]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaxDays
+		formatString: 0
+		lineageTag: be27812c-58a2-4c3f-b559-a746e7f90988
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MaxDays]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		formatString: 0
+		lineageTag: 3f7142e8-6cde-4533-8000-0921f2a7c213
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GRNAgeBucket = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "Age Bucket", STRING,
+				    "MinDays", INTEGER,
+				    "MaxDays", INTEGER,
+				    "Sort", INTEGER,
+				    {
+				        { "Day_1",    0,  1,    1 },
+				        { "Day_2",    2,  2,    2 },
+				        { "Day_3",    3,  3,    3 },
+				        { "Day_4_7",  4,  7,    4 },
+				        { "Day_8_14", 8,  14,   5 },
+				        { "Day_15+",  15, 9999, 6 }
+				    }
+				)
+
+	annotation PBI_Id = fb98edc54b4f41e1910e6809144d650c
+

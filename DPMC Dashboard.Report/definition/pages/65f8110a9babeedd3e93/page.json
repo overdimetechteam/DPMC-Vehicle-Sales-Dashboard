@@ -1,0 +1,225 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "65f8110a9babeedd3e93",
+  "displayName": "GRN Details",
+  "displayOption": "FitToWidth",
+  "height": 3068,
+  "width": 2852,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9e8f928fdb77cd8da9b0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+              }
+            },
+            "Property": "STR_MODEL_DESC"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "e6f8037dac8c60ad4c86",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "PremisesDesc"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "a0b2878966d04d273c51",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_target"
+              }
+            },
+            "Property": "SRM"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "706183170b89fb8b6c03",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_dimdate"
+              }
+            },
+            "Property": "TheMonthName"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "e20533c24fa09c3b6aa3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "AssemblyCategory"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "4c7b9fe4101bf87fb9b3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AsOfDateSelector"
+              }
+            },
+            "Property": "SelectedDate"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "df31fb930050801035e3",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "GRN Text"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "71e3fe423b41169a303d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+              }
+            },
+            "Property": "FromDealerName"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "493dc98c30b6a0aa910c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+              }
+            },
+            "Property": "FromDealerName"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "ea02b294e8e60a27afe7_002153f98dd343c5c8ba",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "5b26bdd7c0eebb526d84",
+        "boundFilter": "df31fb930050801035e3",
+        "fieldExpr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "GRN Text"
+          }
+        }
+      },
+      {
+        "name": "773357c323ea9a50aa26",
+        "boundFilter": "71e3fe423b41169a303d",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+              }
+            },
+            "Property": "FromDealerName"
+          }
+        }
+      },
+      {
+        "name": "0e9325c808e548ec3c07",
+        "boundFilter": "493dc98c30b6a0aa910c",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factgrndetails_v2"
+              }
+            },
+            "Property": "FromDealerName"
+          }
+        }
+      }
+    ],
+    "referenceScope": "CrossReport",
+    "acceptsFilterContext": "None"
+  },
+  "objects": {
+    "displayArea": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Middle'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

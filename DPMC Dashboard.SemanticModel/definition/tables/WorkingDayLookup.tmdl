@@ -1,0 +1,38 @@
+table WorkingDayLookup
+	lineageTag: 917ed96c-66b9-4ec9-94ae-bc7d416e925b
+
+	column Date
+		formatString: General Date
+		lineageTag: ea50f90e-d1a1-4816-a4eb-205d1b1639f8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 7bf4ec29-1534-4736-920b-e0e6b520d3ef
+			defaultHierarchy: LocalDateTable_ac1e6156-bae0-424a-8346-f560214fab84.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkingDayOfMonth
+		formatString: 0
+		lineageTag: 0bbbb0cb-d983-42c3-8306-03186e615a79
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [WorkingDayOfMonth]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition WorkingDayLookup = calculated
+		mode: import
+		source =
+				
+				SELECTCOLUMNS (
+				    FILTER ( Vw_dpmc_vs_DimDate, Vw_dpmc_vs_DimDate[Holiday] = 0 ),
+				    "Date",              Vw_dpmc_vs_DimDate[TheDate],
+				    "WorkingDayOfMonth", Vw_dpmc_vs_DimDate[WorkingDay]
+				)
+
+	annotation PBI_Id = 41a2a2888e5f4d21bf846d36c1c746c0
+

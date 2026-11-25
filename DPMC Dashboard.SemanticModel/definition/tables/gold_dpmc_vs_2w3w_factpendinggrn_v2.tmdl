@@ -1,0 +1,274 @@
+table gold_dpmc_vs_2w3w_factpendinggrn_v2
+	lineageTag: ce51e6c6-a13d-46c2-be7c-333be3daef4a
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f44b358-76dd-43d9-86d1-74ca03187abb
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 6292126a-a9df-46f2-8239-90b76f209b5c
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 739f2e7a-9825-483f-b541-ab94685e87bb
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromPremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: b9b49b69-e141-4363-85a3-60ec6b3745ec
+		summarizeBy: none
+		sourceColumn: FromPremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToPremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 3500d1fc-686e-4b6b-9bf4-6b807e60aec7
+		summarizeBy: sum
+		sourceColumn: ToPremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChassisNo
+		dataType: string
+		lineageTag: 6ac5d919-4d92-4cf7-aec8-636a6168f2f6
+		summarizeBy: none
+		sourceColumn: ChassisNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column GatePassNo
+		dataType: string
+		lineageTag: 62a94000-a549-46bc-b8f2-994a1d6a6156
+		summarizeBy: none
+		sourceColumn: GatePassNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column GatePassDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: d8073ad7-2477-43d4-b516-dd931d8d09b6
+		summarizeBy: none
+		sourceColumn: GatePassDate
+
+		variation Variation
+			isDefault
+			relationship: 65c0ef12-1cb3-450b-be40-c31177e94d71
+			defaultHierarchy: LocalDateTable_f02ed9d7-2330-4b64-9352-e8b7301faf55.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column GatePassApprovedDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 5a10e003-6fe5-4ac7-afd0-02d9bd86edc9
+		summarizeBy: none
+		sourceColumn: GatePassApprovedDate
+
+		variation Variation
+			isDefault
+			relationship: 37ed4c46-daf1-4a39-ba01-e27e7b79a93f
+			defaultHierarchy: LocalDateTable_cc354b97-47a5-411f-843e-0f11a6480476.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column GRNDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1110de6f-ecad-4d73-b8dd-9ed5242d5dbf
+		summarizeBy: none
+		sourceColumn: GRNDate
+
+		variation Variation
+			isDefault
+			relationship: 0190c8ec-38e8-4c05-9785-247856d7f25a
+			defaultHierarchy: LocalDateTable_5e11a55e-5ea4-4b18-ae87-65951d847891.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CompanyHierarchyCode
+		dataType: string
+		lineageTag: 91a11e26-8f60-45f2-a484-1249e417486e
+		summarizeBy: none
+		sourceColumn: CompanyHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductHierarchyCode
+		dataType: string
+		lineageTag: d2987dd5-ab59-42b6-8c19-7f185d92f28b
+		summarizeBy: none
+		sourceColumn: ProductHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromLocationCode
+		dataType: string
+		lineageTag: 69999f7a-0b32-4116-bdd1-a5fe303999b2
+		summarizeBy: none
+		sourceColumn: FromLocationCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromPremisesDescription
+		dataType: string
+		lineageTag: 2a1bfbf2-2376-4f2f-bc03-a494b8b53369
+		summarizeBy: none
+		sourceColumn: FromPremisesDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToLocationCode
+		dataType: string
+		lineageTag: fe335603-42fa-453c-83ad-5229273d8609
+		summarizeBy: none
+		sourceColumn: ToLocationCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToPremisesDescription
+		dataType: string
+		lineageTag: 0a41a377-f77b-4de0-9b44-39812e4ddd21
+		summarizeBy: none
+		sourceColumn: ToPremisesDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromDealerCode
+		dataType: string
+		lineageTag: f95da4f3-ffb7-499e-adfe-6e299f55a45b
+		summarizeBy: none
+		sourceColumn: FromDealerCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromDealerName
+		dataType: string
+		lineageTag: d1c231f0-0a73-4f9b-8990-f1323e58c6f4
+		summarizeBy: none
+		sourceColumn: FromDealerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssemblyCategory
+		dataType: string
+		lineageTag: 8cb810d8-103e-4422-999e-f42c533d151a
+		summarizeBy: none
+		sourceColumn: AssemblyCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ba13cf7d-de05-4bdb-8280-8db0f7749442
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		lineageTag: 678bac6c-64aa-4edc-be85-de5ed92f3d09
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 360ef3a3-d43f-48aa-8750-c4cb93374d9b
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		variation Variation
+			isDefault
+			relationship: 970865d0-ca6b-41f9-bec4-206a85da9a6a
+			defaultHierarchy: LocalDateTable_eeef8eb9-e33f-44ee-8478-f7ffb845a784.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b459a68-8e99-48c6-9f52-65465e340493
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pending Days' = DATEDIFF(gold_dpmc_vs_2w3w_factpendinggrn_v2[GatePassApprovedDate].[Date],[Selected As Of Date],DAY)
+		formatString: 0
+		lineageTag: 60be38d4-1b32-4fa0-baf7-a8a057b50964
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age_GRN_Bucket = ```
+			
+			VAR AgeDays = gold_dpmc_vs_2w3w_factpendinggrn_v2[Pending Days]
+			    
+			RETURN
+			SWITCH(
+			    TRUE(),
+			   
+			    AgeDays <= 5, "0-5 Days",
+			    AgeDays <= 30, "6-30 Days",
+			    AgeDays <= 60, "31-60 Days",
+			    AgeDays <= 90, "61-90 Days",
+			    AgeDays <= 120, "91-120 Days",
+			    AgeDays <= 150, "121-150 Days",
+			    AgeDays <= 180, "151-180 Days",
+			    "Above 6 Months"
+			)
+			```
+		lineageTag: 523be70d-d4c7-426f-86a6-12bc84d509c8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w_factpendinggrn_v2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w_factpendinggrn_v2 = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w_factpendinggrn_v2"]}[Data]
+				in
+				    dbo_gold_dpmc_vs_2w3w_factpendinggrn_v2
+
+	annotation PBI_ResultType = Table
+

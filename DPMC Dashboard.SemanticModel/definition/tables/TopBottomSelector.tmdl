@@ -1,0 +1,138 @@
+table TopBottomSelector
+	lineageTag: 1752dec1-4ace-4f46-9dce-905dc474dd55
+
+	measure 'Top Bottom' = SELECTEDVALUE(TopBottomSelector[Selection], "Top")
+		lineageTag: c27eea43-c7ed-4002-9e3a-92ba888346f8
+
+	measure 'RM Rank' =
+			
+			RANKX(
+			    ALLSELECTED(BranchMonthTarget[Product_Owner]),
+			    [Achievement %],
+			    ,
+			    DESC
+			)
+		formatString: 0
+		lineageTag: a1cd9420-b1e1-4b2d-90e7-eaa8c988e6e8
+
+	measure 'Branch Rank' =
+			
+			RANKX(
+			    ALLSELECTED(BranchMonthTarget[STR_BRANCH]),
+			    [Achievement %],
+			    ,
+			    DESC
+			)
+		formatString: 0
+		lineageTag: 319c8d43-1ca6-4649-854d-a93605651473
+
+	measure 'Regional Head Rank' =
+			
+			RANKX(
+			    ALLSELECTED(BranchMonthTarget[SRM]),
+			    [Achievement %],
+			    ,
+			    DESC
+			)
+		formatString: 0
+		lineageTag: 0d948025-4cfa-46bf-ac7c-893c7512adad
+
+	measure 'Show RM' =
+			
+			VAR Sel = [Top Bottom]
+			VAR TotalCount = COUNTROWS(ALLSELECTED(BranchMonthTarget[Product_Owner]))
+			RETURN
+			    IF(
+			        Sel = "Top",
+			        [RM Rank] <= 5,
+			        [RM Rank] > TotalCount - 5
+			    )
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0616560c-8276-44a4-abe6-2a1b2986659a
+
+	measure 'Show Branch' =
+			
+			VAR Sel = [Top Bottom]
+			VAR TotalCount = COUNTROWS(ALLSELECTED(BranchMonthTarget[STR_BRANCH]))
+			RETURN
+			    IF(
+			        Sel = "Top",
+			        [Branch Rank] <= 5,
+			        [Branch Rank] > TotalCount - 5
+			    )
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: de346a82-b95f-48e4-bee7-4ebc1fbad008
+
+	measure 'Show Regional Head' =
+			
+			VAR Sel = [Top Bottom]
+			VAR TotalCount = COUNTROWS(ALLSELECTED(BranchMonthTarget[SRM]))
+			RETURN
+			    IF(
+			        Sel = "Top",
+			        [Regional Head Rank] <= 5,
+			        [Regional Head Rank] > TotalCount - 5
+			    )
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d4a86468-71f3-47dc-bf27-fecb6aaaa54c
+
+	measure 'Sort Basis RM' =
+			
+			VAR Sel = [Top Bottom]
+			RETURN IF(Sel = "Top", [Achievement % (Selected Month)], -[Achievement % (Selected Month)])
+		lineageTag: a1fdcc72-ed3d-48da-87bc-38b74cd290f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sort Basis Branch' =
+			
+			VAR Sel = [Top Bottom]
+			RETURN IF(Sel = "Top", [Achievement % (Selected Month)], -[Achievement % (Selected Month)])
+		lineageTag: 68d61e8a-3aaa-47f7-80bb-55521a967495
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sort Basis Regional Head' =
+			
+			VAR Sel = [Top Bottom]
+			RETURN IF(Sel = "Top", [Achievement % (Selected Month)], -[Achievement % (Selected Month)])
+		lineageTag: 23b20b56-67d0-45ce-a1b3-a6cf7e2ad06c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Show Branch (Threshold)' =
+			
+			VAR Sel = [Top Bottom]
+			VAR Ach = [Achievement % (Selected Month)]
+			VAR Trg = [Target (Selected Month)]
+			VAR RankValue =
+			    RANKX(
+			        ALLSELECTED ( BranchMonthTarget[STR_BRANCH] ),
+			        [Achievement % (Selected Month)],
+			        ,
+			        DESC
+			    )
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    Sel = "Top", IF ( RankValue <= 5, 1, 0 ),
+			    Sel = "Bottom", IF ( ISBLANK ( Trg ) || Trg = 0, 0, IF ( Ach < 10, 1, 0 ) ),
+			    0
+			)
+		formatString: 0
+		lineageTag: 97a4adbe-21e5-43c8-89b1-b0e03793e692
+
+	column Selection
+		lineageTag: 7108baf4-fdb8-4892-9814-05a5b491032e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Selection]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TopBottomSelector = calculated
+		mode: import
+		source = DATATABLE("Selection", STRING, {{"Top"}, {"Bottom"}})
+
+	annotation PBI_Id = 0f222c17cb8b42b5b6fc9392f3fd1303
+

@@ -1,0 +1,59 @@
+table UnitComp
+	lineageTag: 77e93d58-55d6-48a8-9ece-93ff55e88692
+
+	column Group
+		lineageTag: f0b4415a-9da6-484c-8176-5e25acee6382
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Group]
+		sortByColumn: GroupSort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		lineageTag: 17d75893-6f32-4a10-b52d-cdedaa55bb76
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Metric]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Key
+		lineageTag: 42dbc351-8e2f-40b7-80b4-98b220394be4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Key]
+
+		annotation SummarizationSetBy = Automatic
+
+	column GroupSort
+		formatString: 0
+		lineageTag: f0ec8a9a-40a7-4693-9b4c-abc8effa5f20
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [GroupSort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition UnitComp = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "Group",     STRING,
+				    "Metric",    STRING,
+				    "Key",       STRING,
+				    "GroupSort", INTEGER,
+				    {
+				        { "Month",                    " ",             "Month",   1 },
+				        { "Payment Break-UP",         "Cash Sales",    "Cash",    2 },
+				        { "Payment Break-UP",         "Finance Sales", "Finance", 2 },
+				        { "Inquiry Premise Break-Up", "Dealer Count",  "Dealer",  3 },
+				        { "Inquiry Premise Break-Up", "Premises",      "Premise", 3 },
+				        { "Total Units",              " ",             "Total",   4 },
+				        { "Trend",                    " ",             "Trend",   5 }
+				    }
+				)
+
+	annotation PBI_Id = 43002b8fde01483d8c85aeea68b07ca5
+

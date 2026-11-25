@@ -1,0 +1,672 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "28004197e68e5398403d",
+  "position": {
+    "x": 79.222222222222229,
+    "y": 310.79487179487182,
+    "z": 1000,
+    "height": 1121.2991452991453,
+    "width": 2117.6709401709404,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+                    }
+                  },
+                  "Property": "GatePassNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factpendinggrn_v2.GatePassNo",
+              "nativeQueryRef": "Gate Pass No",
+              "displayName": "Gate Pass No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+                    }
+                  },
+                  "Property": "ChassisNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factpendinggrn_v2.ChassisNo",
+              "nativeQueryRef": "Chassis No",
+              "displayName": "Chassis No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+                    }
+                  },
+                  "Property": "STR_MODEL_DESC"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_dimproduct.STR_MODEL_DESC",
+              "nativeQueryRef": "Mode",
+              "displayName": "Mode"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KPI_Measures"
+                    }
+                  },
+                  "Property": "Pending Days"
+                }
+              },
+              "queryRef": "KPI_Measures.Pending Days",
+              "nativeQueryRef": "Pending Days"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+                    }
+                  },
+                  "Property": "GatePassDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factpendinggrn_v2.GatePassDate",
+              "nativeQueryRef": "Gate Pass Date",
+              "displayName": "Gate Pass Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+                    }
+                  },
+                  "Property": "GatePassApprovedDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factpendinggrn_v2.GatePassApprovedDate",
+              "nativeQueryRef": "GatePassApproved Date",
+              "displayName": "GatePassApproved Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+                    }
+                  },
+                  "Property": "ToPremisesDescription"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factpendinggrn_v2.ToPremisesDescription",
+              "nativeQueryRef": "To Location",
+              "displayName": "To Location"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+                    }
+                  },
+                  "Property": "FromPremisesDescription"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factpendinggrn_v2.FromPremisesDescription",
+              "nativeQueryRef": "From Location",
+              "displayName": "From Location"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+                  }
+                },
+                "Property": "STR_MODEL_DESC"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.VehicleCount)"
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "194.6060589330166D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.InquiryDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "191.24242397393573D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.AllocationType"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "176.1890345619424D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.InvoiceStatus"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "210.6060606060606D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.VehicleCount)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "203.69696777296912D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.InquiryType"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "300.63634575809294D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.InquiryNo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "403.9697285166693D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.StatusDesc"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "179.33329617346226D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.ConfirmDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "235.27272145246567D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.AssembleCategory"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "335D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w4w_dimproduct.STR_MODEL_DESC"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "342.6110958689708D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factpendinggrn_v2.ToPremisesDescription"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "339.1282316601669D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factpendinggrn_v2.GatePassApprovedDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "265.5042691141519D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factpendinggrn_v2.GatePassDate"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "228.12820131334087D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "KPI_Measures.Pending Days"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pending GRNs '"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fb0b7013d2e072c90907",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+              }
+            },
+            "Property": "ToPremisesDescription"
+          }
+        },
+        "type": "Categorical",
+        "objects": {
+          "general": [
+            {
+              "properties": {}
+            }
+          ]
+        }
+      },
+      {
+        "name": "9f08ecff85e49d3210c5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+              }
+            },
+            "Property": "FromPremisesDescription"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ab3f717d525667db9acd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+              }
+            },
+            "Property": "GatePassNo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "22db88f9800dd311665b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+              }
+            },
+            "Property": "ChassisNo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "701787e5ba3e270a9928",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+              }
+            },
+            "Property": "GatePassDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "24af68609aab234960a3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factpendinggrn_v2"
+              }
+            },
+            "Property": "GatePassApprovedDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "22a15526a012aa747225",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+              }
+            },
+            "Property": "STR_MODEL_DESC"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "23388c02c0eab99d00bc",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Pending GRN Detail Value"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "k",
+              "Entity": "KPI_Measures",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 1,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "k"
+                        }
+                      },
+                      "Property": "Pending GRN Detail Value"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "0L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      },
+      {
+        "name": "fcb76ebbb2a29c0e8b1d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Pending Days"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,239 @@
+table gold_dpmc_vs_2w3w_factdeliverynotes_v2
+	lineageTag: c717cb8a-8877-475f-ae27-fefb65a8999a
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		lineageTag: f9969d19-1f06-4af5-a3c8-9b3106781bbc
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 378028ed-3ec9-4fd0-80c3-903e2ff23746
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 14a97ae5-7696-4362-8c37-ea2cc9b64ba9
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column PremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 0189d9de-dab2-42b1-834c-5bc0eb4ffe07
+		summarizeBy: none
+		sourceColumn: PremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompanyHierarchyCode
+		dataType: string
+		lineageTag: 9e98afd4-c837-49b0-a8a0-66b61738b81e
+		summarizeBy: none
+		sourceColumn: CompanyHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionName
+		dataType: string
+		lineageTag: c7f33e64-0527-44bd-9463-f16f492bb90a
+		summarizeBy: none
+		sourceColumn: DivisionName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductHierarchyCode
+		dataType: string
+		lineageTag: 1960729b-71d1-40fd-8c5a-b8fa372f023e
+		summarizeBy: none
+		sourceColumn: ProductHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_DELIVERY_NOTE_NO
+		dataType: string
+		lineageTag: c765e008-57ba-4597-baed-c13ee9cf6d35
+		summarizeBy: none
+		sourceColumn: STR_DELIVERY_NOTE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_INQUIRY_NO
+		dataType: string
+		lineageTag: 4c9937fd-24be-4fc2-802a-d7723cb4d6c1
+		summarizeBy: none
+		sourceColumn: STR_INQUIRY_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_BOOKING_NO
+		dataType: string
+		lineageTag: cb06da60-2e2e-4286-9c39-d4be6b69882e
+		summarizeBy: none
+		sourceColumn: STR_BOOKING_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_INVOICE_NO
+		dataType: string
+		lineageTag: 38831296-a79c-4fbc-b3fa-173734faf46f
+		summarizeBy: none
+		sourceColumn: STR_INVOICE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_CHASSIS_NO
+		dataType: string
+		lineageTag: 9e41dd26-6bae-4b0f-a305-db1d8e309447
+		summarizeBy: none
+		sourceColumn: STR_CHASSIS_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_WORKSHOP_NO
+		dataType: string
+		lineageTag: a4548050-e006-448f-83ff-3e294db65344
+		summarizeBy: none
+		sourceColumn: STR_WORKSHOP_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DTM_INVOICE_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: c7b00fdf-4bfe-4c1c-baae-1106a6027cd2
+		summarizeBy: none
+		sourceColumn: DTM_INVOICE_DATE
+
+		variation Variation
+			isDefault
+			relationship: 6651d79b-0d76-46b4-95d8-e76ed7e048a9
+			defaultHierarchy: LocalDateTable_24cfd0a2-2da5-4b33-bfa2-c037738df1fa.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column STR_COMPANY_CODE
+		dataType: string
+		lineageTag: 00783b9d-28dd-4e54-8ccf-c692d9da8421
+		summarizeBy: none
+		sourceColumn: STR_COMPANY_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STR_DELIVERY_LOCATION
+		dataType: string
+		lineageTag: 5cb56bec-2fdd-4f59-a0c5-f561f01c9c90
+		summarizeBy: none
+		sourceColumn: STR_DELIVERY_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column INT_NO_OF_UNITS
+		dataType: double
+		lineageTag: dc324af1-fa63-464b-b9cf-2b7491d11f36
+		summarizeBy: sum
+		sourceColumn: INT_NO_OF_UNITS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STR_ASSEMBLE_CAT
+		dataType: string
+		lineageTag: 3d1d1307-47e1-4022-b14f-45ae193f25b9
+		summarizeBy: none
+		sourceColumn: STR_ASSEMBLE_CAT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DTM_ACT_DEL_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: c9862e68-b3a5-4ef5-a269-f447cad0c2e0
+		summarizeBy: none
+		sourceColumn: DTM_ACT_DEL_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 461962a6-b58e-4d11-b859-566f61747e23
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		variation Variation
+			isDefault
+			relationship: 7f696af1-4770-482d-bead-c37ac8bc21cd
+			defaultHierarchy: LocalDateTable_635e95f6-9963-4082-b0a1-132ebb3884f7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f52f4d9-a54c-4c34-a398-a07bb488b2a9
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 357312b5-7268-407f-be0d-e6bbe64ff487
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		variation Variation
+			isDefault
+			relationship: 8ffceab9-ef5c-4030-a152-16ecb8796126
+			defaultHierarchy: LocalDateTable_3f700683-cd36-4bc8-94b2-d622cd351f24.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		lineageTag: 17b9c222-c127-45d5-a3a0-b372b55f2039
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w_factdeliverynotes_v2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w_factdeliverynotes_v2 = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w_factdeliverynotes_v2"]}[Data]
+				in
+				    dbo_gold_dpmc_vs_2w3w_factdeliverynotes_v2
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

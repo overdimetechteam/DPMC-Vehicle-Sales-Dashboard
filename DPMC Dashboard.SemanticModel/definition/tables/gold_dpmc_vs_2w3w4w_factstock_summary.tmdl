@@ -1,0 +1,141 @@
+table gold_dpmc_vs_2w3w4w_factstock_summary
+	lineageTag: 39430d54-c4b9-4688-b8e5-7f0446e94535
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		lineageTag: b18e097f-57cf-4f25-afe0-e34f498460aa
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column PremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 92413cf1-459c-4112-8c17-9f40042cdbcc
+		summarizeBy: none
+		sourceColumn: PremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company
+		dataType: string
+		lineageTag: 48ff7d49-bac6-4215-b2ca-850d32df21d1
+		summarizeBy: none
+		sourceColumn: Company
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRNDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b2a0a691-66c9-421b-8417-26127a1eb01b
+		summarizeBy: none
+		sourceColumn: GRNDate
+
+		variation Variation
+			isDefault
+			relationship: 3377330f-8ef5-4e68-866e-4564aee9aada
+			defaultHierarchy: LocalDateTable_345ad0ce-f2b5-48d0-97a4-cbff0297e10d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DeclareDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 708643ea-101c-44a4-920c-e2edf4cf3304
+		summarizeBy: none
+		sourceColumn: DeclareDate
+
+		variation Variation
+			isDefault
+			relationship: fb0fc935-bbcc-4ecb-9fac-1e5666523ada
+			defaultHierarchy: LocalDateTable_c306dd28-55d1-4095-9a75-f86191ac2629.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_LOADED_DATE
+		dataType: string
+		lineageTag: 40a1b482-75e1-412b-be2d-088642dbabfd
+		summarizeBy: none
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b28e8ac8-f73f-4e91-b8ee-27aecb3fd906
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		variation Variation
+			isDefault
+			relationship: 9d2d5ab2-f772-43ba-8f0f-15ff78a3f6f7
+			defaultHierarchy: LocalDateTable_36a1eda3-c5a5-44a2-916a-f22bb549f449.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Status
+		dataType: string
+		lineageTag: e1ab4a29-59db-45d9-a9a3-8aaa3a273244
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssemblyCategory
+		dataType: string
+		lineageTag: 96e3508d-28f7-4b2c-a0f8-53f939643f87
+		summarizeBy: none
+		sourceColumn: AssemblyCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: 0
+		lineageTag: 69fd5994-9bdd-4394-94be-271dc4aa07ef
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		lineageTag: 883f92dc-3135-43ec-9520-d3c4ded6a3cf
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		lineageTag: e1205596-5306-433d-8670-9a41c5edfe46
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w4w_factstock_summary = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w4w_factstock_summary = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w4w_factstock_summary"]}[Data]
+				in
+				    dbo_gold_dpmc_vs_2w3w4w_factstock_summary
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

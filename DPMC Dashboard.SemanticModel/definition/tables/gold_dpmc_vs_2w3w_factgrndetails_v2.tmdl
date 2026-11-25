@@ -1,0 +1,253 @@
+table gold_dpmc_vs_2w3w_factgrndetails_v2
+	lineageTag: bfe3727d-054b-44ab-b6f6-dc04ec9db38d
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		lineageTag: ed64f2a5-ba68-42c9-a160-be42a498d23a
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 61ae1185-043f-4d02-95cf-31d872c3d05f
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromPremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 28064ad6-1143-4939-a1d7-02e42c186d24
+		summarizeBy: sum
+		sourceColumn: FromPremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToPremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: d1f42e66-fdb8-47e9-a6c7-f6a1ac03c8c3
+		summarizeBy: none
+		sourceColumn: ToPremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		lineageTag: f42bc103-4a4d-449a-b2d1-75596712013b
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChassisNo
+		dataType: string
+		lineageTag: 5c8e9ef3-7994-4e17-97b9-0e4aedf9c0c3
+		summarizeBy: none
+		sourceColumn: ChassisNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column GRNNo
+		dataType: string
+		lineageTag: 822df555-da9c-4657-9506-1f75a091c85c
+		summarizeBy: none
+		sourceColumn: GRNNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column GatePassNo
+		dataType: string
+		lineageTag: 5e06494c-c299-49a0-9b45-64e6e1227082
+		summarizeBy: none
+		sourceColumn: GatePassNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column GatePassDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 7af4f216-d9c7-4aad-a82e-0f90cc9260d2
+		summarizeBy: none
+		sourceColumn: GatePassDate
+
+		variation Variation
+			isDefault
+			relationship: 4fbd0bf3-f4e3-45ee-86a5-00ad73a87612
+			defaultHierarchy: LocalDateTable_846287c3-8a83-4faf-9823-9bf0e0a41aff.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column GatePassApprovedDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: c96685e6-da1b-405b-bfc5-14faba42cb83
+		summarizeBy: none
+		sourceColumn: GatePassApprovedDate
+
+		variation Variation
+			isDefault
+			relationship: 81c27c1c-1d25-4865-921a-a6505b93d317
+			defaultHierarchy: LocalDateTable_c3b26ab0-b852-48a4-9930-985469d21dd7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column GRNDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: a51d82b6-d750-4f3a-b6b9-cc07fcc55d31
+		summarizeBy: none
+		sourceColumn: GRNDate
+
+		variation Variation
+			isDefault
+			relationship: cc3fa720-ca91-4af1-97d1-8e94f6ebecc7
+			defaultHierarchy: LocalDateTable_5f9b1d91-3b56-47a3-81db-2122f8f0abfe.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column FromDealerCode
+		dataType: string
+		lineageTag: f3ac5354-25f0-4267-97c5-8506cfb7de85
+		summarizeBy: none
+		sourceColumn: FromDealerCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromDealerName
+		dataType: string
+		lineageTag: 39be0d71-3a73-4ae0-aaa8-ef515030032d
+		summarizeBy: none
+		sourceColumn: FromDealerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToDealerCode
+		dataType: string
+		lineageTag: 35640797-4487-4442-a6e2-537be4922245
+		summarizeBy: none
+		sourceColumn: ToDealerCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToDealerName
+		dataType: string
+		lineageTag: aa092f9c-c50c-4184-89c4-375394f76948
+		summarizeBy: none
+		sourceColumn: ToDealerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromLocationCode
+		dataType: string
+		lineageTag: 4443fa29-e354-49c6-bb13-62c4edc3003b
+		summarizeBy: none
+		sourceColumn: FromLocationCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToLocationCode
+		dataType: string
+		lineageTag: 9268e133-1cc2-43c4-8ddc-5e4c8caf8ead
+		summarizeBy: none
+		sourceColumn: ToLocationCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductHierarchyCode
+		dataType: string
+		lineageTag: 9f804e84-563f-4128-9150-bd68b7d1f13f
+		summarizeBy: none
+		sourceColumn: ProductHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssemblyCategory
+		dataType: string
+		lineageTag: a6877a08-c95e-4615-8cdf-1f3cbc3241e8
+		summarizeBy: none
+		sourceColumn: AssemblyCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 11a8a4d4-1616-4ad4-8815-60e633cd5a2d
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		variation Variation
+			isDefault
+			relationship: c6544874-0878-417d-8c76-6f22ae1be41e
+			defaultHierarchy: LocalDateTable_86826f4c-f580-4fbc-aa1a-c03aef185b6a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e43c374-f754-457a-a053-ed0d6f1ef06b
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0c770b96-21a2-426b-b992-dec387882ef4
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		variation Variation
+			isDefault
+			relationship: 0707fd42-dd02-41ae-b9a1-7848d128e7ad
+			defaultHierarchy: LocalDateTable_a559d40c-f8cc-4ada-9d02-58fe710c877c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		lineageTag: 6cab4340-23d5-43c5-920f-1f75075cdba4
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w_factgrndetails_v2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w_factgrndetails_v2 = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w_factgrndetails_v2"]}[Data]
+				in
+				    dbo_gold_dpmc_vs_2w3w_factgrndetails_v2
+
+	annotation PBI_ResultType = Table
+

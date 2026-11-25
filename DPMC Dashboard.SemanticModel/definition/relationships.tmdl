@@ -1,0 +1,522 @@
+relationship 3d8d0346-f35f-9a8d-0125-080dd760c976
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship 471c1eca-ca55-ffe1-7c37-87f017012d14
+	fromColumn: gold_dpmc_vs_2w3w4w_dimdivision.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship 213e4d03-5c75-9f4a-9cf3-0734908dbace
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship 8d0710a2-0f2e-3480-d119-a1148a455243
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.InvoiceDate
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship 27549d72-5c98-09b8-cb14-7a144b7b6994
+	fromColumn: gold_dpmc_vs_2w3w_target.DATE
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship 87d2971f-412f-4503-a45a-d772325b78ba
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Vw_dpmc_vs_DimDate.TheFirstOfMonth
+	toColumn: LocalDateTable_9da29efa-ab57-4315-ab1b-7aa7cd7c5a35.Date
+
+relationship 9d4f4807-b3ef-4f0f-98a3-158b3eddc794
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Vw_dpmc_vs_DimDate.TheLastOfYear
+	toColumn: LocalDateTable_64d6d604-9c9f-4357-8995-1629575fc509.Date
+
+relationship 0042c47c-93b4-a1a3-fb7f-f470dd7171b7
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Vw_dpmc_vs_DimDate.TheDate
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship 4b5103f5-10b0-8170-4f3f-7cc32c148daf
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.PremiseSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseSK
+
+relationship 11b3758b-5df9-66be-7cff-b3762dd8f3e1
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.BranchMonthKey
+	toColumn: BranchMonthTarget.BranchMonthKey
+
+relationship b14d6582-d52f-46ee-82f1-1751c250e08f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_competitorwisereg.Month
+	toColumn: LocalDateTable_d894c362-d534-44dc-a835-432c84bfc2a0.Date
+
+relationship 32e2f69d-3587-48e7-8389-304b98e92518
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MonthBridge.TheFirstOfMonth
+	toColumn: LocalDateTable_51815c0f-adc3-4045-9491-1eb4203b692f.Date
+
+relationship a34e4f7c-6f3e-362e-a614-8a17154cf71f
+	fromColumn: gold_dpmc_dimdate.TheFirstOfMonth
+	toColumn: MonthBridge.TheFirstOfMonth
+
+relationship 3e8f8ab7-df2d-8413-52c4-7f2c7db9605c
+	fromColumn: gold_dpmc_vs_2w3w4w_competitorwisereg.MonthStart
+	toColumn: MonthBridge.TheFirstOfMonth
+
+relationship ecc4bcf9-c01a-3bca-490d-c8ae6b3f0b2e
+	isActive: false
+	fromColumn: BranchMonthTarget.DATE
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship 1377c708-af77-61af-71f8-fd92a1d48469
+	crossFilteringBehavior: bothDirections
+	fromColumn: gold_dpmc_vs_2w3w4w_dimproduct.VehicleTypeShort
+	toColumn: VehicleTypeSelector.'Vehicle Type'
+
+relationship e142fb57-ebbe-4511-959c-97ebc728dd9b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: MonthsWithTargetTable.TheFirstOfMonth
+	toColumn: LocalDateTable_b3258b9d-76df-4cc7-9059-5b9979bc4077.Date
+
+relationship 1f4aeb4d-0fe5-4311-9c35-86bf8fd67eac
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_2w3w_forecast_units.InvoiceDate
+	toColumn: LocalDateTable_17f4a05f-89d3-483f-8dd2-0055821c7a9f.Date
+
+relationship eceaa02f-576b-7ba0-6f67-6e20f3415077
+	fromColumn: gold_dpmc_2w3w_forecast_units.Product
+	toColumn: VehicleTypeSelector.'Vehicle Type'
+
+relationship c995274f-1f71-4423-94de-8c1e0875adb5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_dimcompany.ModifiedDate
+	toColumn: LocalDateTable_aecd6cd8-120b-418d-8f21-8b47f351ae44.Date
+
+relationship 0ec5b348-c8a9-4df6-9274-36d17324a4a2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_dimdivision.ModifiedDate
+	toColumn: LocalDateTable_41d63db9-9e95-47c2-82aa-42eb1c94f7fa.Date
+
+relationship 06ada7ac-ebc8-46c5-9015-9e3fa7ef0674
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_dimpremises.CreatedDate
+	toColumn: LocalDateTable_74fec9b1-647a-41e0-b3ad-e56f8cd52ce8.Date
+
+relationship 37694f80-4d03-44ee-bdc4-5086a8b83ced
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_dimproduct.CreatedDate
+	toColumn: LocalDateTable_3cd4d963-cc36-487d-9bc0-4b9ec2b735dd.Date
+
+relationship 8aeb739e-5ffd-44f5-8584-6be3b9cde1fe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.InquiryDate
+	toColumn: LocalDateTable_60dcd2e1-e48e-4573-8faa-6f3158662fe1.Date
+
+relationship 851bc76f-d7c0-4d77-aa13-34089c7dbc78
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.DeliveryDate
+	toColumn: LocalDateTable_b6a2f01f-3d7c-41a8-8e59-b33830da742a.Date
+
+relationship 72d017ec-08b8-48e5-a0bf-4d73ba5be275
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.GRNDate
+	toColumn: LocalDateTable_9b3e11e2-f843-4d7b-af3a-81e2d4dd0d9d.Date
+
+relationship 0ae5508c-625e-4b08-bb62-83f0ce098dbe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.ConfirmDate
+	toColumn: LocalDateTable_954e5880-698b-4056-8379-7fff7e514f20.Date
+
+relationship d4459f1f-f867-414b-a529-20b3aa4f29a3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.DMT_LOADED_DATE
+	toColumn: LocalDateTable_e3715d4b-394e-4149-bc8f-4c87d2737ad1.Date
+
+relationship 71b9a59f-a9f7-4c65-a363-2ff373153576
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.DMT_MONTH_END
+	toColumn: LocalDateTable_20ac0e3f-e749-4ae4-90bc-df58cbd30008.Date
+
+relationship 6e9708ff-ae29-4f05-bfe4-59a942fe3486
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factsales.InvoiceMonth
+	toColumn: LocalDateTable_7f8b7f80-1091-420c-a7c2-ec91fd464108.Date
+
+relationship 0ad35fdc-955e-45cd-819f-3e0d06bfa512
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_target.DMT_LOADED_DATE
+	toColumn: LocalDateTable_b1ff85d0-f904-4de6-ba71-69ef15711402.Date
+
+relationship 644c8b1a-bf7b-49cb-b195-b4cd2deaa9a2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_dimdate.TheDate
+	toColumn: LocalDateTable_8fa256c7-1689-4a13-bd67-dd46cf02866a.Date
+
+relationship aa2ae7ad-566f-45af-bd7c-4c22652d70bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_dimdate.TheLastOfYear
+	toColumn: LocalDateTable_2b82303d-27d5-4700-b8c8-440c8265b4b3.Date
+
+relationship bba42c09-50c0-49ab-9e09-d2b993e06000
+	joinOnDateBehavior: datePartOnly
+	fromColumn: AsOfDateSelector.SelectedDate
+	toColumn: LocalDateTable_00b49d70-07ac-4fed-a74b-6400707bb5a9.Date
+
+relationship a8a853ff-0a7f-4c11-8573-306b0b82c5b8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BranchMonthTarget.MonthEnd
+	toColumn: LocalDateTable_ebaf551a-b146-407a-b88f-9b4c9e32c730.Date
+
+relationship 6651d79b-0d76-46b4-95d8-e76ed7e048a9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.DTM_INVOICE_DATE
+	toColumn: LocalDateTable_24cfd0a2-2da5-4b33-bfa2-c037738df1fa.Date
+
+relationship 7f696af1-4770-482d-bead-c37ac8bc21cd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.DMT_LOADED_DATE
+	toColumn: LocalDateTable_635e95f6-9963-4082-b0a1-132ebb3884f7.Date
+
+relationship 8ffceab9-ef5c-4030-a152-16ecb8796126
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.DMT_MONTH_END
+	toColumn: LocalDateTable_3f700683-cd36-4bc8-94b2-d622cd351f24.Date
+
+relationship 4fbd0bf3-f4e3-45ee-86a5-00ad73a87612
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.GatePassDate
+	toColumn: LocalDateTable_846287c3-8a83-4faf-9823-9bf0e0a41aff.Date
+
+relationship 81c27c1c-1d25-4865-921a-a6505b93d317
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.GatePassApprovedDate
+	toColumn: LocalDateTable_c3b26ab0-b852-48a4-9930-985469d21dd7.Date
+
+relationship cc3fa720-ca91-4af1-97d1-8e94f6ebecc7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.GRNDate
+	toColumn: LocalDateTable_5f9b1d91-3b56-47a3-81db-2122f8f0abfe.Date
+
+relationship c6544874-0878-417d-8c76-6f22ae1be41e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.DMT_LOADED_DATE
+	toColumn: LocalDateTable_86826f4c-f580-4fbc-aa1a-c03aef185b6a.Date
+
+relationship 0707fd42-dd02-41ae-b9a1-7848d128e7ad
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.DMT_MONTH_END
+	toColumn: LocalDateTable_a559d40c-f8cc-4ada-9d02-58fe710c877c.Date
+
+relationship 57be3285-6428-49ea-8937-b9641289c400
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.InquiryDate
+	toColumn: LocalDateTable_ccc57224-6484-4c8c-94a7-c96d98c87ebe.Date
+
+relationship d1f71046-5e61-4e55-89ae-18376e5953dc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.ConfirmDate
+	toColumn: LocalDateTable_6612d60e-3307-4d70-96c6-a14191176921.Date
+
+relationship 7e96d117-bbda-4c59-b638-e2af227855d3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.DMT_MONTH_END
+	toColumn: LocalDateTable_5c27d986-e327-41ca-a4a9-f5542653c8d8.Date
+
+relationship e601deba-aec9-4db1-9d15-f6967f4b34de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.InquiryDate
+	toColumn: LocalDateTable_f4d0c4eb-a8f8-4862-a681-673ac9832e02.Date
+
+relationship d38f0d8d-6c41-4f88-bc84-e6256099f82e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.ConfirmDate
+	toColumn: LocalDateTable_b0a9a949-9301-4a20-a1c8-a33944a73921.Date
+
+relationship 081eb999-3914-4eed-ad11-876558744814
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.DMT_MONTH_END
+	toColumn: LocalDateTable_c3571995-d67f-4885-8df0-1a8a99350a75.Date
+
+relationship 65c0ef12-1cb3-450b-be40-c31177e94d71
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.GatePassDate
+	toColumn: LocalDateTable_f02ed9d7-2330-4b64-9352-e8b7301faf55.Date
+
+relationship 37ed4c46-daf1-4a39-ba01-e27e7b79a93f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.GatePassApprovedDate
+	toColumn: LocalDateTable_cc354b97-47a5-411f-843e-0f11a6480476.Date
+
+relationship 0190c8ec-38e8-4c05-9785-247856d7f25a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.GRNDate
+	toColumn: LocalDateTable_5e11a55e-5ea4-4b18-ae87-65951d847891.Date
+
+relationship 970865d0-ca6b-41f9-bec4-206a85da9a6a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.DMT_MONTH_END
+	toColumn: LocalDateTable_eeef8eb9-e33f-44ee-8478-f7ffb845a784.Date
+
+relationship 475d7a06-7858-44ea-8e17-dbd351f89de7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.TRN_DATE
+	toColumn: LocalDateTable_53f3ecba-a479-4d0a-92ff-5e0f9eece046.Date
+
+relationship af371933-4556-4b17-be22-7c390630e043
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.GRN_DATE
+	toColumn: LocalDateTable_8d295dc8-d1e7-4813-a7ef-e9d44e54c726.Date
+
+relationship 0d674f04-4a3d-484c-b175-b0755d9dcd87
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.MAX_GRN_DATE
+	toColumn: LocalDateTable_9cf00419-0775-4a68-871d-fce98e3a7fd9.Date
+
+relationship 0cfe20ee-5a31-4514-aa0c-5bdf417dd326
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.SCHEDULE_START_DATE
+	toColumn: LocalDateTable_e35b980e-d15a-4232-a763-57ee1fd55980.Date
+
+relationship 2e21947d-b0df-47fd-a8cb-7eb199508c4b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.SCHEDULE_END_DATE
+	toColumn: LocalDateTable_2e31e607-1ace-4017-83cd-725fedf86ffa.Date
+
+relationship 35bdfa47-4662-4766-b01c-6b49586a6bd2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.CSU_DATE
+	toColumn: LocalDateTable_ba9ab22e-dd2f-4652-bb02-949309088908.Date
+
+relationship 6e6f7dc2-f320-4884-8250-46ce6b8a7731
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.MDP_DEP_DATE
+	toColumn: LocalDateTable_209e3056-3bd9-4583-8541-75a7c934a7f3.Date
+
+relationship e0b11f83-9b1c-42af-9614-bd5937a31848
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.ALLOCATED_DATE
+	toColumn: LocalDateTable_b95a0688-1905-42da-b019-d8416f28cabd.Date
+
+relationship 8222665e-2f8d-4de1-898b-057b9681caf1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.INVOICE_DATE
+	toColumn: LocalDateTable_1119ed84-b215-4c10-85c4-9b569ab58dca.Date
+
+relationship 0182e415-ac4c-4762-a622-9f91c2bedc43
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.DTM_DECLARE
+	toColumn: LocalDateTable_483f53e3-b27c-4030-bc91-30a1a6228087.Date
+
+relationship 0ad5f6ee-0b11-45b2-bba9-ea80102cf06c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.DMT_MONTH_END
+	toColumn: LocalDateTable_83dbda8b-8e29-4311-b619-0ee29aefde98.Date
+
+relationship 81ebc719-9022-46e3-b504-a27ae9675069
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary_1.GRNDate
+	toColumn: LocalDateTable_ebd9bc47-d9de-4064-9428-80622a80763d.Date
+
+relationship 3f29d72a-7c12-42db-a7a1-e2db2a9af86c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary_1.DeclareDate
+	toColumn: LocalDateTable_cd878483-0e90-4e3c-a3f5-0f4fde36a9f0.Date
+
+relationship aebe8743-4dd1-4e84-91e0-759214fcdd6a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary_1.DMT_LOADED_DATE
+	toColumn: LocalDateTable_b18c7d53-ef5c-4a5f-8da0-886335175e87.Date
+
+relationship 3377330f-8ef5-4e68-866e-4564aee9aada
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary.GRNDate
+	toColumn: LocalDateTable_345ad0ce-f2b5-48d0-97a4-cbff0297e10d.Date
+
+relationship fb0fc935-bbcc-4ecb-9fac-1e5666523ada
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary.DeclareDate
+	toColumn: LocalDateTable_c306dd28-55d1-4095-9a75-f86191ac2629.Date
+
+relationship 9d2d5ab2-f772-43ba-8f0f-15ff78a3f6f7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary.DMT_LOADED_DATE
+	toColumn: LocalDateTable_36a1eda3-c5a5-44a2-916a-f22bb549f449.Date
+
+relationship AutoDetected_4acca2f3-c4f4-4abe-9266-70342ac45f84
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_2aa87036-df2a-453b-87fc-114c2093d643
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_4073bd04-1dc4-4118-9d47-aae2359c4890
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_2375007f-b30e-43e8-9506-6030cef85f85
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_375b7568-f70a-4539-88c8-beaa2a94582a
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_8b9d276e-1150-424c-a9dd-81c5ca67bcf5
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_87defc14-3731-4104-b61e-78ed695ce45c
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+
+relationship AutoDetected_f73e536b-a81a-4c6e-b86c-77a89f18605a
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+
+relationship AutoDetected_e466e130-c1df-44c1-acf4-d46599c66357
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+
+relationship AutoDetected_b6445891-158b-451c-852b-5fd87f2c6a78
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+
+relationship AutoDetected_abea1f35-e70c-4148-902a-5d8f083e8268
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+
+relationship AutoDetected_a822ce87-26a1-4f63-b779-30a601ce1855
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+
+relationship AutoDetected_c189ec03-526a-4195-b973-049d3568e92d
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.PremiseSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseSK
+
+relationship AutoDetected_fc8f5121-add4-477e-8b27-ce8fbd32756f
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.PremiseSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseSK
+
+relationship AutoDetected_100d80b8-733d-4798-b7a8-386bf8e9e3d8
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary_1.PremiseSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseSK
+
+relationship AutoDetected_929f8990-5395-4847-9cb0-d682e38fbe71
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary.PremiseSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseSK
+
+relationship AutoDetected_8f41b540-669c-443d-a535-cdfa6b435ffb
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship AutoDetected_b6ed9449-5eb5-4792-b54f-a0b2d19c5346
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship AutoDetected_05a752bb-e787-4a73-b0ff-d8e766997589
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship AutoDetected_405e9ea5-e2a7-4ae9-a0fd-29a354c7acda
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship AutoDetected_bae95f09-2f3e-40d6-aa87-8ceac6ea38c1
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship AutoDetected_bfb1ef89-3ea0-4149-a3d3-c389638667e6
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship AutoDetected_7b07c71d-0e29-465a-b5ef-24a3115085ca
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary_1.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship AutoDetected_d0c3610e-9ffe-454f-9a0c-5836bdca3ab5
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary.ProductSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimproduct.ProductSK
+
+relationship a47393dc-0e14-0260-e9cd-f6960c5d1c4a
+	fromColumn: gold_dpmc_vs_2w3w_factgrndetails_v2.ToPremiseSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseSK
+
+relationship 4a8ecc29-0f2a-670d-489a-eb6b0e4243e3
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.DTM_ACT_DEL_DATE
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship 609fd5e3-1d81-f132-c3ba-dd1a44b81a5c
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.DMT_LOADED_DATE
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship 0f080ef9-e567-2f41-0f5d-897de996c0cb
+	fromColumn: gold_dpmc_vs_2w3w_factpendinggrn_v2.FromPremiseSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseSK
+
+relationship fb4bae29-7217-4c1e-c414-be3d3795c1de
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.DMT_LOADED_DATE
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship c7b8a620-49fa-5294-d2d0-49b259e5562f
+	fromColumn: gold_dpmc_vs_2w3w_factstock_v2.DMT_LOADED_DATE
+	toColumn: gold_dpmc_dimdate.TheDate
+
+relationship fb7e1d67-9d7d-4764-901d-73c66e1b566d
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.AttachedPremisesCode
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseCode
+
+relationship 69124229-aaed-7644-882b-aa695ac7df09
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w_factdeliverynotes_v2.STR_DELIVERY_LOCATION
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseCode
+
+relationship 2542f65b-cd25-f3e6-8f47-776da41ad227
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.AttachedPremisesCode
+	toColumn: gold_dpmc_vs_2w3w4w_dimpremises.PremiseCode
+
+relationship 4835d638-8a2b-49e0-956b-11ed6ea0959f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.InquiryMonth
+	toColumn: LocalDateTable_0c97e980-470f-4eed-b81a-b62ff5cd450a.Date
+
+relationship b90800e9-2ee5-87ee-d01d-d54e2e578c22
+	fromColumn: gold_dpmc_vs_2w3w_factpendingbooking_v2.DMT_LOADED_DATE
+	toColumn: AsOfDateSelector.SelectedDate
+
+relationship 7760b60a-0d99-49ab-b021-29d96ae4b3bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_vs_2w3w_factinquirytoinvoice_v2.DMT_LOADED_DATE
+	toColumn: LocalDateTable_32e73160-962f-45f7-8095-405e19434ebc.Date
+
+relationship 7bf4ec29-1534-4736-920b-e0e6b520d3ef
+	joinOnDateBehavior: datePartOnly
+	fromColumn: WorkingDayLookup.Date
+	toColumn: LocalDateTable_ac1e6156-bae0-424a-8346-f560214fab84.Date
+
+relationship e668f866-b88f-41dd-aa8c-a099f1898915
+	joinOnDateBehavior: datePartOnly
+	fromColumn: gold_dpmc_2w3w_forecast_units.MonthEnd
+	toColumn: LocalDateTable_fe33ab5e-8383-427e-8902-1f5c343e5ffb.Date
+
+relationship AutoDetected_c30051c8-9419-47d7-b5be-a4240974db80
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary_1.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_b8416f07-6fd9-416c-92b0-26cf63728498
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary.CompanySK
+	toColumn: gold_dpmc_vs_2w3w4w_dimcompany.CompanySK
+
+relationship AutoDetected_c3dc9b6a-eade-4110-b1f1-fcbd88efb1f0
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary_1.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+
+relationship AutoDetected_f591b04a-5aa9-40be-bffd-bf7646168351
+	isActive: false
+	fromColumn: gold_dpmc_vs_2w3w4w_factstock_summary.DivisionSK
+	toColumn: gold_dpmc_vs_2w3w4w_dimdivision.DivisionSK
+

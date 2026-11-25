@@ -1,0 +1,25 @@
+table DimProductFilter
+	lineageTag: 881d0fa4-1bef-4287-9505-e295377f4b6b
+
+	column Product
+		lineageTag: 1306f5a4-b85d-44cb-a201-2dca9c6d6057
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Product]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProductFilter = calculated
+		mode: import
+		source =
+				
+				DISTINCT(
+				    SELECTCOLUMNS(
+				        gold_dpmc_vs_2w3w4w_dimproduct,
+				        "Product",
+				        gold_dpmc_vs_2w3w4w_dimproduct[STR_PRODLINE_DESC]
+				    )
+				)
+
+	annotation PBI_Id = 94f00c9bb7754c80ad226ba41b3fd068
+

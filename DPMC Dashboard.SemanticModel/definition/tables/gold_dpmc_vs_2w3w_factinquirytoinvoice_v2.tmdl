@@ -1,0 +1,234 @@
+table gold_dpmc_vs_2w3w_factinquirytoinvoice_v2
+	lineageTag: d7bc9a4b-cf86-44c4-952f-54314d864b95
+
+	column CompanySK
+		dataType: int64
+		formatString: 0
+		lineageTag: 83c39361-b4e8-4468-81d4-56e78bc6c38c
+		summarizeBy: none
+		sourceColumn: CompanySK
+
+		annotation SummarizationSetBy = Automatic
+
+	column DivisionSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ba93488-05d3-4ad9-9e01-98f89dccb42a
+		summarizeBy: sum
+		sourceColumn: DivisionSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSK
+		dataType: int64
+		formatString: 0
+		lineageTag: d35d9c1a-f53d-4fb8-b146-e24077d19254
+		summarizeBy: none
+		sourceColumn: ProductSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column AttachedPremiseSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 9fc62c1f-cc78-4707-9e0f-de6d50c87065
+		summarizeBy: sum
+		sourceColumn: AttachedPremiseSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryNo
+		dataType: string
+		lineageTag: 58c55775-5a42-4574-a4a3-725f2be1b263
+		summarizeBy: none
+		sourceColumn: InquiryNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryType
+		dataType: string
+		lineageTag: 32cf873a-802b-435c-8176-cce123287787
+		summarizeBy: none
+		sourceColumn: InquiryType
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvoiceStatus
+		dataType: string
+		lineageTag: f4d0fa66-6f1b-4fa1-85d9-f7a78eacd289
+		summarizeBy: none
+		sourceColumn: InvoiceStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column AllocationType
+		dataType: string
+		lineageTag: 6a539e19-ba0a-4008-ac10-81760b83e0bc
+		summarizeBy: none
+		sourceColumn: AllocationType
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusDesc
+		dataType: string
+		lineageTag: dc649837-2fe7-455d-9ccc-f3107b908ec5
+		summarizeBy: none
+		sourceColumn: StatusDesc
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssembleCategory
+		dataType: string
+		lineageTag: f16a0d8d-d966-466f-b258-b917c6795ae4
+		summarizeBy: none
+		sourceColumn: AssembleCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: d2a295ff-0026-4256-af1c-7d03ca4d1999
+		summarizeBy: none
+		sourceColumn: InquiryDate
+
+		variation Variation
+			isDefault
+			relationship: 57be3285-6428-49ea-8937-b9641289c400
+			defaultHierarchy: LocalDateTable_ccc57224-6484-4c8c-94a7-c96d98c87ebe.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column ConfirmDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 578d4f56-80b9-4554-bcf4-c535fc463739
+		summarizeBy: none
+		sourceColumn: ConfirmDate
+
+		variation Variation
+			isDefault
+			relationship: d1f71046-5e61-4e55-89ae-18376e5953dc
+			defaultHierarchy: LocalDateTable_6612d60e-3307-4d70-96c6-a14191176921.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column VehicleCount
+		dataType: int64
+		lineageTag: ed56fb6b-d091-43cf-ab62-6a535e78103f
+		summarizeBy: sum
+		sourceColumn: VehicleCount
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AttachedPremisesCode
+		dataType: string
+		lineageTag: 15cfdeb0-874b-4caf-b7f0-2957d4f04202
+		summarizeBy: none
+		sourceColumn: AttachedPremisesCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompanyHierarchyCode
+		dataType: string
+		lineageTag: 228755a9-ee26-4940-8487-06856c753085
+		summarizeBy: none
+		sourceColumn: CompanyHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductHierarchyCode
+		dataType: string
+		lineageTag: 1e1038c7-a1f3-4880-a365-f2b422bb583a
+		summarizeBy: none
+		sourceColumn: ProductHierarchyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_LOADED_DATE
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: bac0824f-d734-42b8-8438-f1241c8328ad
+		summarizeBy: none
+		sourceColumn: DMT_LOADED_DATE
+
+		variation Variation
+			isDefault
+			relationship: 7760b60a-0d99-49ab-b021-29d96ae4b3bf
+			defaultHierarchy: LocalDateTable_32e73160-962f-45f7-8095-405e19434ebc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column INT_LOADED_DATE
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c4ea81d-c358-4109-9944-b185b2dc9ba7
+		summarizeBy: sum
+		sourceColumn: INT_LOADED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DMT_MONTH_END
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c740131c-5f2c-40b1-b88c-2021294fdf60
+		summarizeBy: none
+		sourceColumn: DMT_MONTH_END
+
+		variation Variation
+			isDefault
+			relationship: 7e96d117-bbda-4c59-b638-e2af227855d3
+			defaultHierarchy: LocalDateTable_5c27d986-e327-41ca-a4a9-f5542653c8d8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column INT_MONTH_END
+		dataType: int64
+		formatString: 0
+		lineageTag: 6cae8285-fd7f-4657-9e52-7ab33be298e1
+		summarizeBy: sum
+		sourceColumn: INT_MONTH_END
+
+		annotation SummarizationSetBy = Automatic
+
+	column InquiryMonth = DATE ( YEAR ( [InquiryDate] ), MONTH ( [InquiryDate] ), 1 )
+		formatString: General Date
+		lineageTag: f280fc35-40bd-4f62-ac12-8a3d3f4294db
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 4835d638-8a2b-49e0-956b-11ed6ea0959f
+			defaultHierarchy: LocalDateTable_0c97e980-470f-4eed-b81a-b62ff5cd450a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition gold_dpmc_vs_2w3w_factinquirytoinvoice_v2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("7feayvayvgkebc6l4lr5ck2nkq-c7rf6hb2ej7erc674mjqmjlkeu.datawarehouse.fabric.microsoft.com", "DPMC_Lakehouse_External"),
+				    dbo_gold_dpmc_vs_2w3w_factinquirytoinvoice_v2 = Source{[Schema="dbo",Item="gold_dpmc_vs_2w3w_factinquirytoinvoice_v2"]}[Data]
+				in
+				    dbo_gold_dpmc_vs_2w3w_factinquirytoinvoice_v2
+
+	annotation PBI_ResultType = Table
+

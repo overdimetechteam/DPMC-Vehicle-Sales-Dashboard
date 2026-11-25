@@ -1,0 +1,633 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "7b468bc8aaa417aba17c",
+  "position": {
+    "x": 109,
+    "y": 265,
+    "z": 1000,
+    "height": 1317,
+    "width": 2743,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "InquiryNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factsales.InquiryNo",
+              "nativeQueryRef": "Inquiry No",
+              "displayName": "Inquiry No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+                    }
+                  },
+                  "Property": "STR_MODEL_DESC"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_dimproduct.STR_MODEL_DESC",
+              "nativeQueryRef": "Model",
+              "displayName": "Model"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "InquiryDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factsales.InquiryDate",
+              "nativeQueryRef": "InquiryDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+                    }
+                  },
+                  "Property": "PremisesDesc"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_dimpremises.PremisesDesc",
+              "nativeQueryRef": "Premise",
+              "displayName": "Premise"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "InvoiceNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factsales.InvoiceNo",
+              "nativeQueryRef": "Invoice No",
+              "displayName": "Invoice No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "InvoiceValue"
+                }
+              },
+              "queryRef": "Sum(gold_dpmc_vs_2w3w4w_factsales.InvoiceValue)",
+              "nativeQueryRef": "Invoice Value",
+              "displayName": "Invoice Value"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "InqType"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factsales.InqType",
+              "nativeQueryRef": "Inquiry Type",
+              "displayName": "Inquiry Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "BookingNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factsales.BookingNo",
+              "nativeQueryRef": "Booking No",
+              "displayName": "Booking No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "InvoiceDate"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factsales.InvoiceDate",
+              "nativeQueryRef": "InvoiceDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+                    }
+                  },
+                  "Property": "ChassisNo"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w4w_factsales.ChassisNo",
+              "nativeQueryRef": "ChassisNo"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+                  }
+                },
+                "Property": "STR_MODEL_DESC"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {}
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "346.1212325041116D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w4w_factsales.InquiryNo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "389.6363715792182D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w4w_dimproduct.STR_MODEL_DESC"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "319.03026068371673D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w4w_dimpremises.PremisesDesc"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "350.2424974507291D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w4w_factsales.InvoiceNo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "212.6969660911505D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(gold_dpmc_vs_2w3w4w_factsales.InvoiceValue)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "216.21221560710075D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w4w_factsales.InqType"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "315D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w4w_factsales.BookingNo"
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(gold_dpmc_vs_2w3w4w_factsales.InvoiceValue)"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dcd54cd603c585bb48c0",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "BookingNo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c301a1a37c89ae50e818",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "ChassisNo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "143e48d2c338635d8051",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "InquiryNo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "841c1a63b9e69d9e57a0",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "InqType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e505f75dcddcec3ad1a4",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "InquiryDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e5d82a784d76493cd51b",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "InvoiceNo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "0bf813b9651d399e7673",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "InvoiceValue"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3ccb89d113b6c2941d70",
+        "ordinal": 7,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "InvoiceDate"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5b582b35ec0e26bb4bac",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+              }
+            },
+            "Property": "STR_MODEL_DESC"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1a5a38012e07490604cb",
+        "ordinal": 9,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "PremisesDesc"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f0c76df30e559ed46c64",
+        "ordinal": 10,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Is Sale In MTD"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "k",
+              "Entity": "KPI_Measures",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "k"
+                        }
+                      },
+                      "Property": "Is Sale In MTD"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}

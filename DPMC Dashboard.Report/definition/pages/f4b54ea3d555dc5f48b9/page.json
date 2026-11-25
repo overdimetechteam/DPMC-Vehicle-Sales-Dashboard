@@ -1,0 +1,326 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "f4b54ea3d555dc5f48b9",
+  "displayName": "Stock Details",
+  "displayOption": "FitToWidth",
+  "height": 3068,
+  "width": 2852,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "85b1911172646e6b0346",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+              }
+            },
+            "Property": "Model (Sales)"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "e20533c24fa09c3b6aa3",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_factsales"
+              }
+            },
+            "Property": "AssemblyCategory"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "e6f8037dac8c60ad4c86",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimpremises"
+              }
+            },
+            "Property": "PremisesDesc"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "4c7b9fe4101bf87fb9b3",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AsOfDateSelector"
+              }
+            },
+            "Property": "SelectedDate"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "a0b2878966d04d273c51",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_target"
+              }
+            },
+            "Property": "SRM"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "9e8f928fdb77cd8da9b0",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+              }
+            },
+            "Property": "STR_MODEL_DESC"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "706183170b89fb8b6c03",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_dimdate"
+              }
+            },
+            "Property": "TheMonthName"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "cf3757c20833948dce89",
+        "ordinal": 7,
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Stock Units Text"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "d55564866b0035b01a19",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+              }
+            },
+            "Property": "DMT_LOADED_DATE"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "6c1b417d5a46b760b3a0",
+        "ordinal": 9,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+              }
+            },
+            "Property": "STR_STR_ASSEMBLE_CAT"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "b7213554acc330d681a4",
+        "ordinal": 10,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+              }
+            },
+            "Property": "STR_STR_ASSEMBLE_CAT"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "4013dd74eb63a810b0a9",
+        "ordinal": 11,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AgeBucketV2"
+              }
+            },
+            "Property": "Age Bucket"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  },
+  "pageBinding": {
+    "name": "ea02b294e8e60a27afe7_435513d9c640ad477bfd",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "13dae45e305e170d0719",
+        "boundFilter": "cf3757c20833948dce89",
+        "fieldExpr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Stock Units Text"
+          }
+        }
+      },
+      {
+        "name": "c80a922f825da303807c",
+        "boundFilter": "d55564866b0035b01a19",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+              }
+            },
+            "Property": "DMT_LOADED_DATE"
+          }
+        }
+      },
+      {
+        "name": "736da8780d9c0cc609e7",
+        "boundFilter": "6c1b417d5a46b760b3a0",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+              }
+            },
+            "Property": "STR_STR_ASSEMBLE_CAT"
+          }
+        }
+      },
+      {
+        "name": "200c7750b2ee6eb3d6ce",
+        "boundFilter": "b7213554acc330d681a4",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+              }
+            },
+            "Property": "STR_STR_ASSEMBLE_CAT"
+          }
+        }
+      },
+      {
+        "name": "8e132c3c034261950c38",
+        "boundFilter": "4013dd74eb63a810b0a9",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AgeBucketV2"
+              }
+            },
+            "Property": "Age Bucket"
+          }
+        }
+      },
+      {
+        "name": "99175eb86870517b3338",
+        "boundFilter": "85b1911172646e6b0346",
+        "asAggregation": false,
+        "qnaSingleSelectRequired": false,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "gold_dpmc_vs_2w3w4w_dimproduct"
+              }
+            },
+            "Property": "Model (Sales)"
+          }
+        }
+      }
+    ],
+    "acceptsFilterContext": "None"
+  },
+  "objects": {
+    "displayArea": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Middle'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

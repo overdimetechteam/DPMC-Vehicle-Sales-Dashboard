@@ -1,0 +1,27 @@
+table MonthBridge
+	lineageTag: 92271eec-f6fb-406d-af99-c1ed24c86860
+
+	column TheFirstOfMonth
+		formatString: mmmm yyyy
+		lineageTag: aec97f24-c043-4444-b156-0525d0b754b5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: gold_dpmc_dimdate[TheFirstOfMonth]
+
+		variation Variation
+			isDefault
+			relationship: 32e2f69d-3587-48e7-8389-304b98e92518
+			defaultHierarchy: LocalDateTable_51815c0f-adc3-4045-9491-1eb4203b692f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition MonthBridge = calculated
+		mode: import
+		source = SUMMARIZE(gold_dpmc_dimdate, gold_dpmc_dimdate[TheFirstOfMonth])
+
+	annotation PBI_Id = 04ae71ccb17b49da826280465e5d3e72
+

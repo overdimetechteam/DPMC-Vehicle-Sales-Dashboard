@@ -1,0 +1,477 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "16c56e84b7c7296dc410",
+  "position": {
+    "x": 120,
+    "y": 230,
+    "z": 3000,
+    "height": 1353.3333333333335,
+    "width": 2096.666666666667,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "DTM_DECLARE"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.DTM_DECLARE",
+              "nativeQueryRef": "DTM Declare Date",
+              "displayName": "DTM Declare Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STR_CHASSIS_NO"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STR_CHASSIS_NO",
+              "nativeQueryRef": "Chassis No",
+              "displayName": "Chassis No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "GRN_DATE"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.GRN_DATE",
+              "nativeQueryRef": "GRN Date",
+              "displayName": "GRN Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "DMT_LOADED_DATE"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.DMT_LOADED_DATE",
+              "nativeQueryRef": "DMT Loaded Date",
+              "displayName": "DMT Loaded Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STATUS"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STATUS",
+              "nativeQueryRef": "STATUS"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STR_STATUS"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STR_STATUS",
+              "nativeQueryRef": "Status",
+              "displayName": "Status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STR_VEHICLE_NO"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STR_VEHICLE_NO",
+              "nativeQueryRef": "Vehicle No",
+              "displayName": "Vehicle No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STR_ENGINE_NO"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STR_ENGINE_NO",
+              "nativeQueryRef": "Engine No",
+              "displayName": "Engine No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STR_BOOKING_NO"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STR_BOOKING_NO",
+              "nativeQueryRef": "Booking No",
+              "displayName": "Booking No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STR_INQUIRY_NO"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STR_INQUIRY_NO",
+              "nativeQueryRef": "Inquiry No",
+              "displayName": "Inquiry No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                    }
+                  },
+                  "Property": "STR_STR_ASSEMBLE_CAT"
+                }
+              },
+              "queryRef": "gold_dpmc_vs_2w3w_factstock_v2.STR_STR_ASSEMBLE_CAT",
+              "nativeQueryRef": "Assemble Category",
+              "displayName": "Assemble Category"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_dpmc_vs_2w3w_factstock_v2"
+                  }
+                },
+                "Property": "STR_STR_ASSEMBLE_CAT"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "18D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "284.6363567129145D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factstock_v2.STR_CHASSIS_NO"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "206.9090938080725D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factstock_v2.GRN_DATE"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "245.42422928219708D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factstock_v2.DMT_LOADED_DATE"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "224.63635778798414D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factstock_v2.STATUS"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "111.36363636363636D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factstock_v2.STR_STATUS"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "165.3939232025976D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factstock_v2.STR_VEHICLE_NO"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "221D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "gold_dpmc_vs_2w3w_factstock_v2.DTM_DECLARE"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 6,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4e749d1681c74e398c97",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KPI_Measures"
+              }
+            },
+            "Property": "Stock Details Row Flag"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "k",
+              "Entity": "KPI_Measures",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "k"
+                        }
+                      },
+                      "Property": "Stock Details Row Flag"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

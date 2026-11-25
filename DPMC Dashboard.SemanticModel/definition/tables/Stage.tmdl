@@ -1,0 +1,37 @@
+table Stage
+	lineageTag: 52973a34-de66-47be-afe3-d9dd15255210
+
+	column StageName
+		lineageTag: 1898c1c3-8d59-4eb2-9985-17b770fe5c79
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StageName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortOrder
+		formatString: 0
+		lineageTag: b8383f42-0f83-4f1d-bec6-5f65fdc2256f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [SortOrder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Stage = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "StageName", STRING,
+				    "SortOrder", INTEGER,
+				    {
+				        { "Inquiry", 1 },
+				        { "Confirmed Booking", 2 },
+				        { "Allocation", 3 },
+				        { "Invoice", 4 }
+				    }
+				)
+
+	annotation PBI_Id = 4646a5ea4e9d402a873b23259d80d0a5
+

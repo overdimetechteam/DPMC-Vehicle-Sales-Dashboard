@@ -1,0 +1,25 @@
+table YearsBackSelector
+	lineageTag: c4a95453-8736-4160-b02e-91f0d4b09987
+
+	column YearsBack
+		formatString: 0
+		lineageTag: d6ad2a56-7607-4644-bb66-ed0681d20915
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [YearsBack]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearRowKey = REPT ( " ", [YearsBack] + 1 )
+		lineageTag: 975bfe1c-a671-4ce9-8243-5d6395c5b3b9
+		summarizeBy: none
+		sortByColumn: YearsBack
+
+		annotation SummarizationSetBy = Automatic
+
+	partition YearsBackSelector = calculated
+		mode: import
+		source = DATATABLE ( "YearsBack", INTEGER, { {0}, {1}, {2} } )
+
+	annotation PBI_Id = 200e66e47ba341d6b36e40d574e0fee1
+
